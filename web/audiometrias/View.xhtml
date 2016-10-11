@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="Editar Audiometría"></h:outputText>
+        </ui:define>
+
+
+
+        <ui:define name="body">
+
+            <f:view>
+
+
+                <h:form>
+                    <p:panel header="Datos Audiometría">
+                        <p:panelGrid columns="2" style="width: 900px;">
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_idPaciente}"/>
+                            <h:outputText value="#{audiometriasController.selected.idPaciente.toString()}" title="#{bundle.ViewAudiometriasTitle_idPaciente}"/>
+
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_fechaAudiometria}"/>
+                            <h:outputText value="#{audiometriasController.selected.fechaAudiometria}" title="#{bundle.ViewAudiometriasTitle_fechaAudiometria}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                           
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_vaoi250}"/>
+                            <h:outputText value="#{audiometriasController.selected.vaoi250}" title="#{bundle.ViewAudiometriasTitle_vaoi250}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_vaoi500}"/>
+                            <h:outputText value="#{audiometriasController.selected.vaoi500}" title="#{bundle.ViewAudiometriasTitle_vaoi500}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_vaoi1000}"/>
+                            <h:outputText value="#{audiometriasController.selected.vaoi1000}" title="#{bundle.ViewAudiometriasTitle_vaoi1000}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_vaoi2000}"/>
+                            <h:outputText value="#{audiometriasController.selected.vaoi2000}" title="#{bundle.ViewAudiometriasTitle_vaoi2000}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_vaoi3000}"/>
+                            <h:outputText value="#{audiometriasController.selected.vaoi3000}" title="#{bundle.ViewAudiometriasTitle_vaoi3000}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_vaoi4000}"/>
+                            <h:outputText value="#{audiometriasController.selected.vaoi4000}" title="#{bundle.ViewAudiometriasTitle_vaoi4000}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_vaoi6000}"/>
+                            <h:outputText value="#{audiometriasController.selected.vaoi6000}" title="#{bundle.ViewAudiometriasTitle_vaoi6000}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_vaoi8000}"/>
+                            <h:outputText value="#{audiometriasController.selected.vaoi8000}" title="#{bundle.ViewAudiometriasTitle_vaoi8000}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_vaod250}"/>
+                            <h:outputText value="#{audiometriasController.selected.vaod250}" title="#{bundle.ViewAudiometriasTitle_vaod250}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_vaod500}"/>
+                            <h:outputText value="#{audiometriasController.selected.vaod500}" title="#{bundle.ViewAudiometriasTitle_vaod500}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_vaod1000}"/>
+                            <h:outputText value="#{audiometriasController.selected.vaod1000}" title="#{bundle.ViewAudiometriasTitle_vaod1000}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_vaod2000}"/>
+                            <h:outputText value="#{audiometriasController.selected.vaod2000}" title="#{bundle.ViewAudiometriasTitle_vaod2000}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_vaod3000}"/>
+                            <h:outputText value="#{audiometriasController.selected.vaod3000}" title="#{bundle.ViewAudiometriasTitle_vaod3000}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_vaod4000}"/>
+                            <h:outputText value="#{audiometriasController.selected.vaod4000}" title="#{bundle.ViewAudiometriasTitle_vaod4000}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_vaod6000}"/>
+                            <h:outputText value="#{audiometriasController.selected.vaod6000}" title="#{bundle.ViewAudiometriasTitle_vaod6000}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_vaod8000}"/>
+                            <h:outputText value="#{audiometriasController.selected.vaod8000}" title="#{bundle.ViewAudiometriasTitle_vaod8000}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_vooi250}"/>
+                            <h:outputText value="#{audiometriasController.selected.vooi250}" title="#{bundle.ViewAudiometriasTitle_vooi250}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_vooi500}"/>
+                            <h:outputText value="#{audiometriasController.selected.vooi500}" title="#{bundle.ViewAudiometriasTitle_vooi500}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_vooi1000}"/>
+                            <h:outputText value="#{audiometriasController.selected.vooi1000}" title="#{bundle.ViewAudiometriasTitle_vooi1000}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_vooi2000}"/>
+                            <h:outputText value="#{audiometriasController.selected.vooi2000}" title="#{bundle.ViewAudiometriasTitle_vooi2000}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_vooi3000}"/>
+                            <h:outputText value="#{audiometriasController.selected.vooi3000}" title="#{bundle.ViewAudiometriasTitle_vooi3000}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_vooi4000}"/>
+                            <h:outputText value="#{audiometriasController.selected.vooi4000}" title="#{bundle.ViewAudiometriasTitle_vooi4000}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_vood250}"/>
+                            <h:outputText value="#{audiometriasController.selected.vood250}" title="#{bundle.ViewAudiometriasTitle_vood250}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_vood500}"/>
+                            <h:outputText value="#{audiometriasController.selected.vood500}" title="#{bundle.ViewAudiometriasTitle_vood500}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_vood1000}"/>
+                            <h:outputText value="#{audiometriasController.selected.vood1000}" title="#{bundle.ViewAudiometriasTitle_vood1000}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_vood2000}"/>
+                            <h:outputText value="#{audiometriasController.selected.vood2000}" title="#{bundle.ViewAudiometriasTitle_vood2000}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_vood3000}"/>
+                            <h:outputText value="#{audiometriasController.selected.vood3000}" title="#{bundle.ViewAudiometriasTitle_vood3000}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_vood4000}"/>
+                            <h:outputText value="#{audiometriasController.selected.vood4000}" title="#{bundle.ViewAudiometriasTitle_vood4000}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_larsenod}"/>
+                            <h:outputText value="#{audiometriasController.selected.larsenod}" title="#{bundle.ViewAudiometriasTitle_larsenod}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_larsenoi}"/>
+                            <h:outputText value="#{audiometriasController.selected.larsenoi}" title="#{bundle.ViewAudiometriasTitle_larsenoi}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_eliod}"/>
+                            <h:outputText value="#{audiometriasController.selected.eliod}" title="#{bundle.ViewAudiometriasTitle_eliod}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_elioi}"/>
+                            <h:outputText value="#{audiometriasController.selected.elioi}" title="#{bundle.ViewAudiometriasTitle_elioi}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_salod}"/>
+                            <h:outputText value="#{audiometriasController.selected.salod}" title="#{bundle.ViewAudiometriasTitle_salod}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_saloi}"/>
+                            <h:outputText value="#{audiometriasController.selected.saloi}" title="#{bundle.ViewAudiometriasTitle_saloi}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_ptaod}"/>
+                            <h:outputText value="#{audiometriasController.selected.ptaod}" title="#{bundle.ViewAudiometriasTitle_ptaod}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_ptaoi}"/>
+                            <h:outputText value="#{audiometriasController.selected.ptaoi}" title="#{bundle.ViewAudiometriasTitle_ptaoi}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_otoscopiaoi}"/>
+                            <h:outputText value="#{audiometriasController.selected.otoscopiaoi}" title="#{bundle.ViewAudiometriasTitle_otoscopiaoi}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_otoscopiaod}"/>
+                            <h:outputText value="#{audiometriasController.selected.otoscopiaod}" title="#{bundle.ViewAudiometriasTitle_otoscopiaod}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_impresionDiagnosticaOidoDerecho}"/>
+                            <h:outputText value="#{audiometriasController.selected.impresionDiagnosticaOidoDerecho}" title="#{bundle.ViewAudiometriasTitle_impresionDiagnosticaOidoDerecho}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_impresionDiagnosticaOidoIzquierdo}"/>
+                            <h:outputText value="#{audiometriasController.selected.impresionDiagnosticaOidoIzquierdo}" title="#{bundle.ViewAudiometriasTitle_impresionDiagnosticaOidoIzquierdo}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_conceptoOidoDerecho}"/>
+                            <h:outputText value="#{audiometriasController.selected.conceptoOidoDerecho}" title="#{bundle.ViewAudiometriasTitle_conceptoOidoDerecho}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_conceptoOidoIzquierdo}"/>
+                            <h:outputText value="#{audiometriasController.selected.conceptoOidoIzquierdo}" title="#{bundle.ViewAudiometriasTitle_conceptoOidoIzquierdo}"/>
+                            <h:outputText value="#{bundle.ViewAudiometriasLabel_recomendaciones}"/>
+                            <h:outputText value="#{audiometriasController.selected.recomendaciones}" title="#{bundle.ViewAudiometriasTitle_recomendaciones}"/>
+
+                        </p:panelGrid>
+
+
+                    </p:panel>
+                    <p:button style="margin-top: 15px; margin-bottom: 15px" value="#{bundle.Close}" outcome="/audiometrias/List"/>
+
+                </h:form>
+            </f:view>
+
+
+        </ui:define>
+
+    </ui:composition>
+</html>

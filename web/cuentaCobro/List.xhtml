@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListCuentaCobroTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="CuentaCobroListForm">
+               
+
+                <p:dataTable id="datalist" value="#{cuentaCobroController.items}" var="item"
+                             selectionMode="single" 
+                             paginator="true"
+                             rowKey="#{item.idCuenta}"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             >
+
+                    <f:facet name="header">
+                         <p:commandButton value="Agregar Cuenta" action="#{cuentaCobroController.prepareCreate}"/>
+                        Reporte por página:
+                        <h:commandLink  style="margin-top: 15px; margin-bottom: 15px; ">
+                            <img src="#{request.contextPath}/resources/images/excel.png" width="24"/>
+                            <p:dataExporter type="xls" target="datalist" fileName="Lista de cuenta de cobro" pageOnly="true" />
+                        </h:commandLink>
+
+                        <h:commandLink rendered="#{loginController.admin}" style="margin-top: 15px; margin-bottom: 15px; margin-left: 15px;">
+                            <img src="#{request.contextPath}/resources/images/pdf.png" width="24"/>
+                            <p:dataExporter type="pdf" target="datalist" fileName="Lista de cuenta de cobro" pageOnly="true"/>
+                        </h:commandLink >
+
+                        <h:commandLink rendered="#{loginController.admin}"   style="margin-top: 15px; margin-bottom: 15px; margin-left: 15px; margin-right: 40px;">
+                            <img src="#{request.contextPath}/resources/images/csv.png" width="24"/>
+                            <p:dataExporter type="csv" target="datalist" fileName="Lista de cuenta de cobro" pageOnly="true" />
+                        </h:commandLink>
+                        Reporte completo:
+
+                        <h:commandLink  style="margin-top: 15px; margin-bottom: 15px; ">
+                            <img src="#{request.contextPath}/resources/images/excel.png" width="24"/>
+                            <p:dataExporter type="xls" target="datalist" fileName="Lista de cuenta de cobro" />
+                        </h:commandLink>
+
+                        <h:commandLink  rendered="#{loginController.admin}"  style="margin-top: 15px; margin-bottom: 15px; margin-left: 15px;">
+                            <img src="#{request.contextPath}/resources/images/pdf.png" width="24"/>
+                            <p:dataExporter type="pdf" target="datalist" fileName="Lista de cuenta de cobro"/>
+                        </h:commandLink >
+
+                        <h:commandLink rendered="#{loginController.admin}"   style="margin-top: 15px; margin-bottom: 15px; margin-left: 15px;">
+                            <img src="#{request.contextPath}/resources/images/csv.png" width="24"/>
+                            <p:dataExporter type="csv" target="datalist" fileName="Lista de cuenta de cobro" />
+                        </h:commandLink>
+
+                    </f:facet>
+
+
+
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListCuentaCobroTitle_fechaCuenta}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.fechaCuenta}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column filterBy="#{item.numeroCuenta}">
+                        <f:facet name="header" >
+                            <h:outputText value="#{bundle.ListCuentaCobroTitle_numeroCuenta}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.numeroCuenta}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListCuentaCobroTitle_concepto}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.concepto}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListCuentaCobroTitle_cantidad}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.cantidad}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListCuentaCobroTitle_valorUnitario}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.valorUnitario}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListCuentaCobroTitle_valorTotal}"/>
+                        </f:facet>
+                        <h:outputText style="color: red;" value="$ #{item.valorTotal}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListCuentaCobroTitle_banco}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.banco}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListCuentaCobroTitle_cuentaAhorros}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.cuentaAhorros}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListCuentaCobroTitle_nombre}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nombre}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListCuentaCobroTitle_titularCuenta}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.titularCuenta}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListCuentaCobroTitle_pagoEfectivo}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.pagoEfectivo}"/>
+                    </p:column>
+                    <p:column style="display: none;" exportable="false">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListCuentaCobroTitle_firmaEncargado}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.firmaEncargado}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListCuentaCobroTitle_idUsuario}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idUsuario}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.idClem}">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListCuentaCobroTitle_idClem}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idClem}"/>
+                    </p:column>
+                    <p:column exportable="false" > 
+                        <f:facet name="header">Opciones</f:facet>
+
+                        <p:commandLink  ajax="false" pt:target="_blank"
+                                        action="#{cuentaCobroController.llamarReporte}" >
+                            <img src="#{request.contextPath}/resources/images/pdf.png" width="24"/>
+                            <f:setPropertyActionListener value="#{item}"
+                                                         target="#{cuentaCobroController.selected}"/>
+                        </p:commandLink>
+                        <p:commandButton id="viewButton" icon="ui-icon-search" update="datalist" action="#{cuentaCobroController.prepareView}">
+                            <f:setPropertyActionListener value="#{item}" target="#{cuentaCobroController.selected}"/>
+                        </p:commandButton>
+
+                        <p:commandButton  id="editButton" icon="ui-icon-pencil" update="datalist" action="#{cuentaCobroController.prepareEdit}">
+                            <f:setPropertyActionListener value="#{item}" target="#{cuentaCobroController.selected}"/>
+                        </p:commandButton>
+                        <p:commandButton rendered="#{loginController.admin}" id="deleteButton" icon="ui-icon-trash" action="#{cuentaCobroController.destroy()}"
+                                         process="@this" update="datalist">
+                            <p:confirm header="Confirmación" message="¿Esta seguro que desea eliminar el item?" icon="ui-icon-alert" />
+                            <f:setPropertyActionListener value="#{item}" target="#{cuentaCobroController.selected}"/>
+                        </p:commandButton>
+
+                    </p:column> 
+
+                </p:dataTable>
+
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+
+</html>

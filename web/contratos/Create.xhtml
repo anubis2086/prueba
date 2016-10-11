@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ContratosCreateDlg" widgetVar="ContratosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateContratosTitle}">
+            <h:form id="ContratosCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{contratosController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateContratosLabel_idCont}" for="idCont" />
+                        <p:inputText id="idCont" value="#{contratosController.selected.idCont}" title="#{bundle.CreateContratosTitle_idCont}" required="true" requiredMessage="#{bundle.CreateContratosRequiredMessage_idCont}"/>
+                        <p:outputLabel value="#{bundle.CreateContratosLabel_numCont}" for="numCont" />
+                        <p:inputText id="numCont" value="#{contratosController.selected.numCont}" title="#{bundle.CreateContratosTitle_numCont}" />
+                        <p:outputLabel value="#{bundle.CreateContratosLabel_conceptoCont}" for="conceptoCont" />
+                        <p:inputText id="conceptoCont" value="#{contratosController.selected.conceptoCont}" title="#{bundle.CreateContratosTitle_conceptoCont}" />
+                        <p:outputLabel value="#{bundle.CreateContratosLabel_fechaIniCon}" for="fechaIniCon" />
+                        <p:inputText id="fechaIniCon" value="#{contratosController.selected.fechaIniCon}" title="#{bundle.CreateContratosTitle_fechaIniCon}" />
+                        <p:outputLabel value="#{bundle.CreateContratosLabel_fechaFinCont}" for="fechaFinCont" />
+                        <p:inputText id="fechaFinCont" value="#{contratosController.selected.fechaFinCont}" title="#{bundle.CreateContratosTitle_fechaFinCont}" />
+                        <p:outputLabel value="#{bundle.CreateContratosLabel_pagoCont}" for="pagoCont" />
+                        <p:inputText id="pagoCont" value="#{contratosController.selected.pagoCont}" title="#{bundle.CreateContratosTitle_pagoCont}" />
+                        <p:outputLabel value="#{bundle.CreateContratosLabel_telCelCont}" for="telCelCont" />
+                        <p:inputText id="telCelCont" value="#{contratosController.selected.telCelCont}" title="#{bundle.CreateContratosTitle_telCelCont}" />
+                        <p:outputLabel value="#{bundle.CreateContratosLabel_dirCont}" for="dirCont" />
+                        <p:inputText id="dirCont" value="#{contratosController.selected.dirCont}" title="#{bundle.CreateContratosTitle_dirCont}" />
+                        <p:outputLabel value="#{bundle.CreateContratosLabel_nomCont}" for="nomCont" />
+                        <p:inputText id="nomCont" value="#{contratosController.selected.nomCont}" title="#{bundle.CreateContratosTitle_nomCont}" />
+                        <p:outputLabel value="#{bundle.CreateContratosLabel_emailCont}" for="emailCont" />
+                        <p:inputText id="emailCont" value="#{contratosController.selected.emailCont}" title="#{bundle.CreateContratosTitle_emailCont}" />
+                        <p:outputLabel value="#{bundle.CreateContratosLabel_idClem}" for="idClem" />
+                        <p:selectOneMenu id="idClem" value="#{contratosController.selected.idClem}" required="true" requiredMessage="#{bundle.EditContratosRequiredMessage_idClem}">
+                            <f:selectItems value="#{empresasController.itemsAvailableSelectOne}"
+                                           var="idClemItem"
+                                           itemValue="#{idClemItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton style="margin-top: 15px; margin-bottom: 15px" actionListener="#{contratosController.create}" value="#{bundle.Save}" update="display,:ContratosListForm:datalist,:growl" oncomplete="handleSubmit(args,'ContratosCreateDialog');"/>
+                    <p:commandButton  value="#{bundle.Cancel}" onclick="ContratosCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+  <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateRolTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="RolCreateForm" rendered="#{loginController.admin}">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{rolController.selected != null}">                       
+                        <p:outputLabel value="#{bundle.CreateRolLabel_nombreRol}" for="nombreRol" />
+                        <p:inputText id="nombreRol" value="#{rolController.selected.nombreRol}" title="#{bundle.CreateRolTitle_nombreRol}" required="true" requiredMessage="#{bundle.CreateRolRequiredMessage_nombreRol}"/>
+                    </p:panelGrid>
+                    <p:commandButton action="#{rolController.create}" value="#{bundle.Save}"/>
+                     <p:button value="#{bundle.Cancel}" outcome="/rol/List" />
+                </h:panelGroup>
+            </h:form>
+         
+        </ui:define>
+    </ui:composition>
+
+</html>

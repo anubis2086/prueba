@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/plantilla.xhtml">
+        <ui:define name="title">NBD E.S.O.- Bienvenid@</ui:define>
+        <ui:define name="body">
+            <h:body>
+                
+                <div class=" container-fluid">
+                    <div class="mySpace row">
+                        <div class="col-md-5">
+                            .
+                        </div>
+                        <div class="col-md-6">
+                            <h1 class="hidden-md hidden-lg featurette-heading">Bienvenido Usuario.</h1>
+                            <h1 class="hidden-xs hidden-sm hText featurette-heading">Bienvenido Usuario.</h1>
+                            <h1 class="hidden-xs hidden-sm">Diligencie el siguiente formulario.</h1>
+                            <h3 class="hidden-md hidden-lg">Diligencie el siguiente formulario.</h3>
+                            
+                            <h:form class="LoginUSuario"> 
+                                <h:panelGrid columns="1">
+                                   
+                                    <p:outputLabel value="Número de documento: " for="numeroDocumento" />
+                                   
+                                    <p:inputText id="numeroDocumento" value="#{loginController.numeroDoc}" 
+                                                 title="NumeroDocumento" required="true" 
+                                                 requiredMessage="El número de documento es requerido"
+                                                 />
+                                    <p:outputLabel value="Contraseña: " for="password"/>
+                                    <p:password id="password" value="#{loginController.password}" required="true" 
+                                                requiredMessage="la contraseña es requerida"/>
+                                    <hr/>
+                                    <h:column/>
+                                    <p:commandButton value="Iniciar sesión" action="#{loginController.iniciarSesion}"  update=":growl, :growl"/>
+                                    <p:column/>
+                                    
+                                   
+                                </h:panelGrid>
+                            </h:form>
+                        </div>
+                        <div class="col-md-1">
+                            .
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden-xs hidden-sm container">
+                    <div class="hidden-xs hidden-sm row">
+                        <div class="bg-primary myBar1 col-md-3">
+                            <span class="icon-star-full"></span>
+                            <h3>CALIDAD</h3>
+                        </div>
+                        <div class="myBar2 col-md-3">
+                            <span class="icon-user-tie"></span>
+                            <h3>ÉTICA</h3>
+                        </div>
+                        <div class="myBar3 col-md-3">
+                            <span class="icon-clipboard"></span>
+                            <h3>RESPONSABILIDAD</h3>
+                        </div>
+                        <div class="myBar4 col-md-3">
+                            <span class="icon-user-check"></span>
+                            <h3>SERVICIO</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="container marketing">
+                    <div class="myInf row">
+                        <div class="col-lg-12">
+                            <h1 class="myFeat">Actividades de Asesoría</h1>
+                            <p>DESCRIPCION DEL SERVICIO DE ASESORIA PARA LA GENERACION DE EMPRESAS SALUDABLES <br/><br/>
+- Articulados según los requerimientos de la Organización Panamericana de La Salud, El Plan Decenal de Salud Pública, Visión Global, los Objetivos de Desarrollo Sostenido de 2012 y el Decreto 1072 de 2015<br/>
+- Diagnóstico de condiciones de salud de la empresa.<br/>
+- Diseño e implementación de los sistemas de vigilancia epidemiológica para la prevención de hipoacusia neurosensorial, psicosocial,  asma ocupacional, dolor lumbar, cáncer de pulmón, neumoconiosis, hombro doloroso, desordenes musculo esqueléticos de miembros superiores, dermatitis de contacto, toxico-vigilancia de plaguicidas inhibidores de la colinesterasa, benceno y sus derivados, plomo, solventes, monómeros, pinturas entre otros pertenecientes al riesgo químico.  <br/>
+- Valoración de las aptitudes de los trabajadores para cada cargo mediante la evaluación médica ocupacional de ingreso y periódica (trabajos en alturas, manipuladores de alimentos, operarios de montacargas, brigadistas, conductores, etc.)<br/>
+- Diseño de los programas de seguimiento para manipuladores de alimentos.<br/>
+- Evaluaciones médicas de retiro.<br/>
+- Evaluaciones de reintegro laboral.<br/>
+- Diseño de los programas de seguimiento para ausentismo por causa médica, enfermedad laboral y accidentes de trabajo.<br/>
+- Diseño, implementación, acompañamiento y seguimiento a los casos de ausentismo y reintegro laboral de la empresa.<br/>
+- Diseño y aplicación de encuestas de morbilidad. <br/>
+- Caracterización del ausentismo por accidentes de trabajo.<br/>
+- Análisis de la enfermedad laboral. <br/>
+- Perfil sociodemográfico con los procesos de salud y enfermedad mediante la construcción del perfil ocupacional de la empresa.<br/>
+- Inspecciones de seguridad y estudios de puestos de trabajo.<br/>
+- Diseño de los programas de promoción de la salud y prevención de la enfermedad ajustados al diagnóstico de salud de la empresa.<br/>
+- Diseño y aplicación de los programas de detección y prevención del riesgo cardiovascular.<br/>
+- Diseño de la política de prevención del tabaquismo, consumo de alcohol y drogas.<br/>
+- Diseño de los profesiogramas.<br/>
+- Asesoría, evaluación, revisión y acompañamiento en la mesa laboral celebrada entre la empresa y las distintas entidades de salud que requieran ser consultadas con relación a las situaciones de salud de los trabajadores de la empresa con el único fin de procurar condiciones y soluciones favorables para el proceso de reintegro laboral.<br/>
+- Generación de informes individuales para el trabajador y de investigaciones y conclusiones epidemiológicas para la empresa, entre otras actividades de asesoría y capacitación para el cuidado de los trabajadores y la responsabilidad social.</p>
+                        </div><!-- /.col-lg-4 -->
+                       
+                      
+                    </div><!-- /.row -->
+                </div><!-- /.container -->
+                <div class="container-fluid myFooter">
+                    <div class="row">
+                        <div class="col-md-2">
+                            .
+                        </div>
+                        <div class="col-md-8">
+                            <footer>
+                        <p class="pull-right"><a href="#"><span style="color: #203864; font-size: 50px;" class="glyphicon glyphicon-chevron-up"/>
+                            </a></p>
+                                <h4>&copy; N B D - E.S.O. #{loginController.annio}  &middot; </h4>
+                        <h5>&copy; Designed and developed by: <a href="https://www.facebook.com/miketascon" target="_blank">@miketascon</a>  &middot; 
+                             <a href="https://www.facebook.com/LenisJeison" target="_blank">@jeisonlenis</a> &middot; 
+                            
+                            &middot; 
+             
+                            &middot; <a >Version del software 0.1</a> &middot;</h5>
+                    </footer>
+                        </div>
+                        <div class="col-md-2">
+                            .
+                        </div>
+                    </div>
+                    <div class="hidden-xs hidden-sm row">
+                        <div class="myBar3 col-md-3">
+                        </div>
+                        <div class="bg-primary myBar1 col-md-3">
+                        </div>
+                        <div class="myBar4 col-md-3">
+                        </div>
+                        <div class="myBar2 col-md-3">
+                        </div>
+                    </div>
+                </div>
+               <!-- <script src="# {request.contextPath}/resources/js/jquery-1.11.3.js"></script>	
+                <script src="# {request.contextPath}/resources/js/bootstrap.min.js"></script> -->
+            </h:body>
+        </ui:define>
+    </ui:composition>  
+</html>
+
+

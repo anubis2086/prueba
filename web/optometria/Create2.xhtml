@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateOptometriaTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+
+
+
+            <h:form>
+
+                <p:panel header="Paciente">
+                    <h:panelGrid columns="2" style="width: 1050px;">
+
+
+                        <p:graphicImage   value="#{pacientesController.imagen}"  cache="false" 
+                                          style=" width: 90px; height: 110px; margin-top: 15px; margin-bottom: 15px; margin-left: 20px;"/>
+
+                        <h:outputText  style="margin-top: 10px; margin-bottom: 10px;"   
+                                       value="#{pacientesController.selected.nombres}  
+                                       #{pacientesController.selected.apellidos} Doumento:
+                                       #{pacientesController.selected.numDoc} &lt;br /&gt;
+                                       #{pacientesController.selected.idClem.nomClem} 
+                                       Nit: #{pacientesController.selected.idClem.nitClem}&lt;br /&gt;
+                                       Cargo: #{pacientesController.selected.cargo} &lt;br /&gt;
+                                       Ciudad: #{pacientesController.selected.ciudad} &lt;br /&gt;" 
+                                       title="#{bundle.ViewOptometriaTitle_idPaciente}" escape="false"/> 
+
+                    </h:panelGrid>
+                </p:panel>
+                <p:panel header="Datos de la optometría">
+
+                    <h:panelGrid columns="2" style="width: 1050px;">
+                        
+                          <p:outputLabel  style="margin-top: 10px; margin-bottom: 10px;"  value="#{bundle.CreateOptometriaLabel_usalentes}" for="usalentes" />
+                        <p:selectOneMenu  style="margin-top: 10px; margin-bottom: 10px;"  id="usalentes" value="#{pacientesController.optometriaActual.usalentes}" 
+                                          >
+                            <f:selectItem itemLabel="SI" itemValue="SI" />
+                            <f:selectItem itemLabel="NO" itemValue="NO" />
+                        </p:selectOneMenu>
+
+
+
+                        <p:outputLabel  style="margin-top: 10px; margin-bottom: 10px;"  value="#{bundle.CreateOptometriaLabel_sintomatologia}" for="sintomatologia" />
+                        <p:inputTextarea  style="margin-top: 10px; margin-bottom: 10px; width: 300px;"  id="sintomatologia" value="#{pacientesController.optometriaActual.sintomatologia}"
+                                          maxlength="300"   title="#{bundle.CreateOptometriaTitle_sintomatologia}" />
+
+                        <p:outputLabel  style="margin-top: 10px; margin-bottom: 10px;"  value="#{bundle.CreateOptometriaLabel_ultimoExamen}" for="ultimoExamen" />
+                        <p:calendar  style="margin-top: 10px; margin-bottom: 10px;"  id="ultimoExamen" pattern="MM/dd/yyyy" value="#{pacientesController.optometriaActual.ultimoExamen}" 
+                                     title="#{bundle.EditOptometriaTitle_ultimoExamen}"  showOn="button" yearRange="c-10:c+10" navigator="true"
+                                     maxdate="#{pacientesController.optometriaActual.fechaOptpmetria}">
+                            <p:ajax event="dateSelect" process="@this ultimoExamen" update="fechaOptpmetria"/>
+                        </p:calendar>
+
+
+                        <p:outputLabel  style="margin-top: 10px; margin-bottom: 10px;"  value="#{bundle.CreateOptometriaLabel_fechaOptpmetria}" for="fechaOptpmetria" />
+                        <p:calendar  style="margin-top: 10px; margin-bottom: 10px;"  id="fechaOptpmetria" pattern="MM/dd/yyyy" yearRange="c-10:c+10"
+                                     value="#{pacientesController.optometriaActual.fechaOptpmetria}" navigator="true"
+                                     title="#{bundle.EditOptometriaTitle_fechaOptpmetria}"  showOn="button"
+                                     mindate="#{pacientesController.optometriaActual.ultimoExamen}">
+                            <p:ajax event="dateSelect" process="@this fechaOptpmetria" update="ultimoExamen"/>
+                        </p:calendar>
+
+                  
+
+                        <p:outputLabel  style="margin-top: 10px; margin-bottom: 10px;"  value="#{bundle.CreateOptometriaLabel_vcodsl}" for="vcodsl" />
+                        <p:inputText  style="margin-top: 10px; margin-bottom: 10px;"  id="vcodsl" value="#{pacientesController.optometriaActual.vcodsl}"
+                                      maxlength="45" title="#{bundle.CreateOptometriaTitle_vcodsl}" />
+
+                        <p:outputLabel  style="margin-top: 10px; margin-bottom: 10px;"  value="#{bundle.CreateOptometriaLabel_vcoisl}" for="vcoisl" />
+                        <p:inputText  style="margin-top: 10px; margin-bottom: 10px;"  id="vcoisl" value="#{pacientesController.optometriaActual.vcoisl}"
+                                      maxlength="45" title="#{bundle.CreateOptometriaTitle_vcoisl}" />
+
+                        <p:outputLabel  style="margin-top: 10px; margin-bottom: 10px;"  value="#{bundle.CreateOptometriaLabel_vlodsl}" for="vlodsl" />
+                        <p:inputText  style="margin-top: 10px; margin-bottom: 10px;"  id="vlodsl" value="#{pacientesController.optometriaActual.vlodsl}"
+                                      maxlength="45" title="#{bundle.CreateOptometriaTitle_vlodsl}" />
+
+                        <p:outputLabel  style="margin-top: 10px; margin-bottom: 10px;"  value="#{bundle.CreateOptometriaLabel_vloisl}" for="vloisl" />
+                        <p:inputText  style="margin-top: 10px; margin-bottom: 10px;"  id="vloisl" value="#{pacientesController.optometriaActual.vloisl}"
+                                      maxlength="45" title="#{bundle.CreateOptometriaTitle_vloisl}" />
+
+                        <p:outputLabel  style="margin-top: 10px; margin-bottom: 10px;"  value="#{bundle.CreateOptometriaLabel_vcodcl}" for="vcodcl" />
+                        <p:inputText  style="margin-top: 10px; margin-bottom: 10px;"  id="vcodcl" value="#{pacientesController.optometriaActual.vcodcl}"
+                                      maxlength="45" title="#{bundle.CreateOptometriaTitle_vcodcl}" />
+
+                        <p:outputLabel  style="margin-top: 10px; margin-bottom: 10px;"  value="#{bundle.CreateOptometriaLabel_vcoicl}" for="vcoicl" />
+                        <p:inputText  style="margin-top: 10px; margin-bottom: 10px;"  id="vcoicl" value="#{pacientesController.optometriaActual.vcoicl}"
+                                      maxlength="45" title="#{bundle.CreateOptometriaTitle_vcoicl}" />
+
+                        <p:outputLabel  style="margin-top: 10px; margin-bottom: 10px;"  value="#{bundle.CreateOptometriaLabel_vlodcl}" for="vlodcl" />
+                        <p:inputText id="vlodcl" value="#{pacientesController.optometriaActual.vlodcl}"
+                                     maxlength="45" title="#{bundle.CreateOptometriaTitle_vlodcl}" />
+
+                        <p:outputLabel  style="margin-top: 10px; margin-bottom: 10px;"  value="#{bundle.CreateOptometriaLabel_vloicl}" for="vloicl" />
+                        <p:inputText  style="margin-top: 10px; margin-bottom: 10px;"  id="vloicl" value="#{pacientesController.optometriaActual.vloicl}"
+                                      maxlength="45" title="#{bundle.CreateOptometriaTitle_vloicl}" />
+
+
+                      
+
+
+
+                        <p:outputLabel  style="margin-top: 10px; margin-bottom: 10px;"  value="#{bundle.CreateOptometriaLabel_azul}" for="azul" />
+                        <p:inputText  style="margin-top: 10px; margin-bottom: 10px;"  id="azul" value="#{pacientesController.optometriaActual.azul}" 
+                                      maxlength="45" title="#{bundle.CreateOptometriaTitle_azul}" />
+
+                        <p:outputLabel  style="margin-top: 10px; margin-bottom: 10px;"  value="#{bundle.CreateOptometriaLabel_rojo}" for="rojo" />
+                        <p:inputText  style="margin-top: 10px; margin-bottom: 10px;"  id="rojo" value="#{pacientesController.optometriaActual.rojo}"
+                                      maxlength="45" title="#{bundle.CreateOptometriaTitle_rojo}"  /> 
+
+                        <p:outputLabel  style="margin-top: 10px; margin-bottom: 10px;"  value="#{bundle.CreateOptometriaLabel_amarillo}" for="amarillo" />
+                        <p:inputText id="amarillo" value="#{pacientesController.optometriaActual.amarillo}"
+                                     maxlength="45" title="#{bundle.CreateOptometriaTitle_amarillo}" />
+
+                        <p:outputLabel  style="margin-top: 10px; margin-bottom: 10px;"  value="#{bundle.CreateOptometriaLabel_verde}" for="verde" />
+                        <p:inputText  style="margin-top: 10px; margin-bottom: 10px;"  id="verde" value="#{pacientesController.optometriaActual.verde}" 
+                                      maxlength="45" title="#{bundle.CreateOptometriaTitle_verde}" />
+
+
+
+                        <p:outputLabel  style="margin-top: 10px; margin-bottom: 10px;"  value="#{bundle.CreateOptometriaLabel_profundidad}" for="profundidad" />
+                        <p:inputText  style="margin-top: 10px; margin-bottom: 10px;"  id="profundidad" value="#{pacientesController.optometriaActual.profundidad}"
+                                      maxlength="45" title="#{bundle.CreateOptometriaTitle_profundidad}" />
+
+                        <p:outputLabel  style="margin-top: 10px; margin-bottom: 10px;"  value="#{bundle.CreateOptometriaLabel_normal}" for="normal" />
+                        <p:selectOneMenu  style="margin-top: 10px; margin-bottom: 10px;"  id="normal" value="#{pacientesController.optometriaActual.normal}"
+                                          >
+                            <f:selectItem itemLabel="SI" itemValue="SI" />
+                            <f:selectItem itemLabel="NO" itemValue="NO" />
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="#{bundle.CreateOptometriaLabel_recomendaciones}" for="recomendaciones" />
+                        <p:inputTextarea style="width: 400px;" id="recomendaciones" value="#{pacientesController.optometriaActual.recomendaciones}"
+                                         maxlength="250" title="#{bundle.CreateOptometriaTitle_recomendaciones}" />
+
+                    </h:panelGrid>
+                </p:panel>
+                <p:commandButton style="margin-top: 10px; margin-bottom: 10px;"  action="#{pacientesController.addOptometria}" value="#{bundle.Save}">
+                    <p:ajax update="@this" listener="#{optometriaController.recargarListaOptometria}"/>
+                </p:commandButton>                   
+
+
+                <p:button  style="margin-top: 10px; margin-bottom: 10px; margin-left: 4em;" value="#{bundle.Cancel}" outcome="/pacientes/List" />
+            </h:form>
+
+
+
+
+        </ui:define>
+    </ui:composition>
+</html>
+

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewEspirometriasTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+
+
+            <h:form id="EspirometriasViewForm">
+
+                <p:panel header='Datos de la espirometría'>
+                    <p:panelGrid columns="2" rendered="#{espirometriasController.selected != null}" style="width: 1050px;">
+                        <h:outputText value="#{bundle.ViewEspirometriasLabel_idPaciente}"/>
+                        <h:outputText value="#{espirometriasController.selected.idPaciente.toString()}" title="#{bundle.ViewEspirometriasTitle_idPaciente}"/>
+
+                        <h:outputText value="#{bundle.ViewEspirometriasLabel_fechaEspirometria}"/>
+                        <h:outputText value="#{espirometriasController.selected.fechaEspirometria}" title="#{bundle.ViewEspirometriasTitle_fechaEspirometria}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        
+                        <h:outputText value="#{bundle.ViewEspirometriasLabel_edadPulmonar}"/>
+                        <h:outputText value="#{espirometriasController.selected.edadPulmonar}" title="#{bundle.ViewEspirometriasTitle_edadPulmonar}"/>
+                        <h:outputText value="#{bundle.ViewEspirometriasLabel_fvc}"/>
+                        <h:outputText value="#{espirometriasController.selected.fvc}" title="#{bundle.ViewEspirometriasTitle_fvc}"/>
+                        <h:outputText value="#{bundle.ViewEspirometriasLabel_fev1Fvcporctj}"/>
+                        <h:outputText value="#{espirometriasController.selected.fev1Fvcporctj}" title="#{bundle.ViewEspirometriasTitle_fev1Fvcporctj}"/>
+                        <h:outputText value="#{bundle.ViewEspirometriasLabel_fef2575}"/>
+                        <h:outputText value="#{espirometriasController.selected.fef2575}" title="#{bundle.ViewEspirometriasTitle_fef2575}"/>
+                        <h:outputText value="#{bundle.ViewEspirometriasLabel_fef7585}"/>
+                        <h:outputText value="#{espirometriasController.selected.fef7585}" title="#{bundle.ViewEspirometriasTitle_fef7585}"/>                        
+                        <h:outputText value="#{bundle.ViewEspirometriasLabel_diagnostico}"/>
+                        <h:outputText value="#{espirometriasController.selected.diagnostico}" title="#{bundle.ViewEspirometriasTitle_diagnostico}"/>
+                        <h:outputText value="#{bundle.ViewEspirometriasLabel_recomendaciones}"/>
+                        <h:outputText value="#{espirometriasController.selected.recomendaciones}" title="#{bundle.ViewEspirometriasTitle_recomendaciones}"/>
+                        <h:outputText value="#{bundle.ViewEspirometriasLabel_antecedentes}"/>
+                        <h:outputText value="#{espirometriasController.selected.antecedentes}" title="#{bundle.ViewEspirometriasTitle_antecedentes}"/>
+                       
+                    </p:panelGrid>
+                </p:panel>
+                <p:button style="margin-top: 15px; margin-bottom: 15px;" value="#{bundle.Close}" outcome="/espirometrias/List"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+
+</html>

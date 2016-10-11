@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="Nueva Audiometría"></h:outputText>
+        </ui:define>
+
+
+
+        <ui:define name="body">
+
+
+            <h:form id="AudiometriasCreateForm">
+                <p:panel header="Audiometría">
+
+                    <h:panelGrid columns="2" style="width: 1050px;" >
+
+
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_fechaAudiometria}" for="fechaAudiometria" />
+                        <p:calendar style="margin-top: 10px; margin-bottom: 10px;"  id="fechaAudiometria" pattern="MM/dd/yyyy" value="#{audiometriasController.selected.fechaAudiometria}" title="#{bundle.EditAudiometriasTitle_fechaAudiometria}"  showOn="button"
+                                    navigator="true" yearRange="c-10:c+10"/>
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_facturado}" for="facturado" />
+                        <p:selectOneRadio style="margin-top: 10px; margin-bottom: 10px;" id="facturado" value="#{audiometriasController.selected.facturado}"  > 
+                            <f:selectItem itemLabel="SI" itemValue="SI" />
+                            <f:selectItem itemLabel="NO" itemValue="NO" />
+
+                        </p:selectOneRadio>
+
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;"  value="#{bundle.CreateAudiometriasLabel_vaoi250}" for="vaoi250" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;"  id="vaoi250" value="#{audiometriasController.selected.vaoi250}" title="#{bundle.CreateAudiometriasTitle_vaoi250}" maxlength="4"/>
+
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_vaoi500}" for="vaoi500" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="vaoi500" value="#{audiometriasController.selected.vaoi500}" title="#{bundle.CreateAudiometriasTitle_vaoi500}" maxlength="4" />
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_vaoi1000}" for="vaoi1000" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="vaoi1000" value="#{audiometriasController.selected.vaoi1000}" title="#{bundle.CreateAudiometriasTitle_vaoi1000}" maxlength="4" />
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_vaoi2000}" for="vaoi2000" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="vaoi2000" value="#{audiometriasController.selected.vaoi2000}" title="#{bundle.CreateAudiometriasTitle_vaoi2000}" maxlength="4"/>
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_vaoi3000}" for="vaoi3000" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="vaoi3000" value="#{audiometriasController.selected.vaoi3000}" title="#{bundle.CreateAudiometriasTitle_vaoi3000}" maxlength="4" />
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_vaoi4000}" for="vaoi4000" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="vaoi4000" value="#{audiometriasController.selected.vaoi4000}" title="#{bundle.CreateAudiometriasTitle_vaoi4000}" maxlength="4" />
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_vaoi6000}" for="vaoi6000" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="vaoi6000" value="#{audiometriasController.selected.vaoi6000}" title="#{bundle.CreateAudiometriasTitle_vaoi6000}" maxlength="4" />
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_vaoi8000}" for="vaoi8000" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="vaoi8000" value="#{audiometriasController.selected.vaoi8000}" title="#{bundle.CreateAudiometriasTitle_vaoi8000}" maxlength="4" />
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_vaod250}" for="vaod250" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="vaod250" value="#{audiometriasController.selected.vaod250}" title="#{bundle.CreateAudiometriasTitle_vaod250}" maxlength="4"/>
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_vaod500}" for="vaod500" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="vaod500" value="#{audiometriasController.selected.vaod500}" title="#{bundle.CreateAudiometriasTitle_vaod500}" maxlength="4"/>
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_vaod1000}" for="vaod1000" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="vaod1000" value="#{audiometriasController.selected.vaod1000}" title="#{bundle.CreateAudiometriasTitle_vaod1000}"  maxlength="4"/>
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_vaod2000}" for="vaod2000" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="vaod2000" value="#{audiometriasController.selected.vaod2000}" title="#{bundle.CreateAudiometriasTitle_vaod2000}" maxlength="4"/>
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_vaod3000}" for="vaod3000" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="vaod3000" value="#{audiometriasController.selected.vaod3000}" title="#{bundle.CreateAudiometriasTitle_vaod3000}" maxlength="4"/>
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_vaod4000}" for="vaod4000" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="vaod4000" value="#{audiometriasController.selected.vaod4000}" title="#{bundle.CreateAudiometriasTitle_vaod4000}" maxlength="4"/>
+                        <p:outputLabel value="#{bundle.CreateAudiometriasLabel_vaod6000}" for="vaod6000" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="vaod6000" value="#{audiometriasController.selected.vaod6000}" title="#{bundle.CreateAudiometriasTitle_vaod6000}" maxlength="4"/>
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_vaod8000}" for="vaod8000" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="vaod8000" value="#{audiometriasController.selected.vaod8000}" title="#{bundle.CreateAudiometriasTitle_vaod8000}" maxlength="4"/>
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_vooi250}" for="vooi250" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="vooi250" value="#{audiometriasController.selected.vooi250}" title="#{bundle.CreateAudiometriasTitle_vooi250}" maxlength="4"/>
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_vooi500}" for="vooi500" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="vooi500" value="#{audiometriasController.selected.vooi500}" title="#{bundle.CreateAudiometriasTitle_vooi500}" maxlength="4"/>
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_vooi1000}" for="vooi1000" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="vooi1000" value="#{audiometriasController.selected.vooi1000}" title="#{bundle.CreateAudiometriasTitle_vooi1000}" maxlength="4"/>
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_vooi2000}" for="vooi2000" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="vooi2000" value="#{audiometriasController.selected.vooi2000}" title="#{bundle.CreateAudiometriasTitle_vooi2000}" maxlength="4"/>
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_vooi3000}" for="vooi3000" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="vooi3000" value="#{audiometriasController.selected.vooi3000}" title="#{bundle.CreateAudiometriasTitle_vooi3000}" maxlength="4"/>
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_vooi4000}" for="vooi4000" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="vooi4000" value="#{audiometriasController.selected.vooi4000}" title="#{bundle.CreateAudiometriasTitle_vooi4000}" maxlength="4"/>
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_vood250}" for="vood250" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="vood250" value="#{audiometriasController.selected.vood250}" title="#{bundle.CreateAudiometriasTitle_vood250}" maxlength="4"/>
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_vood500}" for="vood500" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="vood500" value="#{audiometriasController.selected.vood500}" title="#{bundle.CreateAudiometriasTitle_vood500}" maxlength="4"/>
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_vood1000}" for="vood1000" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="vood1000" value="#{audiometriasController.selected.vood1000}" title="#{bundle.CreateAudiometriasTitle_vood1000}" maxlength="4"/>
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_vood2000}" for="vood2000" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="vood2000" value="#{audiometriasController.selected.vood2000}" title="#{bundle.CreateAudiometriasTitle_vood2000}" maxlength="4"/>
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_vood3000}" for="vood3000" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="vood3000" value="#{audiometriasController.selected.vood3000}" title="#{bundle.CreateAudiometriasTitle_vood3000}" maxlength="4"/>
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_vood4000}" for="vood4000" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="vood4000" value="#{audiometriasController.selected.vood4000}" title="#{bundle.CreateAudiometriasTitle_vood4000}" maxlength="4"/>
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_larsenod}" for="larsenod" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="larsenod" value="#{audiometriasController.selected.larsenod}" title="#{bundle.CreateAudiometriasTitle_larsenod}" maxlength="45"/>
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_larsenoi}" for="larsenoi" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="larsenoi" value="#{audiometriasController.selected.larsenoi}" title="#{bundle.CreateAudiometriasTitle_larsenoi}" maxlength="45" />
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_eliod}" for="eliod" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="eliod" value="#{audiometriasController.selected.eliod}" title="#{bundle.CreateAudiometriasTitle_eliod}" maxlength="45"/>
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_elioi}" for="elioi" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="elioi" value="#{audiometriasController.selected.elioi}" title="#{bundle.CreateAudiometriasTitle_elioi}" maxlength="45"/>
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_salod}" for="salod" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="salod" value="#{audiometriasController.selected.salod}" title="#{bundle.CreateAudiometriasTitle_salod}" maxlength="45"/>
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_saloi}" for="saloi" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="saloi" value="#{audiometriasController.selected.saloi}" title="#{bundle.CreateAudiometriasTitle_saloi}" maxlength="45"/>
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;"  value="#{bundle.CreateAudiometriasLabel_ptaod}" for="ptaod" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="ptaod" value="#{audiometriasController.selected.ptaod}" title="#{bundle.CreateAudiometriasTitle_ptaod}" maxlength="45"/>
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_ptaoi}" for="ptaoi" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="ptaoi" value="#{audiometriasController.selected.ptaoi}" title="#{bundle.CreateAudiometriasTitle_ptaoi}" maxlength="45"/>
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_otoscopiaoi}" for="otoscopiaoi" />
+                        <p:inputTextarea style="margin-top: 10px; margin-bottom: 10px;" id="otoscopiaoi" value="#{audiometriasController.selected.otoscopiaoi}" title="#{bundle.CreateAudiometriasTitle_otoscopiaoi}" maxlength="150" />
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_otoscopiaod}" for="otoscopiaod" />
+                        <p:inputTextarea style="margin-top: 10px; margin-bottom: 10px;" id="otoscopiaod" value="#{audiometriasController.selected.otoscopiaod}" title="#{bundle.CreateAudiometriasTitle_otoscopiaod}" maxlength="150"/>
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_impresionDiagnosticaOidoDerecho}" for="impresionDiagnosticaOidoDerecho" />
+                        <p:inputTextarea style="margin-top: 10px; margin-bottom: 10px;" id="impresionDiagnosticaOidoDerecho" value="#{audiometriasController.selected.impresionDiagnosticaOidoDerecho}" title="#{bundle.CreateAudiometriasTitle_impresionDiagnosticaOidoDerecho}" maxlength="200" />
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_impresionDiagnosticaOidoIzquierdo}" for="impresionDiagnosticaOidoIzquierdo" />
+                        <p:inputTextarea style="margin-top: 10px; margin-bottom: 10px;" id="impresionDiagnosticaOidoIzquierdo" value="#{audiometriasController.selected.impresionDiagnosticaOidoIzquierdo}" title="#{bundle.CreateAudiometriasTitle_impresionDiagnosticaOidoIzquierdo}" maxlength="200"/>
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_conceptoOidoDerecho}" for="conceptoOidoDerecho" />
+                        <p:inputTextarea style="margin-top: 10px; margin-bottom: 10px;" id="conceptoOidoDerecho" value="#{audiometriasController.selected.conceptoOidoDerecho}" title="#{bundle.CreateAudiometriasTitle_conceptoOidoDerecho}" maxlength="200" />
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_conceptoOidoIzquierdo}" for="conceptoOidoIzquierdo" />
+                        <p:inputTextarea style="margin-top: 10px; margin-bottom: 10px;" id="conceptoOidoIzquierdo" value="#{audiometriasController.selected.conceptoOidoIzquierdo}" title="#{bundle.CreateAudiometriasTitle_conceptoOidoIzquierdo}" maxlength="200" />
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateAudiometriasLabel_recomendaciones}" for="recomendaciones" />
+                        <p:inputTextarea style="margin-top: 10px; margin-bottom: 10px;" id="recomendaciones" value="#{audiometriasController.selected.recomendaciones}" title="#{bundle.CreateAudiometriasTitle_recomendaciones}" maxlength="450"/>
+
+
+                    </h:panelGrid>
+                </p:panel>
+                <p:commandButton action="#{audiometriasController.create}" value="#{bundle.Save}"/>
+                <p:commandButton value="#{bundle.Cancel}" />
+                </h:panelGroup>
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+
+
+</html>

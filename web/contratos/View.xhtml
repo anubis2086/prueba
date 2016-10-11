@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewContratosTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+
+
+
+            <h:form>
+                <p:panel header="Datos del contrato">
+
+                    <p:panelGrid columns="2"  style="width: 900px;">
+                        <h:outputText value="Empresa:"/>
+                        <h:outputText value="#{contratosController.selected.idClem.toString()}" title="IdClem"/>
+
+                        <h:outputText value="NumCont:"/>
+                        <h:outputText value="#{contratosController.selected.numCont}" title="NumCont"/>
+                        <h:outputText value="ConceptoCont:"/>
+                        <h:outputText value="#{contratosController.selected.conceptoCont}" title="ConceptoCont"/>
+                        <h:outputText value="FechaIniCon:"/>
+                        <h:outputText value="#{contratosController.selected.fechaIniCon}" title="FechaIniCon">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="FechaFinCont:"/>
+                        <h:outputText value="#{contratosController.selected.fechaFinCont}" title="FechaFinCont">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="PagoCont:"/>
+                        <h:outputText value="#{contratosController.selected.pagoCont}" title="PagoCont"/>
+                        <h:outputText value="TelCelCont:"/>
+                        <h:outputText value="#{contratosController.selected.telCelCont}" title="TelCelCont"/>
+                        <h:outputText value="DirCont:"/>
+                        <h:outputText value="#{contratosController.selected.dirCont}" title="DirCont"/>
+                        <h:outputText value="NomCont:"/>
+                        <h:outputText value="#{contratosController.selected.nomCont}" title="NomCont"/>
+                        <h:outputText value="EmailCont:"/>
+                        <h:outputText value="#{contratosController.selected.emailCont}" title="EmailCont"/>
+
+                    </p:panelGrid>
+                </p:panel>
+                 <p:button style="margin-top: 15px; margin-bottom: 15px" value="#{bundle.Close}" outcome="/contratos/List"/>
+            </h:form>        
+
+        </ui:define>
+
+
+
+    </ui:composition>
+</html>

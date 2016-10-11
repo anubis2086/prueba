@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OptometriaCreateDlg" widgetVar="OptometriaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateOptometriaTitle}">
+            <h:form id="OptometriaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{optometriaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateOptometriaLabel_idOptometria}" for="idOptometria" />
+                        <p:inputText id="idOptometria" value="#{optometriaController.selected.idOptometria}" title="#{bundle.CreateOptometriaTitle_idOptometria}" required="true" requiredMessage="#{bundle.CreateOptometriaRequiredMessage_idOptometria}"/>
+                        <p:outputLabel value="#{bundle.CreateOptometriaLabel_fechaOptpmetria}" for="fechaOptpmetria" />
+                        <p:calendar id="fechaOptpmetria" pattern="MM/dd/yyyy" value="#{optometriaController.selected.fechaOptpmetria}" title="#{bundle.EditOptometriaTitle_fechaOptpmetria}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateOptometriaLabel_cargo}" for="cargo" />
+                        <p:inputText id="cargo" value="#{optometriaController.selected.cargo}" title="#{bundle.CreateOptometriaTitle_cargo}" />
+                        <p:outputLabel value="#{bundle.CreateOptometriaLabel_vcodsl}" for="vcodsl" />
+                        <p:inputText id="vcodsl" value="#{optometriaController.selected.vcodsl}" title="#{bundle.CreateOptometriaTitle_vcodsl}" />
+                        <p:outputLabel value="#{bundle.CreateOptometriaLabel_vcoisl}" for="vcoisl" />
+                        <p:inputText id="vcoisl" value="#{optometriaController.selected.vcoisl}" title="#{bundle.CreateOptometriaTitle_vcoisl}" />
+                        <p:outputLabel value="#{bundle.CreateOptometriaLabel_vlodsl}" for="vlodsl" />
+                        <p:inputText id="vlodsl" value="#{optometriaController.selected.vlodsl}" title="#{bundle.CreateOptometriaTitle_vlodsl}" />
+                        <p:outputLabel value="#{bundle.CreateOptometriaLabel_vloisl}" for="vloisl" />
+                        <p:inputText id="vloisl" value="#{optometriaController.selected.vloisl}" title="#{bundle.CreateOptometriaTitle_vloisl}" />
+                        <p:outputLabel value="#{bundle.CreateOptometriaLabel_vcodcl}" for="vcodcl" />
+                        <p:inputText id="vcodcl" value="#{optometriaController.selected.vcodcl}" title="#{bundle.CreateOptometriaTitle_vcodcl}" />
+                        <p:outputLabel value="#{bundle.CreateOptometriaLabel_vcoicl}" for="vcoicl" />
+                        <p:inputText id="vcoicl" value="#{optometriaController.selected.vcoicl}" title="#{bundle.CreateOptometriaTitle_vcoicl}" />
+                        <p:outputLabel value="#{bundle.CreateOptometriaLabel_vlodcl}" for="vlodcl" />
+                        <p:inputText id="vlodcl" value="#{optometriaController.selected.vlodcl}" title="#{bundle.CreateOptometriaTitle_vlodcl}" />
+                        <p:outputLabel value="#{bundle.CreateOptometriaLabel_vloicl}" for="vloicl" />
+                        <p:inputText id="vloicl" value="#{optometriaController.selected.vloicl}" title="#{bundle.CreateOptometriaTitle_vloicl}" />
+                        <p:outputLabel value="#{bundle.CreateOptometriaLabel_recomendaciones}" for="recomendaciones" />
+                        <p:inputText id="recomendaciones" value="#{optometriaController.selected.recomendaciones}" title="#{bundle.CreateOptometriaTitle_recomendaciones}" />
+                        <p:outputLabel value="#{bundle.CreateOptometriaLabel_usalentes}" for="usalentes" />
+                        <p:inputText id="usalentes" value="#{optometriaController.selected.usalentes}" title="#{bundle.CreateOptometriaTitle_usalentes}" />
+                        <p:outputLabel value="#{bundle.CreateOptometriaLabel_ultimoExamen}" for="ultimoExamen" />
+                        <p:inputText id="ultimoExamen" value="#{optometriaController.selected.ultimoExamen}" title="#{bundle.CreateOptometriaTitle_ultimoExamen}" />
+                        <p:outputLabel value="#{bundle.CreateOptometriaLabel_sintomatologia}" for="sintomatologia" />
+                        <p:inputText id="sintomatologia" value="#{optometriaController.selected.sintomatologia}" title="#{bundle.CreateOptometriaTitle_sintomatologia}" />
+                        <p:outputLabel value="#{bundle.CreateOptometriaLabel_normalsn}" for="normalsn" />
+                        <p:inputText id="normalsn" value="#{optometriaController.selected.normalsn}" title="#{bundle.CreateOptometriaTitle_normalsn}" />
+                        <p:outputLabel value="#{bundle.CreateOptometriaLabel_azul}" for="azul" />
+                        <p:inputText id="azul" value="#{optometriaController.selected.azul}" title="#{bundle.CreateOptometriaTitle_azul}" />
+                        <p:outputLabel value="#{bundle.CreateOptometriaLabel_rojo}" for="rojo" />
+                        <p:inputText id="rojo" value="#{optometriaController.selected.rojo}" title="#{bundle.CreateOptometriaTitle_rojo}" />
+                        <p:outputLabel value="#{bundle.CreateOptometriaLabel_amarillo}" for="amarillo" />
+                        <p:inputText id="amarillo" value="#{optometriaController.selected.amarillo}" title="#{bundle.CreateOptometriaTitle_amarillo}" />
+                        <p:outputLabel value="#{bundle.CreateOptometriaLabel_verde}" for="verde" />
+                        <p:inputText id="verde" value="#{optometriaController.selected.verde}" title="#{bundle.CreateOptometriaTitle_verde}" />
+                        <p:outputLabel value="#{bundle.CreateOptometriaLabel_profundidad}" for="profundidad" />
+                        <p:inputText id="profundidad" value="#{optometriaController.selected.profundidad}" title="#{bundle.CreateOptometriaTitle_profundidad}" />
+                        <p:outputLabel value="#{bundle.CreateOptometriaLabel_idPaciente}" for="idPaciente" />
+                        <p:selectOneMenu id="idPaciente" value="#{optometriaController.selected.idPaciente}" required="true" requiredMessage="#{bundle.EditOptometriaRequiredMessage_idPaciente}">
+                            <f:selectItems value="#{pacientesController.itemsAvailableSelectOne}"
+                                           var="idPacienteItem"
+                                           itemValue="#{idPacienteItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{optometriaController.create}" value="#{bundle.Save}" update="display,:OptometriaListForm:datalist,:growl" oncomplete="handleSubmit(args,'OptometriaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="OptometriaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EspirometriasCreateDlg" widgetVar="EspirometriasCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateEspirometriasTitle}">
+            <h:form id="EspirometriasCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{espirometriasController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateEspirometriasLabel_idEspirometria}" for="idEspirometria" />
+                        <p:inputText id="idEspirometria" value="#{espirometriasController.selected.idEspirometria}" title="#{bundle.CreateEspirometriasTitle_idEspirometria}" required="true" requiredMessage="#{bundle.CreateEspirometriasRequiredMessage_idEspirometria}"/>
+                        <p:outputLabel value="#{bundle.CreateEspirometriasLabel_fechaEspirometria}" for="fechaEspirometria" />
+                        <p:calendar id="fechaEspirometria" pattern="MM/dd/yyyy" value="#{espirometriasController.selected.fechaEspirometria}" title="#{bundle.EditEspirometriasTitle_fechaEspirometria}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateEspirometriasLabel_talla}" for="talla" />
+                        <p:inputText id="talla" value="#{espirometriasController.selected.talla}" title="#{bundle.CreateEspirometriasTitle_talla}" />
+                        <p:outputLabel value="#{bundle.CreateEspirometriasLabel_peso}" for="peso" />
+                        <p:inputText id="peso" value="#{espirometriasController.selected.peso}" title="#{bundle.CreateEspirometriasTitle_peso}" />
+                        <p:outputLabel value="#{bundle.CreateEspirometriasLabel_edadPulmonar}" for="edadPulmonar" />
+                        <p:inputText id="edadPulmonar" value="#{espirometriasController.selected.edadPulmonar}" title="#{bundle.CreateEspirometriasTitle_edadPulmonar}" />
+                        <p:outputLabel value="#{bundle.CreateEspirometriasLabel_fvc}" for="fvc" />
+                        <p:inputText id="fvc" value="#{espirometriasController.selected.fvc}" title="#{bundle.CreateEspirometriasTitle_fvc}" />
+                        <p:outputLabel value="#{bundle.CreateEspirometriasLabel_fev1Fvcporctj}" for="fev1Fvcporctj" />
+                        <p:inputText id="fev1Fvcporctj" value="#{espirometriasController.selected.fev1Fvcporctj}" title="#{bundle.CreateEspirometriasTitle_fev1Fvcporctj}" />
+                        <p:outputLabel value="#{bundle.CreateEspirometriasLabel_fef2575}" for="fef2575" />
+                        <p:inputText id="fef2575" value="#{espirometriasController.selected.fef2575}" title="#{bundle.CreateEspirometriasTitle_fef2575}" />
+                        <p:outputLabel value="#{bundle.CreateEspirometriasLabel_fef7585}" for="fef7585" />
+                        <p:inputText id="fef7585" value="#{espirometriasController.selected.fef7585}" title="#{bundle.CreateEspirometriasTitle_fef7585}" />
+                        <p:outputLabel value="#{bundle.CreateEspirometriasLabel_pef}" for="pef" />
+                        <p:inputText id="pef" value="#{espirometriasController.selected.pef}" title="#{bundle.CreateEspirometriasTitle_pef}" />
+                        <p:outputLabel value="#{bundle.CreateEspirometriasLabel_concepto}" for="concepto" />
+                        <p:inputText id="concepto" value="#{espirometriasController.selected.concepto}" title="#{bundle.CreateEspirometriasTitle_concepto}" />
+                        <p:outputLabel value="#{bundle.CreateEspirometriasLabel_diagnostico}" for="diagnostico" />
+                        <p:inputText id="diagnostico" value="#{espirometriasController.selected.diagnostico}" title="#{bundle.CreateEspirometriasTitle_diagnostico}" />
+                        <p:outputLabel value="#{bundle.CreateEspirometriasLabel_recomendaciones}" for="recomendaciones" />
+                        <p:inputText id="recomendaciones" value="#{espirometriasController.selected.recomendaciones}" title="#{bundle.CreateEspirometriasTitle_recomendaciones}" />
+                        <p:outputLabel value="#{bundle.CreateEspirometriasLabel_antecedentes}" for="antecedentes" />
+                        <p:inputText id="antecedentes" value="#{espirometriasController.selected.antecedentes}" title="#{bundle.CreateEspirometriasTitle_antecedentes}" />
+                        <p:outputLabel value="#{bundle.CreateEspirometriasLabel_fechaCreacion}" for="fechaCreacion" />
+                        <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy" value="#{espirometriasController.selected.fechaCreacion}" title="#{bundle.EditEspirometriasTitle_fechaCreacion}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateEspirometriasLabel_idPaciente}" for="idPaciente" />
+                        <p:selectOneMenu id="idPaciente" value="#{espirometriasController.selected.idPaciente}" required="true" requiredMessage="#{bundle.EditEspirometriasRequiredMessage_idPaciente}">
+                            <f:selectItems value="#{pacientesController.itemsAvailableSelectOne}"
+                                           var="idPacienteItem"
+                                           itemValue="#{idPacienteItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{espirometriasController.create}" value="#{bundle.Save}" update="display,:EspirometriasListForm:datalist,:growl" oncomplete="handleSubmit(args,'EspirometriasCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EspirometriasCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

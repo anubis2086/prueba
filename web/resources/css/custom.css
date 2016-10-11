@@ -1,0 +1,196 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 08-jul-2016, 15:56:49
+    Author     : Jose Maldonado
+*/
+@font-face {
+    font-family: 'icomoon';
+    src:    url('../fonts/icomoon.eot?g73u6h');
+    src:    url('../fonts/icomoon.eot?g73u6h#iefix') format('embedded-opentype'),
+        url('../fonts/icomoon.ttf?g73u6h') format('truetype'),
+        url('../fonts/icomoon.woff?g73u6h') format('woff'),
+        url('../fonts/icomoon.svg?g73u6h#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-nuevoLogo:before {
+    content: "\e900";
+    font-size: 61px;
+    color: #203864;
+    position: relative;
+    bottom: 20px;
+}
+.icon-book:before {
+    content: "\e91f";
+}
+.icon-profile:before {
+    content: "\e923";
+}
+.icon-phone:before {
+    content: "\e942";
+}
+.icon-envelop:before {
+    content: "\e945";
+}
+.icon-pushpin:before {
+    content: "\e946";
+}
+.icon-user-check:before {
+    content: "\e975";
+    font-size: 50px;
+}
+.icon-user-tie:before {
+    content: "\e976";
+    font-size: 50px;
+}
+.icon-key:before {
+    content: "\e98d";
+}
+.icon-lock:before {
+    content: "\e98f";
+}
+.icon-aid-kit:before {
+    content: "\e998";
+}
+.icon-lab:before {
+    content: "\e9aa";
+}
+.icon-accessibility:before {
+    content: "\e9b2";
+}
+.icon-clipboard:before {
+    content: "\e9b8";
+    font-size: 50px;
+}
+.icon-star-full:before {
+    content: "\e9d9";
+    font-size: 50px;
+}
+.icon-heart:before {
+    content: "\e9da";
+}
+.icon-happy:before {
+    content: "\e9df";
+}
+.icon-checkmark:before {
+    content: "\ea10";
+}
+.icon-circle-up:before {
+    content: "\ea41";
+}
+.icon-checkbox-checked:before {
+    content: "\ea52";
+}
+.icon-google-plus3:before {
+    content: "\ea8d";
+}
+.icon-facebook2:before {
+    content: "\ea91";
+    font-size: 50px;
+}
+.icon-instagram:before {
+    content: "\ea92";
+}
+.icon-whatsapp:before {
+    content: "\ea93";
+    font-size: 50px;
+}
+.icon-twitter:before {
+    content: "\ea96";
+}
+.icon-linkedin:before {
+    content: "\eac9";
+    font-size: 50px;
+}
+#body{
+    background: -webkit-linear-gradient(rgba(32, 56, 100, 0), rgba(0, 59, 165, 0.25));
+    color: #203864;
+    text-align: justify;
+    text-shadow: 2px 2px 4px rgb(255, 255, 255);
+}
+.btn-sing{
+    border-radius: 5px;
+    background: -webkit-radial-gradient(circle, #eff3f8, #203864);
+}
+.hText{
+    font-size: 4em;
+}
+.myBar1 {
+    padding-top: 15px;
+    text-align: center;
+    text-shadow: none;
+}
+.myBar2 {
+    background-color: #d6e4ec;
+    padding-top: 15px;
+    text-align: center;
+    text-shadow: none;
+}
+.myBar3 {
+    color: white;
+    background-color: #203864;
+    padding-top: 15px;
+    text-align: center;
+    text-shadow: none;
+}
+.myBar4 {
+    background-color: #269abc;
+    padding-top: 15px;
+    text-align: center;
+    text-shadow: none;
+}
+.myContact {
+    padding-top: 2em;
+}
+.myFeat {
+    text-align: center;
+    
+}
+.myFooter{
+    background-image: url(../images/footer-background.png);
+    background-repeat: no-repeat;
+}
+.myInf {
+    padding-top: 3.5em;
+    padding-bottom: 5em;
+}
+.my-navbar {
+    background: -webkit-linear-gradient(left top, rgb(213, 226, 249), rgba(32, 56, 100, 0));
+}
+.mySpace {
+    color: white;
+    text-shadow: 2px 2px 4px #000000;
+    padding-top: 8em;
+    padding-bottom: 10em;
+    background-image: url(../images/blue.jpg);
+}
+.nav-image {
+    width: 60px;
+    padding: 5px;
+    
+}
+.templ{
+    margin-top: 6em;
+    padding-bottom: 10em;
+}
+

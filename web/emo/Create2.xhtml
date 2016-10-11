@@ -1,0 +1,1172 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="Crear Emo"></h:outputText>
+        </ui:define>
+
+
+        <ui:define name="body">
+
+
+            <h:form id="EmoCreateForm">
+
+                <p:panel header="Paciente">
+                    <h:panelGrid columns="2" style="width: 1050px;">
+
+
+                        <p:graphicImage   value="#{pacientesController.imagen}"  cache="false" 
+                                          style=" width: 90px; height: 110px; margin-top: 15px; margin-bottom: 15px; margin-left: 20px;"/>
+
+                        <h:outputText  style="margin-top: 10px; margin-bottom: 10px;"   
+                                       value="#{pacientesController.selected.nombres}  
+                                       #{pacientesController.selected.apellidos} Doumento:
+                                       #{pacientesController.selected.numDoc} &lt;br /&gt;
+                                       #{pacientesController.selected.idClem.nomClem} 
+                                       Nit: #{pacientesController.selected.idClem.nitClem}&lt;br /&gt;
+                                       Cargo: #{pacientesController.selected.cargo} &lt;br /&gt;
+                                       Ciudad: #{pacientesController.selected.ciudad} &lt;br /&gt;" 
+                                       title="#{bundle.ViewOptometriaTitle_idPaciente}" escape="false"/> 
+
+                    </h:panelGrid>
+
+
+
+
+
+                </p:panel>
+
+                <p:panelGrid columns="2" layout="grid" >
+                    <p:outputLabel value="#{bundle.CreateEmoLabel_tipoConcepto}" for="tipoConcepto" />
+                    <p:selectOneMenu style="margin-top: 10px; margin-bottom: 10px;" id="tipoConcepto"
+                                     value="#{pacientesController.emoActual.tipoConcepto}">
+
+                        <f:selectItem itemLabel="PRE-INGRESO" itemValue="PRE-INGRESO" />
+                        <f:selectItem itemLabel="PERIÓDICO" itemValue="PERIODICO" />
+                        <f:selectItem itemLabel="MEDICINA LABORAL" itemValue="MEDICINA LABORAL" />
+                        <f:selectItem itemLabel="EGRESO" itemValue="EGRESO" />
+                    </p:selectOneMenu>
+
+
+                    <p:outputLabel value="#{bundle.CreateEmoLabel_tipoPerfil}" for="tipoPerfil" />
+                    <p:selectOneMenu id="tipoPerfil" value="#{pacientesController.emoActual.tipoPerfil}" 
+                                     title="#{bundle.CreateEmoTitle_tipoPerfil}" >
+                        <f:selectItem itemLabel="MANIPULADORES DE ALIMENTOS" itemValue="MANIPULADORES DE ALIMENTOS" />
+                        <f:selectItem itemLabel="TRABAJO EN ALTURAS" itemValue="TRABAJO EN ALTURAS" />
+                        <f:selectItem itemLabel="EXAMEN MÉDICO OCUPACIONAL" itemValue="EXAMEN MEDICO OCUPACIONAL" />
+                        <f:selectItem itemLabel="CONDUCTOR" itemValue="CONDUCTOR" />
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value="Ciuda de atención" for="ciudadAtencion"/>
+                    <p:inputText id="ciudadAtencion" value="#{pacientesController.emoActual.ciudadAtencion}"
+                                 maxlength="45"/>
+                </p:panelGrid>
+
+
+
+
+
+                <p:tabView scrollable="false">
+
+                    <p:tab title="Antecedentes Ocupacionales" >
+                        <p:panelGrid columns="3" layout="grid" id="panelAntecedentes">
+                            <p:outputLabel value="Empresa:" for="nomEmp" />
+                            <p:inputText id="nomEmp" value="#{pacientesController.antecedenteActual.nomEmp}" 
+                                         title="NomEmp"
+
+                                         maxlength="200">
+
+                            </p:inputText>
+                            <p:message id="nomEmpMessage" for="nomEmp"  styleClass="error"/>
+                            <p:outputLabel value="Actividad Económica:" for="actEcoEmp" />
+                            <p:inputText id="actEcoEmp"
+                                         value="#{pacientesController.antecedenteActual.actEcoEmp}" 
+                                         title="ActEcoEmp" 
+                                         maxlength="45"
+                                         >
+
+                            </p:inputText>
+                            <p:message id="actEcoEmpMessage" for="actEcoEmp"  styleClass="error"/>
+                            <p:outputLabel value="Oficio:" for="oficio" />
+                            <p:inputText id="oficio" value="#{pacientesController.antecedenteActual.oficio}"
+                                         title="Oficio" maxlength="45"
+                                         >
+
+                            </p:inputText>
+                            <p:message id="oficioMessage" for="oficio"  styleClass="error"/>
+                            <p:outputLabel value="Antiguedad:" for="antiguedad" />
+                            <p:inputText id="antiguedad" maxlength="11"
+                                         value="#{pacientesController.antecedenteActual.antiguedad}"
+                                         title="Antigüedad"
+                                         >
+
+                            </p:inputText>
+                            <p:message id="antiguedadMessage" for="antiguedad"  styleClass="error"/>
+                            <p:outputLabel value="Riesgos:" for="riesgos" />                                                                                                                                                                                     
+                            <p:inputTextarea id="riesgos" value="#{pacientesController.antecedenteActual.riesgos}"
+                                             title="Riesgos" maxlength="150" style="width: 500px;" >
+
+                            </p:inputTextarea>
+                            <p:message id="riesgosMessage" for="riesgos"  styleClass="error"/>
+                            <p:outputLabel value="Epp:" for="epp" />
+                            <p:inputTextarea id="epp" value="#{pacientesController.antecedenteActual.epp}"
+                                             title="Epp"
+                                             maxlength="300" style="width: 500px;" >
+
+                            </p:inputTextarea>
+                            <p:message id="eppMessage" for="epp"  styleClass="error"/>
+                            <p:commandButton value="Agregar Antecedente" 
+                                             action="#{pacientesController.agregarAntecedentes}" 
+                                             process="@this panelAntecedentes" 
+                                             update="datatableAntecedentes panelAntecedentes"/>
+                        </p:panelGrid>
+
+                        <p:dataTable id="datatableAntecedentes" value="#{pacientesController.listaAntecedentes}" var="item">
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="NomEmp"/>
+                                </f:facet>
+                                <h:outputText value="#{item.nomEmp}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="ActEcoEmp"/>
+                                </f:facet>
+                                <h:outputText value="#{item.actEcoEmp}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Oficio"/>
+                                </f:facet>
+                                <h:outputText value="#{item.oficio}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Antiguedad"/>
+                                </f:facet>
+                                <h:outputText value="#{item.antiguedad}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Riesgos"/>
+                                </f:facet>
+                                <h:outputText value="#{item.riesgos}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Epp"/>
+                                </f:facet>
+                                <h:outputText value="#{item.epp}"/>
+                            </p:column>
+                            <p:column headerText="Borrar">
+                                <p:commandButton icon="ui-icon-trash"  action="#{pacientesController.eliminarAntecedente()}"
+                                                 process="@this" update="datatableAntecedentes">
+
+                                    <f:setPropertyActionListener value="#{item}" 
+                                                                 target="#{pacientesController.antecedenteActual}"/>
+                                    <p:ajax process="@this" update="datatableAntecedentes"/>
+                                </p:commandButton>
+                            </p:column>
+
+                        </p:dataTable>
+                    </p:tab>
+
+
+
+
+
+                    <p:tab title="Accidentes Laborales" >
+                        <p:panelGrid columns="3" layout="grid" id="panelAccidentes">
+
+                            <p:outputLabel value="#{bundle.CreateAccidentesLaboralesLabel_anio}" for="anio" />
+                            <p:inputText id="anio" value="#{pacientesController.accidenteActual.anio}" 
+                                         title="#{bundle.CreateAccidentesLaboralesTitle_anio}"
+                                         validatorMessage="Por favor solo numeros">
+
+                                <f:validateRegex pattern="[0-9]*"/>
+                                <p:ajax process="@this" update="anioMessage"/>
+                            </p:inputText>
+                            <p:message id="anioMessage" for="anio"  styleClass="error"/>
+
+                            <p:outputLabel value="#{bundle.CreateAccidentesLaboralesLabel_descIni}" for="descIni" />
+                            <p:inputTextarea id="descIni" value="#{pacientesController.accidenteActual.descIni}" 
+                                             title="#{bundle.CreateAccidentesLaboralesTitle_descIni}" maxlength="200" style="width: 500px;" 
+                                             validatorMessage="Por favor solo letras" >
+                                <p:ajax process="@this" update="descIniMessage"/>
+                            </p:inputTextarea>
+                            <p:message id="descIniMessage" for="descIni"  styleClass="error"/>
+
+                            <p:outputLabel value="#{bundle.CreateAccidentesLaboralesLabel_accTrab}" for="accTrab" />
+                            <p:inputTextarea id="accTrab" value="#{pacientesController.accidenteActual.accTrab}" 
+                                             title="#{bundle.CreateAccidentesLaboralesTitle_accTrab}"
+                                             validatorMessage="Por favor solo letras" maxlength="200" style="width: 500px;"
+                                             >
+                                <p:ajax process="@this" update="accTrabMessage"/>
+                            </p:inputTextarea>
+                            <p:message id="accTrabMessage" for="accTrab"  styleClass="error"/>
+
+
+                            <p:outputLabel value="#{bundle.CreateAccidentesLaboralesLabel_enferProfe}" for="enferProfe" />
+                            <p:inputTextarea id="enferProfe" value="#{pacientesController.accidenteActual.enferProfe}"
+                                             title="#{bundle.CreateAccidentesLaboralesTitle_enferProfe}"
+                                             validatorMessage="Por favor solo letras" maxlength="200" style="width: 500px;" >
+                                <p:ajax process="@this" update="enferProfeMessage"/>
+                            </p:inputTextarea>
+                            <p:message id="enferProfeMessage" for="enferProfe"  styleClass="error"/>
+
+                            <p:outputLabel value="#{bundle.CreateAccidentesLaboralesLabel_empAcc}" for="empAcc" />
+                            <p:inputTextarea id="empAcc" value="#{pacientesController.accidenteActual.empAcc}" 
+                                             title="#{bundle.CreateAccidentesLaboralesTitle_empAcc}" 
+                                             validatorMessage="Por favor solo letras" maxlength="100" style="width: 500px;" >
+                                <p:ajax process="@this" update="empAccMessage"/>
+                            </p:inputTextarea>
+                            <p:message id="empAccMessage" for="empAcc"  styleClass="error"/>
+
+                            <p:outputLabel value="#{bundle.CreateAccidentesLaboralesLabel_secuelas}" for="secuelas" />
+                            <p:inputTextarea id="secuelas" value="#{pacientesController.accidenteActual.secuelas}" 
+                                             title="#{bundle.CreateAccidentesLaboralesTitle_secuelas}"
+                                             validatorMessage="Por favor solo letras" maxlength="250" style="width: 500px;" >
+                                <p:ajax process="@this" update="secuelasMessage"/>
+                            </p:inputTextarea>
+                            <p:message id="secuelasMessage" for="secuelas"  styleClass="error"/>
+
+                            <p:outputLabel value="#{bundle.CreateAccidentesLaboralesLabel_arl}" for="arl" />
+                            <p:inputText id="arl" value="#{pacientesController.accidenteActual.arl}" 
+                                         title="#{bundle.CreateAccidentesLaboralesTitle_arl}"
+                                         validatorMessage="Por favor solo letras" maxlength="30">
+                                <f:validateRegex pattern="[a-zA-Z áéíóúÁÉÍÓÚÑñ , .  ]*"/>
+                                <p:ajax process="@this" update="arlMessage"/>
+                            </p:inputText>
+                            <p:message id="arlMessage" for="arl"  styleClass="error"/>
+
+                            <p:commandButton value="Agregar Accidente" 
+                                             action="#{pacientesController.agregarAccidentes}" 
+                                             process="@this panelAccidentes" 
+                                             update="datatableAccidentes panelAccidentes"/>
+                        </p:panelGrid>
+
+                        <p:dataTable id="datatableAccidentes" value="#{pacientesController.listaAccidentes}" var="item">
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Año"/>
+                                </f:facet>
+                                <h:outputText value="#{item.anio}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Descripcion Inicial"/>
+                                </f:facet>
+                                <h:outputText value="#{item.descIni}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Accidente de trabajo"/>
+                                </f:facet>
+                                <h:outputText value="#{item.accTrab}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Enfermedad Profesional"/>
+                                </f:facet>
+                                <h:outputText value="#{item.enferProfe}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Empresa de Accidente"/>
+                                </f:facet>
+                                <h:outputText value="#{item.empAcc}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Secuelas"/>
+                                </f:facet>
+                                <h:outputText value="#{item.secuelas}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="ARL"/>
+                                </f:facet>
+                                <h:outputText value="#{item.arl}"/>
+                            </p:column>
+                            <p:column headerText="Borrar">
+                                <p:commandButton icon="ui-icon-trash"  action="#{pacientesController.eliminarAccidente}"
+                                                 process="@this" update="datatableAccidentes">
+
+                                    <f:setPropertyActionListener value="#{item}" 
+                                                                 target="#{pacientesController.accidenteActual}"/>
+                                    <p:ajax process="@this" update="datatableAccidentes"/>
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                        <p:panelGrid layout="grid" columns="2">
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_restriccionesLab}" for="restriccionesLab" />
+                            <p:selectOneMenu id="restriccionesLab" 
+                                             value="#{pacientesController.emoActual.restriccionesLab}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                                <p:ajax event="change" process="restriccionesLab" update="cualesUno"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_cualesUno}" for="cualesUno" />
+                            <p:inputTextarea id="cualesUno" value="#{pacientesController.emoActual.cualesUno}" 
+                                             maxlength="1500"     title="#{bundle.CreateEmoTitle_cualesUno}" disabled="#{pacientesController.emoActual.restriccionesLab != 'SI'}" style="width: 400px;" >
+                            </p:inputTextarea>
+                        </p:panelGrid>
+                    </p:tab>
+
+
+
+
+                    <p:tab title="Antecedentes Personales y familiares">
+
+                        <p:panelGrid columns="2" layout="grid">
+
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_antFam}" for="antFam" />
+                            <p:inputTextarea id="antFam" value="#{pacientesController.emoActual.antFam}" 
+                                             maxlength="500"  title="#{bundle.CreateEmoTitle_antFam}"  style="width: 400px;" >
+                            </p:inputTextarea>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_alergicos}" for="alergicos" />
+                            <p:selectOneMenu id="alergicos" value="#{pacientesController.emoActual.alergicos}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_asma}" for="asma" />
+                            <p:selectOneMenu id="asma" value="#{pacientesController.emoActual.asma}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_cancer}" for="cancer" />
+                            <p:selectOneMenu id="cancer" value="#{pacientesController.emoActual.cancer}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_cardiovasculares}" for="cardiovasculares" />
+                            <p:selectOneMenu id="cardiovasculares" value="#{pacientesController.emoActual.cardiovasculares}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_dermatologicos}" for="dermatologicos" />
+                            <p:selectOneMenu id="dermatologicos" value="#{pacientesController.emoActual.dermatologicos}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_diabetes}" for="diabetes" />
+                            <p:selectOneMenu id="diabetes" value="#{pacientesController.emoActual.diabetes}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_epilepsia}" for="epilepsia" />
+                            <p:selectOneMenu id="epilepsia" value="#{pacientesController.emoActual.epilepsia}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_hipertension}" for="hipertension" />
+                            <p:selectOneMenu id="hipertension" value="#{pacientesController.emoActual.hipertension}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_hipotiroidismo}" for="hipotiroidismo" />
+                            <p:selectOneMenu id="hipotiroidismo" value="#{pacientesController.emoActual.hipotiroidismo}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_neurologicos}" for="neurologicos" />
+                            <p:selectOneMenu id="neurologicos" value="#{pacientesController.emoActual.neurologicos}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_psiquiatricos}" for="psiquiatricos" />
+                            <p:selectOneMenu id="psiquiatricos" value="#{pacientesController.emoActual.psiquiatricos}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_quimicos}" for="quimicos" />
+                            <p:selectOneMenu id="quimicos" value="#{pacientesController.emoActual.quimicos}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_respiratorias}" for="respiratorias" />
+                            <p:selectOneMenu id="respiratorias" value="#{pacientesController.emoActual.respiratorias}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_reumatologicos}" for="reumatologicos" />
+                            <p:selectOneMenu id="reumatologicos" value="#{pacientesController.emoActual.reumatologicos}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_traumaticos}" for="traumaticos" />
+                            <p:selectOneMenu id="traumaticos" value="#{pacientesController.emoActual.traumaticos}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_varicesUno}" for="varicesUno" />
+                            <p:selectOneMenu id="varicesUno" value="#{pacientesController.emoActual.varicesUno}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_visuales}" for="visuales" />
+                            <p:selectOneMenu id="visuales" value="#{pacientesController.emoActual.visuales}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="Cuales Enfermedades Personales:" for="cualesEnfPer" />
+                            <p:inputTextarea id="cualesEnfPer" value="#{pacientesController.emoActual.observacionesCiediez}" 
+                                             title="#{bundle.CreateEmoTitle_cualesUno}" maxlength="3000" style="width: 400px;" >
+                            </p:inputTextarea>
+                        </p:panelGrid>
+                    </p:tab>
+
+
+
+
+                    <p:tab title="Gineco-Obstréticos"  rendered="#{pacientesController.genero}">
+                        <p:panelGrid columns="2" layout="grid" >
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_menarca}" for="menarca" />
+                            <p:inputText maxlength="45" id="menarca" value="#{pacientesController.emoActual.menarca}" title="#{bundle.CreateEmoTitle_menarca}" />
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_gravida}" for="gravida" />
+                            <p:inputText maxlength="45" id="gravida" value="#{pacientesController.emoActual.gravida}" title="#{bundle.CreateEmoTitle_gravida}" />
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_partos}" for="partos" />
+                            <p:inputText maxlength="45" id="partos" value="#{pacientesController.emoActual.partos}" title="#{bundle.CreateEmoTitle_partos}" />
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_cesareas}" for="cesareas" />
+                            <p:inputText maxlength="45" id="cesareas" value="#{pacientesController.emoActual.cesareas}" title="#{bundle.CreateEmoTitle_cesareas}" />
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_abortos}" for="abortos" />
+                            <p:inputText maxlength="45" id="abortos" value="#{pacientesController.emoActual.abortos}" title="#{bundle.CreateEmoTitle_abortos}" />
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_hijosVivos}" for="hijosVivos" />
+                            <p:inputText maxlength="45" id="hijosVivos" value="#{pacientesController.emoActual.hijosVivos}" title="#{bundle.CreateEmoTitle_hijosVivos}" />
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_fechaUltimaMenst}" for="fechaUltimaMenst" />
+                            <p:calendar id="fechaUltimaMenst" pattern="MM/dd/yyyy" value="#{pacientesController.emoActual.fechaUltimaMenst}" title="#{bundle.EditEmoTitle_fechaUltimaMenst}"  showOn="button"/>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_citologia}" for="citologia" />
+                            <p:calendar id="citologia" pattern="MM/dd/yyyy" value="#{pacientesController.emoActual.citologia}" title="#{bundle.EditEmoTitle_citologia}"  showOn="button"/>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_ciclos}" for="ciclos" />
+                            <p:inputText id="ciclos" value="#{pacientesController.emoActual.ciclos}" title="#{bundle.CreateEmoTitle_ciclos}" />
+                        </p:panelGrid>
+                    </p:tab>
+
+
+
+
+
+                    <p:tab title="Hábitos">
+
+                        <p:panelGrid columns="2" layout="grid" >
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_fumas}" for="fumas" />
+                            <p:selectOneMenu id="fumas" 
+                                             value="#{pacientesController.emoActual.fumas}" >
+
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                                <p:ajax event="change" process="fumas" 
+                                        update="cuantos, tiempoHaceCuanto, exfumador"/>                           
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_cuantos}" for="cuantos" />
+                            <p:inputText id="cuantos" value="#{pacientesController.emoActual.cuantos}" title="#{bundle.CreateEmoTitle_cuantos}"
+                                         maxlength="4"    disabled="#{pacientesController.emoActual.fumas != 'SI'}"/>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_tiempoHaceCuanto}" for="tiempoHaceCuanto" />
+                            <p:inputText id="tiempoHaceCuanto" value="#{pacientesController.emoActual.tiempoHaceCuanto}" 
+                                         title="#{bundle.CreateEmoTitle_tiempoHaceCuanto}"
+                                         maxlength="45"  disabled="#{pacientesController.emoActual.fumas != 'SI'}"/>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_exfumador}" for="exfumador" />
+                            <p:selectOneMenu id="exfumador"
+                                             value="#{pacientesController.emoActual.exfumador}"
+                                             disabled="#{pacientesController.emoActual.fumas != 'SI'}">
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_licor}" for="licor" />
+                            <p:selectOneMenu id="licor" value="#{pacientesController.emoActual.licor}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_habitual}" for="habitual" />
+                            <p:selectOneMenu id="habitual" value="#{pacientesController.emoActual.habitual}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_deporte}" for="deporte" />
+                            <p:selectOneMenu id="deporte" value="#{pacientesController.emoActual.deporte}" > 
+                                <p:ajax event="change" process="deporte" 
+                                        update="queDeporte, cuantasVecesSemana"/>
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_queDeporte}" for="queDeporte" />
+                            <p:inputTextarea id="queDeporte" value="#{pacientesController.emoActual.queDeporte}"
+                                             maxlength="100"     title="#{bundle.CreateEmoTitle_queDeporte}"
+                                             disabled="#{pacientesController.emoActual.deporte != 'SI'}" style="width: 400px;"
+                                             />
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_cuantasVecesSemana}" for="cuantasVecesSemana" />
+                            <p:inputText id="cuantasVecesSemana" 
+                                         value="#{pacientesController.emoActual.cuantasVecesSemana}"
+                                         title="#{bundle.CreateEmoTitle_cuantasVecesSemana}" 
+                                         maxlength="25"
+                                         disabled="#{pacientesController.emoActual.deporte != 'SI'}"/>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_manualidades}" for="manualidades" />
+                            <p:selectOneMenu id="manualidades" value="#{pacientesController.emoActual.manualidades}" >
+                                <p:ajax event="change" process="manualidades" 
+                                        update="cualesDos"/>     
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_cualesDos}" for="cualesDos" />
+                            <p:inputText id="cualesDos" value="#{pacientesController.emoActual.cualesDos}"
+                                         maxlength="100"   title="#{bundle.CreateEmoTitle_cualesDos}"
+                                         disabled="#{pacientesController.emoActual.manualidades != 'SI'}" />
+                        </p:panelGrid>
+                    </p:tab>
+
+
+
+
+
+                    <p:tab title="Revision por Sistemas">
+                        <p:panelGrid columns="2" layout="grid" >
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_revisionSistemas}" for="revisionSistemas" />
+                            <p:selectOneMenu id="revisionSistemas" 
+                                             value="#{pacientesController.emoActual.revisionSistemas}" >
+                                <p:ajax event="change" process="revisionSistemas" 
+                                        update="descSiste"/>
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_descSiste}" for="descSiste" />
+                            <p:inputTextarea id="descSiste" value="#{pacientesController.emoActual.descSiste}" 
+                                             style="width: 400px;"        title="#{bundle.CreateEmoTitle_descSiste}" maxlength="200"
+                                             disabled="#{pacientesController.emoActual.revisionSistemas != 'SI'}" />
+                        </p:panelGrid>
+                    </p:tab>
+
+
+
+
+
+                    <p:tab title="Sintomas Osteomusculares">
+                        <p:panelGrid columns="2" layout="grid" >
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_sintOsteom}" for="sintOsteom" />
+                            <p:selectOneMenu id="sintOsteom" value="#{pacientesController.emoActual.sintOsteom}" > 
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_cervical}" for="cervical" />
+                            <p:selectOneMenu id="cervical" value="#{pacientesController.emoActual.cervical}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_cuelloUno}" for="cuelloUno" />
+                            <p:selectOneMenu id="cuelloUno" value="#{pacientesController.emoActual.cuelloUno}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_hombros}" for="hombros" />
+                            <p:selectOneMenu id="hombros" value="#{pacientesController.emoActual.hombros}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_codos}" for="codos" />
+                            <p:selectOneMenu id="codos" value="#{pacientesController.emoActual.codos}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_muniecas}" for="muniecas" />
+                            <p:selectOneMenu id="muniecas" value="#{pacientesController.emoActual.muniecas}" > 
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_manos}" for="manos" />
+                            <p:selectOneMenu id="manos" value="#{pacientesController.emoActual.manos}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_dedos}" for="dedos" />
+                            <p:selectOneMenu id="dedos" value="#{pacientesController.emoActual.dedos}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_dorsal}" for="dorsal" />
+                            <p:selectOneMenu id="dorsal" value="#{pacientesController.emoActual.dorsal}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_dorsolumbar}" for="dorsolumbar" />
+                            <p:selectOneMenu id="dorsolumbar" value="#{pacientesController.emoActual.dorsolumbar}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_lumbosacra}" for="lumbosacra" />
+                            <p:selectOneMenu id="lumbosacra" value="#{pacientesController.emoActual.lumbosacra}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_cadera}" for="cadera" />
+                            <p:selectOneMenu id="cadera" value="#{pacientesController.emoActual.cadera}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_rodillasUno}" for="rodillasUno" />
+                            <p:selectOneMenu id="rodillasUno" value="#{pacientesController.emoActual.rodillasUno}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_pies}" for="pies" />
+                            <p:selectOneMenu id="pies" value="#{pacientesController.emoActual.pies}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_descOsteom}" for="descOsteom" />
+                            <p:inputTextarea maxlength="1000" id="descOsteom" value="#{pacientesController.emoActual.descOsteom}" title="#{bundle.CreateEmoTitle_descOsteom}"  
+                                             style="width: 400px;" ></p:inputTextarea>
+                        </p:panelGrid>
+                    </p:tab>
+
+
+
+
+
+                    <p:tab title="Examen Físico">
+                        <p:panelGrid columns="2" layout="grid" >
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_dominancia}" for="dominancia" />
+                            <p:selectOneMenu id="dominancia" value="#{pacientesController.emoActual.dominancia}" >
+                                <f:selectItem itemLabel="DIESTRO" itemValue="DIESTRO" />
+                                <f:selectItem itemLabel="ZURDO" itemValue="ZURDO" />
+                                <f:selectItem itemLabel="AMBIDIESTRO" itemValue="AMBIDIESTRO" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_talla}" for="talla" />
+                            <p:inputText id="talla" value="#{pacientesController.talla}" title="#{bundle.CreateEmoTitle_talla}" >
+                                <p:ajax event="keyup" update="imc, definicion"  />
+                            </p:inputText>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_peso}" for="peso" />
+                            <p:inputText id="peso" value="#{pacientesController.peso}" title="#{bundle.CreateEmoTitle_peso}" > 
+                                <p:ajax event="keyup" update="imc, definicion"  />
+                            </p:inputText>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_imc}" for="imc" />
+                            <p:outputLabel style="color: 
+                                           green; font-size: 20px" 
+                                           id="imc" value="#{pacientesController.imc}"
+                                           title="#{bundle.CreateEmoTitle_imc}" />
+                            <p:outputLabel value="Clasificación" for='definicion'/>
+                            <p:outputLabel style="color: 
+                                           #4297d7; font-size: 20px" 
+                                           value="#{pacientesController.cad}" id="definicion"/>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_tas}" for="tas" />
+                            <p:inputText maxlength="11" id="tas" value="#{pacientesController.emoActual.tas}" title="#{bundle.CreateEmoTitle_tas}" />
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_tad}" for="tad" />
+                            <p:inputText maxlength="11" id="tad" value="#{pacientesController.emoActual.tad}" title="#{bundle.CreateEmoTitle_tad}" />
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_fc}" for="fc" />
+                            <p:inputText maxlength="11" id="fc" value="#{pacientesController.emoActual.fc}" title="#{bundle.CreateEmoTitle_fc}" />
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_fr}" for="fr" />
+                            <p:inputText maxlength="11" id="fr" value="#{pacientesController.emoActual.fr}" title="#{bundle.CreateEmoTitle_fr}" />
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_temp}" for="temp" />
+                            <p:inputText maxlength="11" id="temp" value="#{pacientesController.emoActual.temp}" title="#{bundle.CreateEmoTitle_temp}" />
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_piel}" for="piel" />
+                            <p:selectOneMenu id="piel" value="#{pacientesController.emoActual.piel}" title="#{bundle.CreateEmoTitle_piel}">
+                                <f:selectItem itemLabel="NORMAL" itemValue="NORMAL" />
+                                <f:selectItem itemLabel="ANORMAL" itemValue="ANORMAL" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_cicaTatu}" for="cicaTatu" />
+                            <p:selectOneMenu id="cicaTatu" value="#{pacientesController.emoActual.cicaTatu}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_boca}" for="boca" />
+                            <p:selectOneMenu id="boca" value="#{pacientesController.emoActual.boca}" title="#{bundle.CreateEmoTitle_boca}" >
+                                <f:selectItem itemLabel="NORMAL, NO CARIES" itemValue="NORMAL, NO CARIES" />
+                                <f:selectItem itemLabel="ANORMAL" itemValue="ANORMAL" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_oidos}" for="oidos" />
+                            <p:selectOneMenu id="oidos" value="#{pacientesController.emoActual.oidos}" title="#{bundle.CreateEmoTitle_oidos}" >
+                                <f:selectItem itemLabel="NORMAL" itemValue="NORMAL" />
+                                <f:selectItem itemLabel="ANORMAL" itemValue="ANORMAL" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_ojos}" for="ojos" />
+                            <p:selectOneMenu id="ojos" value="#{pacientesController.emoActual.ojos}" title="#{bundle.CreateEmoTitle_ojos}" >
+                                <f:selectItem itemLabel="NORMAL" itemValue="NORMAL" />
+                                <f:selectItem itemLabel="ANORMAL" itemValue="ANORMAL" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_cuelloDos}" for="cuelloDos" />
+                            <p:selectOneMenu id="cuelloDos" value="#{pacientesController.emoActual.cuelloDos}" title="#{bundle.CreateEmoTitle_cuelloDos}" >
+                                <f:selectItem itemLabel="NORMAL" itemValue="NORMAL" />
+                                <f:selectItem itemLabel="ANORMAL" itemValue="ANORMAL" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_corazon}" for="corazon" />
+                            <p:selectOneMenu id="corazon" value="#{pacientesController.emoActual.corazon}" title="#{bundle.CreateEmoTitle_corazon}" >
+                                <f:selectItem itemLabel="NORMAL" itemValue="NORMAL" />
+                                <f:selectItem itemLabel="ANORMAL" itemValue="ANORMAL" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_pulmones}" for="pulmones" />
+                            <p:selectOneMenu id="pulmones" value="#{pacientesController.emoActual.pulmones}" title="#{bundle.CreateEmoTitle_pulmones}" >
+                                <f:selectItem itemLabel="NORMAL" itemValue="NORMAL" />
+                                <f:selectItem itemLabel="ANORMAL" itemValue="ANORMAL" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_abdomen}" for="abdomen" />
+                            <p:selectOneMenu id="abdomen" value="#{pacientesController.emoActual.abdomen}" title="#{bundle.CreateEmoTitle_abdomen}" >
+                                <f:selectItem itemLabel="NORMAL" itemValue="NORMAL" />
+                                <f:selectItem itemLabel="ANORMAL" itemValue="ANORMAL" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_hernias}" for="hernias" />
+                            <p:selectOneMenu id="hernias" value="#{pacientesController.emoActual.hernias}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_genitales}" for="genitales" />
+                            <p:selectOneMenu id="genitales" value="#{pacientesController.emoActual.genitales}" title="#{bundle.CreateEmoTitle_genitales}" >
+                                <f:selectItem itemLabel="NP REVISADO" itemValue="NO REVISADO" />
+                                <f:selectItem itemLabel="NORMAL" itemValue="NORMAL" />
+                                <f:selectItem itemLabel="ANORMAL" itemValue="ANORMAL" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_varicesDos}" for="varicesDos" />
+                            <p:selectOneMenu id="varicesDos" value="#{pacientesController.emoActual.varicesDos}" title="#{bundle.CreateEmoTitle_varicesDos}" >
+                                <f:selectItem itemLabel="NEGATIVO" itemValue="NEGATIVO" />
+                                <f:selectItem itemLabel="POSITIVO" itemValue="POSITIVO" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_columVertebral}" for="columVertebral" />
+                            <p:selectOneMenu id="columVertebral" value="#{pacientesController.emoActual.columVertebral}" title="#{bundle.CreateEmoTitle_columVertebral}" >
+                                <f:selectItem itemLabel="NORMAL" itemValue="NORMAL" />
+                                <f:selectItem itemLabel="ANORMAL" itemValue="ANORMAL" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_columCerv}" for="columCerv" />
+                            <p:selectOneMenu id="columCerv" value="#{pacientesController.emoActual.columCerv}" title="#{bundle.CreateEmoTitle_columCerv}">
+                                <f:selectItem itemLabel="NORMAL" itemValue="NORMAL" />
+                                <f:selectItem itemLabel="ANORMAL" itemValue="ANORMAL" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_columTora}" for="columTora" />
+                            <p:selectOneMenu id="columTora" value="#{pacientesController.emoActual.columTora}" title="#{bundle.CreateEmoTitle_columTora}" >
+                                <f:selectItem itemLabel="NORMAL" itemValue="NORMAL" />
+                                <f:selectItem itemLabel="ANORMAL" itemValue="ANORMAL" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_columLumbo}" for="columLumbo" />
+                            <p:selectOneMenu id="columLumbo" value="#{pacientesController.emoActual.columLumbo}" title="#{bundle.CreateEmoTitle_columLumbo}" >
+                                <f:selectItem itemLabel="NORMAL" itemValue="NORMAL" />
+                                <f:selectItem itemLabel="ANORMAL" itemValue="ANORMAL" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_arcoMovilidadArt}" for="arcoMovilidadArt" />
+                            <p:selectOneMenu id="arcoMovilidadArt" value="#{pacientesController.emoActual.arcoMovilidadArt}" title="#{bundle.CreateEmoTitle_arcoMovilidadArt}" >
+                                <f:selectItem itemLabel="NORMAL" itemValue="NORMAL" />
+                                <f:selectItem itemLabel="ANORMAL" itemValue="ANORMAL" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_lasegue}" for="lasegue" />
+                            <p:selectOneMenu id="lasegue" value="#{pacientesController.emoActual.lasegue}" title="#{bundle.CreateEmoTitle_lasegue}" >
+                                <f:selectItem itemLabel="NEGATIVO" itemValue="NEGATIVO" />
+                                <f:selectItem itemLabel="POSITIVO" itemValue="POSITIVO" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_limitacionFuncional}" for="limitacionFuncional" />
+                            <p:selectOneMenu id="limitacionFuncional" value="#{pacientesController.emoActual.limitacionFuncional}" title="#{bundle.CreateEmoTitle_limitacionFuncional}" >
+                                <f:selectItem itemLabel="NEGATIVO" itemValue="NEGATIVO" />
+                                <f:selectItem itemLabel="POSITIVO" itemValue="POSITIVO" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_filkenstein}" for="filkenstein" />
+                            <p:selectOneMenu id="filkenstein" value="#{pacientesController.emoActual.filkenstein}" title="#{bundle.CreateEmoTitle_filkenstein}" >
+                                <f:selectItem itemLabel="NEGATIVO" itemValue="NEGATIVO" />
+                                <f:selectItem itemLabel="POSITIVO" itemValue="POSITIVO" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_panel}" for="panel" />
+                            <p:selectOneMenu id="panel" value="#{pacientesController.emoActual.panel}" title="#{bundle.CreateEmoTitle_panel}" >
+                                <f:selectItem itemLabel="NEGATIVO" itemValue="NEGATIVO" />
+                                <f:selectItem itemLabel="POSITIVO" itemValue="POSITIVO" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_tinel}" for="tinel" />
+                            <p:selectOneMenu id="tinel" value="#{pacientesController.emoActual.tinel}" title="#{bundle.CreateEmoTitle_tinel}" >
+                                <f:selectItem itemLabel="NEGATIVO" itemValue="NEGATIVO" />
+                                <f:selectItem itemLabel="POSITIVO" itemValue="POSITIVO" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_silla}" for="silla" />
+                            <p:selectOneMenu id="silla" value="#{pacientesController.emoActual.silla}" title="#{bundle.CreateEmoTitle_silla}" >
+                                <f:selectItem itemLabel="NEGATIVO" itemValue="NEGATIVO" />
+                                <f:selectItem itemLabel="POSITIVO" itemValue="POSITIVO" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_rodillasDos}" for="rodillasDos" />
+                            <p:selectOneMenu id="rodillasDos" value="#{pacientesController.emoActual.rodillasDos}" title="#{bundle.CreateEmoTitle_rodillasDos}" >
+                                <f:selectItem itemLabel="NORMAL" itemValue="NORMAL" />
+                                <f:selectItem itemLabel="ANORMAL" itemValue="ANORMAL" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_marchaPuntas}" for="marchaPuntas" />
+                            <p:selectOneMenu id="marchaPuntas" value="#{pacientesController.emoActual.marchaPuntas}" title="#{bundle.CreateEmoTitle_marchaPuntas}" >
+                                <f:selectItem itemLabel="NORMAL" itemValue="NORMAL" />
+                                <f:selectItem itemLabel="AMORMAL" itemValue="ANORMAL" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_marchaTalones}" for="marchaTalones" />
+                            <p:selectOneMenu  id="marchaTalones" value="#{pacientesController.emoActual.marchaTalones}" title="#{bundle.CreateEmoTitle_marchaTalones}" >
+                                <f:selectItem itemLabel="NORMAL" itemValue="NORMAL" />
+                                <f:selectItem itemLabel="ANORMAL" itemValue="ANORMAL" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_miembrosSup}" for="miembrosSup" />
+                            <p:selectOneMenu id="miembrosSup" value="#{pacientesController.emoActual.miembrosSup}" title="#{bundle.CreateEmoTitle_miembrosSup}" >
+                                <f:selectItem itemLabel="NORMAL" itemValue="NORMAL" />
+                                <f:selectItem itemLabel="ANORMAL" itemValue="ANORMAL" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_miembrosInf}" for="miembrosInf" />
+                            <p:selectOneMenu id="miembrosInf" value="#{pacientesController.emoActual.miembrosInf}" title="#{bundle.CreateEmoTitle_miembrosInf}">
+                                <f:selectItem itemLabel="NORMAL" itemValue="NORMAL" />
+                                <f:selectItem itemLabel="ANORMAL" itemValue="ANORMAL" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_aparienciaFisica}" for="aparienciaFisica" />
+                            <p:inputTextarea maxlength="4000" id="aparienciaFisica" value="#{pacientesController.emoActual.consentimientoInformado}" title="#{bundle.CreateEmoTitle_aparienciaFisica}" style="width: 400px;" >
+                            </p:inputTextarea>
+                        </p:panelGrid>
+                    </p:tab>
+
+
+
+
+
+                    <p:tab title="Encuesta de Alturas">
+                        <p:panelGrid columns="2" layout="grid" >
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_pruebasVestibular}" for="pruebasVestibular" />
+                            <p:selectOneMenu id="pruebasVestibular" value="#{pacientesController.emoActual.pruebasVestibular}" >
+                                <f:selectItem itemLabel="NEGATIVA" itemValue="NEGATIVA" />
+                                <f:selectItem itemLabel="POSITIVA" itemValue="POSITIVA" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_fechaEncuesta}" for="fechaEncuesta" />
+                            <p:calendar id="fechaEncuesta" pattern="MM/dd/yyyy" value="#{pacientesController.emoActual.fechaEncuesta}" title="#{bundle.EditEmoTitle_fechaEncuesta}"  showOn="button"/>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_trabajadorMenorEdad}" for="trabajadorMenorEdad" />
+                            <p:selectOneMenu id="trabajadorMenorEdad" value="#{pacientesController.emoActual.trabajadorMenorEdad}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_mujerGestante}" for="mujerGestante" />
+                            <p:selectOneMenu id="mujerGestante" value="#{pacientesController.emoActual.mujerGestante}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="Pánico a las Alturas:" for="panicoAlturas" />
+                            <p:selectOneMenu id="panicoAlturas" value="#{pacientesController.emoActual.panicoAlturas}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_restriccionesLab}" for="restriccionesLabdos" />
+                            <p:selectOneMenu id="restriccionesLabdos" value="#{pacientesController.emoActual.restriccionesLabdos}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" /></p:selectOneMenu>
+                            <p:outputLabel value="Limitaciones Físicas:" for="limitacionesFisicas" />
+                            <p:selectOneMenu id="limitacionesFisicas" value="#{pacientesController.emoActual.limitacionesFisicas}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" /></p:selectOneMenu>
+                            <p:outputLabel value="Traumáticos:" for="traumaticosdos" />
+                            <p:selectOneMenu id="traumaticosdos" value="#{pacientesController.emoActual.traumaticosdos}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" /></p:selectOneMenu>
+                            <p:outputLabel value="Ceguera:" for="ceguera" />
+                            <p:selectOneMenu id="ceguera" value="#{pacientesController.emoActual.ceguera}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="Vision Cercana Alterada:" for="visionCercanaAlterada" />
+                            <p:selectOneMenu id="visionCercanaAlterada" value="#{pacientesController.emoActual.visionCercanaAlterada}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="Dislipidemia:" for="dislipidemia" />
+                            <p:selectOneMenu id="dislipidemia" value="#{pacientesController.emoActual.dislipidemia}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="Hiperglicemia:" for="hiperglicemia" />
+                            <p:selectOneMenu id="hiperglicemia" value="#{pacientesController.emoActual.hiperglicemia}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="IMC Mayor a 35:" for="imcmayor" />
+                            <p:selectOneMenu id="imcmayor" value="#{pacientesController.emoActual.imcmayor}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_antecedentesEnfermedades}" for="antecedentesEnfermedades" />
+                            <p:selectOneMenu id="antecedentesEnfermedades" value="#{pacientesController.emoActual.antecedentesEnfermedades}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_antecedentesAdiccion}" for="antecedentesAdiccion" />
+                            <p:selectOneMenu id="antecedentesAdiccion" value="#{pacientesController.emoActual.antecedentesAdiccion}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_alteraciones}" for="alteraciones" />
+                            <p:selectOneMenu id="alteraciones" value="#{pacientesController.emoActual.alteraciones}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_signosSintomasVisuales}" for="signosSintomasVisuales" />
+                            <p:selectOneMenu id="signosSintomasVisuales" value="#{pacientesController.emoActual.signosSintomasVisuales}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_alteracionesVisuales}" for="alteracionesVisuales" />
+                            <p:selectOneMenu id="alteracionesVisuales" value="#{pacientesController.emoActual.alteracionesVisuales}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_alteracionesColor}" for="alteracionesColor" />
+                            <p:selectOneMenu id="alteracionesColor" value="#{pacientesController.emoActual.alteracionesColor}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_alteracionProfundidad}" for="alteracionProfundidad" />
+                            <p:selectOneMenu id="alteracionProfundidad" value="#{pacientesController.emoActual.alteracionProfundidad}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_visionBinocularAlterada}" for="visionBinocularAlterada" />
+                            <p:selectOneMenu id="visionBinocularAlterada" value="#{pacientesController.emoActual.visionBinocularAlterada}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_planoHorizontalVision}" for="planoHorizontalVision" />
+                            <p:selectOneMenu id="planoHorizontalVision" value="#{pacientesController.emoActual.planoHorizontalVision}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_signosSintomasAuditivos}" for="signosSintomasAuditivos" />
+                            <p:selectOneMenu id="signosSintomasAuditivos" value="#{pacientesController.emoActual.signosSintomasAuditivos}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_alteracionesAudicion}" for="alteracionesAudicion" />
+                            <p:selectOneMenu id="alteracionesAudicion" value="#{pacientesController.emoActual.alteracionesAudicion}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_sintomasMetabolicos}" for="sintomasMetabolicos" />
+                            <p:selectOneMenu id="sintomasMetabolicos" value="#{pacientesController.emoActual.sintomasMetabolicos}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_laboratoriosAlteraciones}" for="laboratoriosAlteraciones" />
+                            <p:selectOneMenu id="laboratoriosAlteraciones" value="#{pacientesController.emoActual.laboratoriosAlteraciones}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_sintomasCardiovasculares}" for="sintomasCardiovasculares" />
+                            <p:selectOneMenu id="sintomasCardiovasculares" value="#{pacientesController.emoActual.sintomasCardiovasculares}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_accidenteCerebrovascular}" for="accidenteCerebrovascular" />
+                            <p:selectOneMenu id="accidenteCerebrovascular" value="#{pacientesController.emoActual.accidenteCerebrovascular}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_sintomasMentales}" for="sintomasMentales" />
+                            <p:selectOneMenu id="sintomasMentales" value="#{pacientesController.emoActual.sintomasMentales}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_antecedentesMedicamentos}" for="antecedentesMedicamentos" />
+                            <p:selectOneMenu id="antecedentesMedicamentos" value="#{pacientesController.emoActual.antecedentesMedicamentos}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_sindromeConvulsivo}" for="sindromeConvulsivo" />
+                            <p:selectOneMenu id="sindromeConvulsivo" value="#{pacientesController.emoActual.sindromeConvulsivo}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_alteracionesEquilibrio}" for="alteracionesEquilibrio" />
+                            <p:selectOneMenu id="alteracionesEquilibrio" value="#{pacientesController.emoActual.alteracionesEquilibrio}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_alteracionesAtencion}" for="alteracionesAtencion" />
+                            <p:selectOneMenu id="alteracionesAtencion" value="#{pacientesController.emoActual.alteracionesAtencion}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_alteracionesComportamiento}" for="alteracionesComportamiento" />
+                            <p:selectOneMenu id="alteracionesComportamiento" value="#{pacientesController.emoActual.alteracionesComportamiento}" >
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="Observaciones" for="obsUno" />
+                            <p:inputTextarea  id="obsUno" value="#{pacientesController.emoActual.obsUno}"  title="Observaciones" maxlength="600" style="width: 400px;" >
+
+                            </p:inputTextarea>
+
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_tipoExamenEmo}" for="conceptoEncuesta" />
+                            <p:selectOneMenu id="conceptoEncuesta" value="#{pacientesController.emoActual.tipoExamenEmo}" >
+                                <f:selectItem itemLabel="APTO" itemValue="APTO" />
+                                <f:selectItem itemLabel="NO APTO" itemValue="NO APTO" />
+                            </p:selectOneMenu>
+                        </p:panelGrid>
+                    </p:tab>
+
+
+
+
+
+                    <p:tab title="Otros">
+                        <p:panelGrid columns="2" layout="grid" >
+
+
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_visiometria}" for="visiometria" />                            
+                            <p:selectOneMenu id="visiometria" value="#{pacientesController.emoActual.visiometria}"
+                                             title="#{bundle.CreateEmoTitle_visiometria}" >
+                                <f:selectItem itemLabel="NORMAL" itemValue="NORMAL" />
+                                <f:selectItem itemLabel="ANORMAL" itemValue="ANORMAL" />
+                                <f:selectItem itemLabel="NO APLICA" itemValue="NO APLICA" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_audiometria}" for="audiometria" />
+                            <p:selectOneMenu id="audiometria" value="#{pacientesController.emoActual.audiometria}" 
+                                             title="#{bundle.CreateEmoTitle_audiometria}" > 
+                                <f:selectItem itemLabel="NORMAL" itemValue="NORMAL" />
+                                <f:selectItem itemLabel="ANORMAL" itemValue="ANORMAL" />
+                                <f:selectItem itemLabel="NO APLICA" itemValue="NO APLICA" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_espirometriaComputalizada}" for="espirometriaComputalizada" />
+                            <p:selectOneMenu id="espirometriaComputalizada" 
+                                             value="#{pacientesController.emoActual.espirometriaComputalizada}"
+                                             title="#{bundle.CreateEmoTitle_espirometriaComputalizada}" >
+                                <f:selectItem itemLabel="NORMAL" itemValue="NORMAL" />
+                                <f:selectItem itemLabel="ANORMAL" itemValue="ANORMAL" />
+                                <f:selectItem itemLabel="NO APLICA" itemValue="NO APLICA" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="Laboratorio" for="laboratorio" />
+                            <p:selectOneMenu id="laboratorio" 
+                                             value="#{pacientesController.emoActual.laboratorio}"
+                                             title="laboratorio" >
+                                <f:selectItem itemLabel="NORMAL" itemValue="NORMAL" />
+                                <f:selectItem itemLabel="ANORMAL" itemValue="ANORMAL" />
+                                <f:selectItem itemLabel="NO APLICA" itemValue="NO APLICA" />
+                            </p:selectOneMenu>
+
+
+                            <p:outputLabel value="Diagnostico CIE 10-1" for="cieDiezIdCie" />
+                            <p:autoComplete id="cieDiezIdCie" value="#{pacientesController.emoActual.cieDiezIdCie}" title="CieDiez" 
+                                            required="true" requiredMessage="The CieDiez field is required."
+
+                                            completeMethod="#{pacientesController.getListCieDiezAutoComplete}" 
+                                            var="cieDiezIdCie" itemLabel="#{cieDiezIdCie}" itemValue="#{cieDiezIdCie}" 
+                                            converter="cieDiezConverter" 
+                                            forceSelection="true" /> 
+                            <p:outputLabel value="Diagnostico CIE 10-2:" for="cieDiezIdCie1" />
+                            <p:autoComplete id="cieDiezIdCie1" value="#{pacientesController.emoActual.cieDiezIdCie1}" title="CieDiez" 
+                                            required="true" requiredMessage="The CieDiez field is required."
+                                            completeMethod="#{pacientesController.getListCieDiezAutoComplete}" 
+                                            var="cieDiezIdCie1" itemLabel="#{cieDiezIdCie1}" itemValue="#{cieDiezIdCie1}" 
+                                            converter="cieDiezConverter" 
+                                            forceSelection="true" /> 
+                            <p:outputLabel value="Diagnostico CIE 10-3:" for="cieDiezIdCie2" />
+                            <p:autoComplete id="cieDiezIdCie2" value="#{pacientesController.emoActual.cieDiezIdCie2}" title="CieDiez" 
+                                            required="true" requiredMessage="The CieDiez field is required."
+                                            completeMethod="#{pacientesController.getListCieDiezAutoComplete}" 
+                                            var="cieDiezIdCie2" itemLabel="#{cieDiezIdCie2}" itemValue="#{cieDiezIdCie2}" 
+                                            converter="cieDiezConverter" 
+                                            forceSelection="true" /> 
+                            <p:outputLabel value="Diagnostico CIE 10-4:" for="cieDiezIdCie3" />
+                            <p:autoComplete id="cieDiezIdCie3" value="#{pacientesController.emoActual.cieDiezIdCie3}" title="CieDiez" 
+                                            required="true" requiredMessage="The CieDiez field is required."
+                                            completeMethod="#{pacientesController.getListCieDiezAutoComplete}" 
+                                            var="cieDiezIdCie3" itemLabel="#{cieDiezIdCie3}" itemValue="#{cieDiezIdCie3}" 
+                                            converter="cieDiezConverter" 
+                                            forceSelection="true" /> 
+                            <p:outputLabel value="Diagnostico CIE 10-5:" for="cieDiezIdCie4" />
+                            <p:autoComplete id="cieDiezIdCie4" value="#{pacientesController.emoActual.cieDiezIdCie4}" title="CieDiez" 
+                                            required="true" requiredMessage="The CieDiez field is required."
+                                            completeMethod="#{pacientesController.getListCieDiezAutoComplete}" 
+                                            var="cieDiezIdCie4" itemLabel="#{cieDiezIdCie4}" itemValue="#{cieDiezIdCie4}" 
+                                            converter="cieDiezConverter" 
+                                            forceSelection="true" /> 
+                            <p:outputLabel value="Diagnostico CIE 10-6:" for="cieDiezIdCie5" />
+                            <p:autoComplete id="cieDiezIdCie5" value="#{pacientesController.emoActual.cieDiezIdCie5}" title="CieDiez" 
+                                            required="true" requiredMessage="The CieDiez field is required."
+                                            completeMethod="#{pacientesController.getListCieDiezAutoComplete}" 
+                                            var="cieDiezIdCie5" itemLabel="#{cieDiezIdCie5}" itemValue="#{cieDiezIdCie5}" 
+                                            converter="cieDiezConverter" 
+                                            forceSelection="true" /> 
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_otros}" for="otros" />
+                            <p:inputTextarea maxlength="450" id="otros" value="#{pacientesController.emoActual.otros}" title="#{bundle.CreateEmoTitle_otros}" style="width: 400px;" >
+                            </p:inputTextarea>                            
+
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_resultadoConceptoFinal}" for="resultadoConceptoFinal" />
+                            <p:selectOneMenu id="resultadoConceptoFinal" value="#{pacientesController.emoActual.resultadoConceptoFinal}" 
+                                             title="#{bundle.CreateEmoTitle_resultadoConceptoFinal}" >
+                                <f:selectItem itemLabel="CON RESTRICCIONES" itemValue="CON RESTRICCIONES" />
+                                <f:selectItem itemLabel="SIN RESTRICCIONES" itemValue="SIN RESTRICCIONES" />
+                                <f:selectItem itemLabel="APLAZADO" itemValue="APLAZADO" />
+                                <f:selectItem itemLabel="PRESENTA HALLAZGOS EN EL EXAMEN CLÍNICO" 
+                                              itemValue="PRESENTA HALLAZGOS EN EL EXAMEN CLINICO QUE ESTEN 
+                                              RELACIONADOS CON LAS TAREAS O FUNCIONES DESEMPEÑADAS" />
+                                <f:selectItem itemLabel="NO PRESENTA HALLAZGOS EN EL EXAMEN CLÍNICO"
+                                              itemValue="NO PRESENTA HALLAZGOS EN EL EXAMEN CLINICO QUE 
+                                              ESTÉN RELACIONADOS CON LAS TAREAS O FUNCIONES DESEMPEÑADAS" />
+                                <f:selectItem itemLabel="APTO PARA MANIPULAR ALIMENTOS" itemValue="APTO PARA MANIPULAR ALIMENTOS" />
+                                <f:selectItem itemLabel="NO ES APTO PARA MANIPULAR ALIMENTOS" itemValue="NO ES APTO PARA MANIPULAR ALIMENTOS" />
+                                <f:selectItem itemLabel="APTO PARA TRABAJAR EN ALTURAS"
+                                              itemValue="APTO PARA TRABAJAR EN ALTURAS" />
+                                <f:selectItem itemLabel="NO ES APTO PARA TRABAJAR EN ALTURAS" itemValue="NO ES APTO PARA TRABAJAR EN ALTURAS" />
+
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_observaciones}" for="observaciones" />
+                            <p:inputTextarea maxlength="1500" id="observaciones" value="#{pacientesController.emoActual.observaciones}" title="#{bundle.CreateEmoTitle_observaciones}" style="width: 400px;" >
+                            </p:inputTextarea>
+
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_obsevacionesEspecificas}" for="obsevacionesEspecificas" />
+                            <p:inputTextarea maxlength="4500" id="obsevacionesEspecificas" value="#{pacientesController.emoActual.observacionesEspecificas}" title="#{bundle.CreateEmoTitle_obsevacionesEspecificas}" style="width: 400px;" ></p:inputTextarea>
+
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_remision}" for="remision" />
+                            <p:inputTextarea maxlength="150" id="remision" value="#{pacientesController.emoActual.remision}"
+                                             title="#{bundle.CreateEmoTitle_remision}"  style="width: 400px;" >
+                            </p:inputTextarea>
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_sistemasVigilancia}" for="sistemasVigilancia" />
+                            <p:inputTextarea maxlength="2000" id="sistemasVigilancia" value="#{pacientesController.emoActual.sistemasVigilancia}" title="#{bundle.CreateEmoTitle_sistemasVigilancia}" style="width: 400px;" >
+                            </p:inputTextarea>
+
+                            <p:outputLabel value="#{bundle.CreateEmoLabel_conductasOcupacionales}" for="conductasOcupacionales" />
+                            <p:selectManyCheckbox id="conductasOcupacionales" columns="1" layout="pageDirection"
+                                                  value="#{pacientesController.conductas}"  >
+                                <f:selectItem itemLabel=" DOTAR de todos los elementos de protección personal, acorde con los riesgos demostrados 
+                                              en el panorama de factores de la empresa, CAPACITAR y VERIFICAR su uso adecuado." 
+                                              itemValue="-  DOTAR de todos los elementos de protección personal, acorde con los riesgos demostrados en el panorama de factores de la empresa, CAPACITAR y VERIFICAR su uso adecuado.  "/>
+                                <f:selectItem itemLabel="Capacitar en la prevención de los riesgos propios del oficio a realizar." 
+                                              itemValue="-  Capacitar en la prevención de los riesgos propios del oficio a realizar.  "/>
+                                <f:selectItem itemLabel="Mantener las posiciones y posturas adecuadas en cada puesto de trabajo, 
+                                              dotado de los elementos adecuados acorde con condiciones ergonómicas especificas  "
+                                              itemValue="-  Mantener las posiciones y posturas adecuadas en cada puesto de trabajo, dotado de los elementos adecuados acorde con condiciones ergonómicas especificas.  " />
+                                <f:selectItem itemLabel=" Realizar pausas activas periódicas y cambios de oficio según lo estipulado en los diferentes
+                                              puestos para evitar agotamientos y lesiones. " 
+                                              itemValue="-  Realizar pausas activas periódicas y cambios de oficio según lo estipulado en los diferentes puestos para evitar agotamientos y lesiones.  " />
+                                <f:selectItem itemLabel="Implementar las actividades definidas en el programa de prevención del riesgo psicosocial o
+                                              de estrés ocupacional."
+                                              itemValue="-  Implementar las actividades definidas en el programa de prevención del riesgo psicosocial o de estrés ocupacional.  " />
+                                <f:selectItem itemLabel="Capacitación y entrenamiento en el manejo sanitario de alimentos."
+                                              itemValue="-  Capacitación y entrenamiento en el manejo sanitario de alimentos.  "/>
+                                <f:selectItem itemLabel="Se recomienda la implementación en todas las tareas de buenas prácticas de manufactura para 
+                                              el manejo de los alimentos."
+                                              itemValue="-  Se recomienda la implementación en todas las tareas de buenas prácticas de manufactura para el manejo de los alimentos.  " />
+                                <f:selectItem itemLabel="De acuerdo al resultado de la Audiometría, los exámenes de Laboratorio Clínico y a la evaluación médica realizada, que incluyó pruebas clínicas de equilibrio dinámico y estático para descartar vértigo, se considera que en caso de requerirse, ES APTO PARA REALIZAR TRABAJOS EN ALTURAS, previa capacitación, entrega de la dotación de seguridad requerida, entrenamiento adecuado y la implementación de listas de chequeo para verificar las condiciones de seguridad y de salud, acorde con lo establecido en las Resoluciones 2346 de 2007 , 1918 de 2009 y 1409 de 2012 del Ministerio de Trabajo."
+                                              itemValue="-  De acuerdo al resultado de la Audiometría, los exámenes de Laboratorio Clínico y a la evaluación médica realizada, que incluyó pruebas clínicas de equilibrio dinámico y estático para descartar vértigo, se considera que en caso de requerirse, ES APTO PARA REALIZAR TRABAJOS EN ALTURAS, previa capacitación, entrega de la dotación de seguridad requerida, entrenamiento adecuado y la implementación de listas de chequeo para verificar las condiciones de seguridad y de salud, acorde con lo establecido en las Resoluciones 2346 de 2007 , 1918 de 2009 y 1409 de 2012 del Ministerio de Trabajo.  "/>
+
+
+                            </p:selectManyCheckbox>
+                        </p:panelGrid>
+                    </p:tab>
+
+
+
+
+
+
+                </p:tabView>
+
+
+
+                <p:commandButton style="margin-top: 15px; margin-bottom: 15px" action="#{pacientesController.addEmo}" value="#{bundle.Save}">
+                    <p:ajax update="@this" listener="#{emoController.recargarListaEmo}" />
+                    <p:ajax update="@this" listener="#{antecedentesOcupacionalesController.recargarListaAntecedentes}" />
+                    <p:ajax update="@this" listener="#{accidentesLaboralesController.recargarListaAccidentes}" />
+                </p:commandButton>                   
+                <p:button style="margin-top: 15px; margin-bottom: 15px; margin-left: 4em;" 
+                          value="#{bundle.Cancel}" outcome="/pacientes/List" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

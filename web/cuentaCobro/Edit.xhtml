@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="Editar"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+
+            <h:form id="CuentaCobroEditForm">
+                <p:panel header="Cuenta de cobro">
+
+                    <h:panelGrid columns="3" style="width: 1000px;" rendered="#{cuentaCobroController.selected != null}">
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px;" value="#{bundle.EditCuentaCobroLabel_idClem}" for="idClem" />
+                        <p:inputText style="margin-top: 15px; margin-bottom: 15px;" id="idClem" value="#{cuentaCobroController.selected.idClem}" disabled="true" required="true" 
+                                     requiredMessage="#{bundle.EditCuentaCobroRequiredMessage_idClem}"/>
+                        <h:panelGrid/>
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px;" value="#{bundle.EditCuentaCobroLabel_fechaCuenta}" for="fechaCuenta" />
+                        <p:calendar style="margin-top: 15px; margin-bottom: 15px;" id="fechaCuenta" pattern="MM/dd/yyyy" 
+                                    value="#{cuentaCobroController.selected.fechaCuenta}" 
+                                    title="#{bundle.EditCuentaCobroTitle_fechaCuenta}"  showOn="button"/>
+                        <h:panelGrid/>
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px;" value="#{bundle.EditCuentaCobroLabel_numeroCuenta}" 
+                                       for="numeroCuenta" />
+                        <p:inputText style="margin-top: 15px; margin-bottom: 15px;" id="numeroCuenta" value="#{cuentaCobroController.selected.numeroCuenta}"
+                                     disabled="true" title="#{bundle.EditCuentaCobroTitle_numeroCuenta}" />
+                        <h:panelGrid/>
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px;" value="#{bundle.EditCuentaCobroLabel_concepto}" for="concepto" />
+                        <p:inputTextarea style="margin-top: 15px; margin-bottom: 15px; width: 400px;" id="concepto" value="#{cuentaCobroController.selected.concepto}" 
+                                         title="#{bundle.EditCuentaCobroTitle_concepto}" />
+                        <h:panelGrid/>
+
+
+                        <h:panelGrid style="margin-top: 15px; margin-bottom: 15px; width: 50px;"  columns="2">
+
+                            <p:outputLabel style="margin-right:  15px;" value="#{bundle.CreateCuentaCobroLabel_cantidad}" for="cantidad"  />
+                            <p:inputText placeholder="solo números" id="cantidad" value="#{cuentaCobroController.cantidad}" 
+                                         title="#{bundle.CreateCuentaCobroTitle_cantidad}" maxlength="11">
+                                <p:ajax event="keyup" update="valor, valorPagar"  />
+
+                            </p:inputText>
+                        </h:panelGrid>
+
+                        <h:panelGrid style="margin-top: 15px; margin-bottom: 15px; width: 50px"  columns="2">
+                            <p:outputLabel  style="margin-right:  15px;" value="#{bundle.CreateCuentaCobroLabel_valorUnitario}" for="valorUnitario" />
+                            <p:inputText placeholder="solo números" id="valorUnitario" 
+                                         value="#{cuentaCobroController.valorUnitario}" title="#{bundle.CreateCuentaCobroTitle_valorUnitario}" maxlength="11"> 
+                                <p:ajax event="keyup" update="valor, valorPagar"  />
+                            </p:inputText>
+
+                        </h:panelGrid>
+
+
+
+
+
+                        <h:panelGrid style="margin-top: 15px; margin-bottom: 15px;"  columns="2">
+                            <p:outputLabel style="margin-right:  15px;"  id="valorTotal" value="#{bundle.CreateCuentaCobroLabel_valorTotal}" >
+
+
+                            </p:outputLabel>
+
+                            <p:outputLabel style="color: 
+                                           red; font-size: 20px" 
+                                           id="valor" value="$ #{cuentaCobroController.total}"/>
+                        </h:panelGrid>
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px;"  value="#{bundle.CreateCuentaCobroLabel_banco}" for="banco" />
+                        <p:inputText style="margin-top: 15px; margin-bottom: 15px;"  id="banco" value="#{cuentaCobroController.selected.banco}"
+                                     title="#{bundle.CreateCuentaCobroTitle_banco}" maxlength="80"  validatorMessage="Por favor solo letras">
+                            <f:validateRegex pattern="[a-zA-Z áéíóúÁÉÍÓÚÑñ]*"/>
+                            <p:ajax process="@this" update="bancoMessage"/>
+
+                        </p:inputText>
+                        <p:message style="margin-top: 15px; margin-bottom: 15px" id="bancoMessage" for="banco" />
+
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px;" 
+                                       value="#{bundle.CreateCuentaCobroLabel_cuentaAhorros}" for="cuentaAhorros" />
+                        <p:inputText style="margin-top: 15px; margin-bottom: 15px;"  id="cuentaAhorros"
+                                     value="#{cuentaCobroController.selected.cuentaAhorros}" maxlength="45"
+                                     title="#{bundle.CreateCuentaCobroTitle_cuentaAhorros}" validatorMessage="Por favor solo números">
+                            <f:validateRegex pattern="[0-9 -]*"/>
+                            <p:ajax process="@this" update="cuentaAhorrosMessage"/>
+                        </p:inputText>
+                        <p:message style="margin-top: 15px; margin-bottom: 15px" id="cuentaAhorrosMessage" for="cuentaAhorros" />
+
+
+
+
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px;"  value="#{bundle.CreateCuentaCobroLabel_titularCuenta}" for="nombre" />
+                        <p:inputText style="margin-top: 15px; margin-bottom: 15px;"  id="nombre" 
+                                     value="#{cuentaCobroController.selected.titularCuenta}" maxlength="60"
+                                     title="#{bundle.CreateCuentaCobroTitle_titularCuenta}" validatorMessage="Por favor solo letras">
+
+                            <f:validateRegex pattern="[a-zA-Z áéíóúÁÉÍÓÚÑñ]*"/>
+                            <p:ajax process="@this" update="nombreMessage"/>
+                        </p:inputText>
+                        <p:message style="margin-top: 15px; margin-bottom: 15px" id="nombreMessage" for="nombre" />
+
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px;"  value="#{bundle.CreateCuentaCobroLabel_pagoEfectivo}" for="pagoEfectivo" />
+                        <p:selectOneMenu style="margin-top: 15px; margin-bottom: 15px;"  id="pagoEfectivo" 
+                                     value="#{cuentaCobroController.selected.pagoEfectivo}" 
+                                     >
+                            
+                                <f:selectItem itemLabel="NO" itemValue="NO" />
+                                <f:selectItem itemLabel="SI" itemValue="SI" />
+                          
+
+                        </p:selectOneMenu>
+                        <p:message style="margin-top: 15px; margin-bottom: 15px" id="pagoEfectivoMessage" for="pagoEfectivo" />
+
+
+                       
+
+                        <p:outputLabel value="Valor a pagar" for="valorPagar" />
+                        <p:outputLabel style="color: 
+                                       red; font-size: 30px"  id="valorPagar" value="$ #{cuentaCobroController.total} pesos" />
+
+
+
+
+
+                    </h:panelGrid>
+                </p:panel>
+                <p:commandButton style="margin-top: 15px; margin-bottom: 15px;" action="#{cuentaCobroController.update}" value="#{bundle.Save}" />
+                <p:button style="margin-top: 15px; margin-bottom: 15px;" value="#{bundle.Cancel}" outcome="/cuentaCobro/List"/>
+
+            </h:form>
+
+        </ui:define>
+
+    </ui:composition>
+</html>

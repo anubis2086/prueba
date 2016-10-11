@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListPacientesTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="PacientesListForm" rendered="#{loginController.user}">
+
+
+                <p:dataTable id="datalist" value="#{pacientesController.items}" var="item"
+                             selectionMode="single"
+                             paginator="true"
+                             rowKey="#{item.idPaciente}"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             >     
+
+                    <f:facet name="header">
+
+
+                        <p:commandButton value="Agregar Paciente" action="#{pacientesController.prepareCreate}"/>
+                        Reporte por página:
+                        <h:commandLink  style="margin-top: 15px; margin-bottom: 15px; ">
+                            <img src="#{request.contextPath}/resources/images/excel.png" width="24"/>
+
+                            <p:dataExporter type="xls" target="datalist" fileName="Lista de pacientes" pageOnly="true" />
+                        </h:commandLink>
+
+                        <h:commandLink rendered="#{loginController.admin}"  style="margin-top: 15px; margin-bottom: 15px; margin-left: 15px;">
+                            <img src="#{request.contextPath}/resources/images/pdf.png" width="24"/>
+                            <p:dataExporter type="pdf" target="datalist" fileName="Lista de pacientes" pageOnly="true"/>
+                        </h:commandLink >
+
+                        <h:commandLink rendered="#{loginController.admin}"  style="margin-top: 15px; margin-bottom: 15px; margin-left: 15px; margin-right: 40px;">
+                            <img src="#{request.contextPath}/resources/images/csv.png" width="24"/>
+                            <p:dataExporter type="csv" target="datalist" fileName="Lista de pacientes" pageOnly="true"/>
+                        </h:commandLink>
+                        Reporte                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     completo:
+
+
+                        <h:commandLink  style="margin-top: 15px; margin-bottom: 15px; ">
+                            <img src="#{request.contextPath}/resources/images/excel.png" width="24"/>
+                            <p:dataExporter type="xls" target="datalist" fileName="Lista de pacientes" />
+                        </h:commandLink>
+
+                        <h:commandLink rendered="#{loginController.admin}" style="margin-top: 15px; margin-bottom: 15px; margin-left: 15px;">
+                            <img src="#{request.contextPath}/resources/images/pdf.png" width="24"/>
+                            <p:dataExporter type="pdf" target="datalist" fileName="Lista de pacientes" />
+                        </h:commandLink >
+
+                        <h:commandLink rendered="#{loginController.admin}" style="margin-top: 15px; margin-bottom: 15px; margin-left: 15px;">
+                            <img src="#{request.contextPath}/resources/images/csv.png" width="24"/>
+                            <p:dataExporter type="csv" target="datalist" fileName="Lista de pacientes" />
+                        </h:commandLink>
+
+                    </f:facet>
+                    <p:column filterBy="#{item.nombres}" >
+                        <f:facet name="header">
+                            <h:outputText value="Nombres"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nombres}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.apellidos}" >
+                        <f:facet name="header">
+                            <h:outputText value="Apellidos"/>
+                        </f:facet>
+                        <h:outputText value="#{item.apellidos}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="TipoDoc"/>
+                        </f:facet>
+                        <h:outputText value="#{item.tipoDoc}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.numDoc}" >
+                        <f:facet name="header">
+                            <h:outputText value="Documento"/>
+                        </f:facet>
+                        <h:outputText value="#{item.numDoc}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="Fecha Nacimiento"/>
+                        </f:facet>
+                        <h:outputText value="#{item.fecNac}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="Edad"/>
+                        </f:facet>
+                        <h:outputText value="#{item.edad}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Tel Celular"/>
+                        </f:facet>
+                        <h:outputText value="#{item.telCel}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="Dirección"/>
+                        </f:facet>
+                        <h:outputText value="#{item.direccion}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="Ciudad"/>
+                        </f:facet>
+                        <h:outputText value="#{item.ciudad}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="Ciudad Nacimiento"/>
+                        </f:facet>
+                        <h:outputText value="#{item.ciudadNac}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="Est Civil"/>
+                        </f:facet>
+                        <h:outputText value="#{item.estCiv}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="Nivel Academico"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nivAca}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="Afp"/>
+                        </f:facet>
+                        <h:outputText value="#{item.afp}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="Eps"/>
+                        </f:facet>
+                        <h:outputText value="#{item.eps}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="Arl"/>
+                        </f:facet>
+                        <h:outputText value="#{item.arl}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="Número Hijos"/>
+                        </f:facet>
+                        <h:outputText value="#{item.numHijos}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="Genero"/>
+                        </f:facet>
+                        <h:outputText value="#{item.genero}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="Cargo"/>
+                        </f:facet>
+                        <h:outputText value="#{item.cargo}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="Profesion"/>
+                        </f:facet>
+                        <h:outputText value="#{item.profesion}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="Fecha Creacion"/>
+                        </f:facet>
+                        <h:outputText value="#{item.fechaCreacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+
+
+                    <p:column filterBy="#{item.idClem}">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListPacientesTitle_idClem}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idClem.toString()}"/>
+                    </p:column>
+
+                    <p:column exportable="false" > 
+                        <f:facet name="header">Opciones</f:facet>
+
+
+
+                        <p:splitButton  update="datalist"  title="Editar imágenes" icon="ui-icon-image" oncomplete="PF('tomarPhotoDlg').show()" >
+                            <f:setPropertyActionListener value="#{item}"
+                                                         target="#{pacientesController.selected}"/>
+
+
+                            <p:menuitem value="Emo" icon="ui-icon-plus"
+
+                                        action="#{pacientesController.prepareCreateEmo}" >
+                                <f:setPropertyActionListener value="#{item}"
+                                                             target="#{pacientesController.selected}"/>
+                            </p:menuitem>
+
+                            <p:menuitem value="Audiometría"  ajax="false" icon="ui-icon-plus" 
+                                        action="#{pacientesController.prepareCreateAudiometria}" >
+                                <f:setPropertyActionListener value="#{item}"
+                                                             target="#{pacientesController.selected}"/>
+                            </p:menuitem>
+                            <p:menuitem value="Espirometría"  action="#{pacientesController.prepareCreateEspirometrias}" icon="ui-icon-plus" >
+                                <f:setPropertyActionListener value="#{item}"
+                                                             target="#{pacientesController.selected}"/>
+                            </p:menuitem>
+                            <p:menuitem value="Optometría"   icon="ui-icon-plus" action="#{pacientesController.prepareCreateOptometria}" >
+                                <f:setPropertyActionListener value="#{item}"
+                                                             target="#{pacientesController.selected}"/>
+                            </p:menuitem>
+                            <p:menuitem value="Laboratorio"   icon="ui-icon-plus" action="#{pacientesController.prepareCreateLaboratorio}" >
+                                <f:setPropertyActionListener value="#{item}"
+                                                             target="#{pacientesController.selected}"/>   
+                            </p:menuitem>    
+                            <p:separator />
+
+                            <p:menuitem  id="editButtonFoto" icon="ui-icon-image" update="datalist" value="Actualizar foto" oncomplete="PF('subirPhotoDlg').show()" >
+                                <f:setPropertyActionListener value="#{item}" target="#{pacientesController.selected}"/>
+                            </p:menuitem>
+                            <p:menuitem  id="editButtonFirma" icon="ui-icon-image" update="datalist" value="Actualizar firma" oncomplete="PF('subirFirmaDlg').show()" >
+                                <f:setPropertyActionListener value="#{item}" target="#{pacientesController.selected}"/>
+                            </p:menuitem>
+
+                            <p:menuitem id="viewButton" icon="ui-icon-search" value="Ver registro" update="datalist" action="#{pacientesController.prepareView}">
+                                <f:setPropertyActionListener value="#{item}" target="#{pacientesController.selected}"/>
+                            </p:menuitem>
+                            <p:menuitem  id="editButton" icon="ui-icon-pencil" update="datalist" value="Editar" action="#{pacientesController.prepareEdit}">
+                                <f:setPropertyActionListener value="#{item}" target="#{pacientesController.selected}"/>
+                            </p:menuitem>
+                            <!-- <p:menuitem  id="exportExcel" update="datalist" value="Exportar" >
+                                 <h:commandLink>
+                                     <img src="# {request.contextPath}/resources/images/pdf.png" width="24"/>
+                                     Exportar a excel
+                                     <p:dataExporter type="pdf" target="datalist" fileName="cars"/>
+                                 </h:commandLink>
+                             </p:menuitem>-->
+
+                            <p:menuitem id="deleteButton" icon="ui-icon-trash" rendered="#{loginController.admin}" title="Eliminar" 
+                                        action="#{pacientesController.destroy()}" value="Eliminar"
+                                        process="@this" update="datalist">
+
+                                <f:setPropertyActionListener value="#{item}" target="#{pacientesController.selected}"/>
+                            </p:menuitem>
+
+
+
+                        </p:splitButton>
+
+                    </p:column> 
+
+                </p:dataTable>
+
+
+
+            </h:form>
+
+
+
+
+            <p:dialog id="tomarPhotoDialogo" widgetVar="tomarPhotoDlg"  header="Imagenes" modal="true" resizable="false" closeOnEscape="true" draggable="false">
+                <h:form enctype="multipart/form-data">
+
+
+                    <p:fileUpload id="firma" value="#{pacientesController.fileFirma}" mode="simple" required="true" requiredMessage="Debe elegir una imágen"> 
+
+                    </p:fileUpload>
+
+
+
+                    <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                    <p:message  style="margin-top: 15px; margin-bottom: 15px" id="firmaMessage" for="firma"  styleClass="error"/>
+                    <h:panelGrid columns="2">
+                        <p:photoCam widgetVar="pc" listener="#{pacientesController.oncapture}"  />
+                        <p:commandButton  style="margin-left: 20px" type="button" value="Captura" onclick="PF('pc').capture()"> 
+                            <p:ajax update="@this" listener="#{pacientesController.messageCapture}"/>
+                        </p:commandButton> 
+
+
+                    </h:panelGrid> 
+                    <p:commandButton style="margin-top: 15px; margin-bottom: 15px"
+                                     action="#{pacientesController.updateIMG}" value="Guardar" 
+                                     ajax="false">
+                        <p:ajax oncomplete="PF('tomarPhotoDlg').hide();" />
+
+                    </p:commandButton>
+                    <p:commandButton style="margin-left: 4em; margin-top: 15px; margin-bottom: 15px" value="#{bundle.Cancel}"  >
+                        <p:ajax oncomplete="PF('tomarPhotoDlg').hide();" />
+                    </p:commandButton>
+                </h:form>
+            </p:dialog>
+
+            <p:dialog id="subirPhotoDialogo" widgetVar="subirPhotoDlg"  header="Imagenes" modal="true" resizable="false" closeOnEscape="true" draggable="false">
+
+                <h:form enctype="multipart/form-data">
+
+                    <p:fileUpload id="foto" value="#{pacientesController.file}" mode="simple" required="true" requiredMessage="Debe elegir una imágen"> 
+
+                    </p:fileUpload>
+                    <p:commandButton style="margin-top: 15px; margin-bottom: 15px"
+                                     action="#{pacientesController.updateIMGFOTO}" value="Subir Foto" 
+                                     ajax="false">
+
+                    </p:commandButton>
+
+                    <p:commandButton style="margin-left: 4em; margin-top: 15px; margin-bottom: 15px" value="#{bundle.Cancel}"  >
+                        <p:ajax oncomplete="PF('subirPhotoDlg').hide();" />
+                    </p:commandButton>
+
+                </h:form>
+
+            </p:dialog>
+            <p:dialog id="subirFirmaDialogo" widgetVar="subirFirmaDlg"  header="Imagenes" modal="true" resizable="false" closeOnEscape="true" draggable="false">
+
+                <h:form enctype="multipart/form-data">
+
+                    <p:fileUpload id="foto" value="#{pacientesController.fileFirma}" mode="simple" required="true" requiredMessage="Debe elegir una imágen"> 
+
+                    </p:fileUpload>
+                    <p:commandButton style="margin-top: 15px; margin-bottom: 15px"
+                                     action="#{pacientesController.updateIMGFIRMA}" value="Subir Firma" 
+                                     ajax="false">
+
+                    </p:commandButton>
+
+                    <p:commandButton style="margin-left: 4em; margin-top: 15px; margin-bottom: 15px" value="#{bundle.Cancel}"  >
+                        <p:ajax oncomplete="PF('subirFirmaDlg').hide();" />
+                    </p:commandButton>
+
+                </h:form>
+
+            </p:dialog>
+
+
+        </ui:define>
+    </ui:composition>
+
+</html>

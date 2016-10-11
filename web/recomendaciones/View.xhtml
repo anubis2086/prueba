@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RecomendacionesViewDlg" widgetVar="RecomendacionesViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewRecomendacionesTitle}">
+            <h:form id="RecomendacionesViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{recomendacionesController.selected != null}">
+                        <h:outputText value="#{bundle.ViewRecomendacionesLabel_idRecomendacion}"/>
+                        <h:outputText value="#{recomendacionesController.selected.idRecomendacion}" title="#{bundle.ViewRecomendacionesTitle_idRecomendacion}"/>
+                        <h:outputText value="#{bundle.ViewRecomendacionesLabel_genero}"/>
+                        <h:outputText value="#{recomendacionesController.selected.genero}" title="#{bundle.ViewRecomendacionesTitle_genero}"/>
+                        <h:outputText value="#{bundle.ViewRecomendacionesLabel_descripcion}"/>
+                        <h:outputText value="#{recomendacionesController.selected.descripcion}" title="#{bundle.ViewRecomendacionesTitle_descripcion}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="RecomendacionesViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

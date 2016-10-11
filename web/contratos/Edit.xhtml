@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditContratosTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form>
+                <p:panel header="Datos del contrato">
+                    <h:panelGrid columns="3" style="width: 1000px;">
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px" value="NumCont:" for="numCont"
+                                       rendered="#{loginController.admin}"/>
+                        <p:inputText id="numCont" value="#{contratosController.selected.numCont}" title="NumCont" 
+                                     required="true" style="margin-top: 15px; margin-bottom: 15px;"
+                                     requiredMessage="El campo es requerido." rendered="#{loginController.admin}"
+                                     validatorMessage="Por favor solo numeros"
+                                     maxlength="45">
+                            <f:validateRegex pattern="[0-9]*"/>
+                            <p:ajax process="@this" update="numContMessage"/>
+                        </p:inputText>
+                        <p:message style="margin-top: 15px; margin-bottom: 15px" 
+                                   rendered="#{loginController.admin}" id="numContMessage" for="numCont"  styleClass="error"/>
+
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px;" value="ConceptoCont:" for="conceptoCont" />
+                        <p:inputTextarea id="conceptoCont" value="#{contratosController.selected.conceptoCont}" title="ConceptoCont" 
+                                     required="true" style="margin-top: 15px; margin-bottom: 15px; width: 400px;"
+                                     requiredMessage="El campo es requerido." maxlength="45"
+                                     validatorMessage="Por favor solo letras" >
+                            
+                            <p:ajax process="@this" update="conceptoContMessage"/>
+                        </p:inputTextarea>
+                        <p:message style="margin-top: 15px; margin-bottom: 15px" id="conceptoContMessage" for="conceptoCont"  styleClass="error"/>
+
+
+                       <p:outputLabel  style="margin-top: 15px; margin-bottom: 15px;" value="FechaIniCon:" for="fechaIniCon" />
+                        <p:calendar  style="margin-top: 15px; margin-bottom: 15px;"  showOn="button" id="fechaIniCon" navigator="true" 
+                                     value="#{contratosController.selected.fechaIniCon}"  
+                                     pattern="yyyy-MM-dd"  yearRange="c-80:c+10"
+
+                                     maxdate="#{contratosController.selected.fechaFinCont}"
+                                     >
+                            <p:ajax event="dateSelect" process="@this fechaIniCon" update="fechaFinCont"/>
+                        </p:calendar>
+                        <p:message style="margin-top: 15px; margin-bottom: 15px;" for="fechaIniCon" />
+
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px;" value="FechaFinCont:" for="fechaFinCont" />
+                        <p:calendar showOn="button" id="fechaFinCont" navigator="true" 
+                                    value="#{contratosController.selected.fechaFinCont}"  
+                                    pattern="yyyy-MM-dd"  yearRange="c-80:c+10"
+                                    style="margin-top: 15px; margin-bottom: 15px;"
+                                    mindate="#{contratosController.selected.fechaIniCon}"
+                                    >
+                            <p:ajax event="dateSelect" process="@this fechaFinCont" update="fechaIniCon"/>
+                        </p:calendar>
+                        <p:message style="margin-top: 15px; margin-bottom: 15px;" for="fechaFinCont"/>
+
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px;" value="PagoCont:" for="pagoCont" />
+                        <p:inputText style="margin-top: 15px; margin-bottom: 15px;" id="pagoCont" 
+                                     value="#{contratosController.selected.pagoCont}" 
+                                     title="PagoCont" required="true" 
+                                     validatorMessage="Por favor solo numeros"
+                                     requiredMessage="El campo es requerido."
+                                     maxlength="45"
+                                     >
+                            <f:validateRegex pattern="[0-9]*"/>
+                            <p:ajax process="@this" update="pagoContMessage"/>
+
+                        </p:inputText>
+                        <p:message style="margin-top: 15px; margin-bottom: 15px" id="pagoContMessage" for="pagoCont"  styleClass="error"/>
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px" value="TelCelCont:" for="telCelCont" />
+                        <p:inputText id="telCelCont" value="#{contratosController.selected.telCelCont}" 
+                                     title="TelCelCont" required="true" style="margin-top: 15px; margin-bottom: 15px"
+                                     validatorMessage="Por favor solo numeros"
+                                     requiredMessage="El campo es requerido."
+                                     maxlength="45">
+                            <f:validateRegex pattern="[0-9]*"/>
+                            <p:ajax process="@this" update="telCelContMessage"/>
+                        </p:inputText>
+                        <p:message style="margin-top: 15px; margin-bottom: 15px" id="telCelContMessage" for="telCelCont"  styleClass="error"/>
+
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px" value="DirCont:" for="dirCont" />
+                        <p:inputText id="dirCont" value="#{contratosController.selected.dirCont}" title="DirCont" 
+                                     required="true" style="margin-top: 15px; margin-bottom: 15px"
+                                     requiredMessage="El campo es requerido."
+                                     maxlength="45">    
+                            <p:ajax process="@this" update="dirContMessage"/>
+                        </p:inputText>
+                        <p:message style="margin-top: 15px; margin-bottom: 15px" id="dirContMessage" for="dirCont"  styleClass="error"/>
+
+                        <p:outputLabel value="NomCont:" for="nomCont" />
+                        <p:inputText id="nomCont" value="#{contratosController.selected.nomCont}" title="NomCont" style="margin-top: 15px; margin-bottom: 15px"
+                                     validatorMessage="Por favor solo letras"
+                                     requiredMessage="El campo es requerido."
+                                     maxlength="45">
+                            <f:validateRegex pattern="[a-zA-Z áéíóúÁÉÍÓÚÑñ]*"/>
+                            <p:ajax process="@this" update="nomContMessage"/>
+                        </p:inputText>
+                        <p:message style="margin-top: 15px; margin-bottom: 15px" id="nomContMessage" for="nomCont"  styleClass="error"/>
+
+
+                        <p:outputLabel  style="margin-top: 15px; margin-bottom: 15px" value="EmailCont:" for="emailCont" />
+                        <p:inputText id="emailCont" value="#{contratosController.selected.emailCont}" title="EmailCont"
+                                     style="margin-top: 15px; margin-bottom: 15px" required="true" 
+                                     requiredMessage="El campo es requerido." 
+                                     validatorMessage="Ingrese un formato de correo valido" maxlength="45"> 
+                            <f:validateRegex
+                                pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                            <p:ajax process="@this" update="emailContMessage"/>
+                        </p:inputText>
+                        <p:message style="margin-top: 15px; margin-bottom: 15px" id="emailContMessage" for="emailCont"  styleClass="error"/>
+
+
+                    </h:panelGrid>
+                </p:panel>
+                <p:commandButton style="margin-top: 15px; margin-bottom: 15px" action="#{contratosController.update()}" value="#{bundle.Save}" >
+
+                </p:commandButton>                   
+
+
+                <p:button style="margin-left: 4em; margin-top: 15px; margin-bottom: 15px" value="#{bundle.Cancel}" outcome="/contratos/List" />
+            </h:form>
+
+
+
+        </ui:define>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+     <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditAccidentesLaboralesTitle}"></h:outputText>
+        </ui:define>
+
+
+        <ui:define name="body">
+
+   
+            <h:form id="AccidentesLaboralesCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{accidentesLaboralesController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateAccidentesLaboralesLabel_idAccidenteLaboral}" for="idAccidenteLaboral" />
+                        <p:inputText id="idAccidenteLaboral" value="#{accidentesLaboralesController.selected.idAccidenteLaboral}" title="#{bundle.CreateAccidentesLaboralesTitle_idAccidenteLaboral}" required="true" requiredMessage="#{bundle.CreateAccidentesLaboralesRequiredMessage_idAccidenteLaboral}"/>
+                        <p:outputLabel value="#{bundle.CreateAccidentesLaboralesLabel_anio}" for="anio" />
+                        <p:inputText id="anio" value="#{accidentesLaboralesController.selected.anio}" title="#{bundle.CreateAccidentesLaboralesTitle_anio}" />
+                        <p:outputLabel value="#{bundle.CreateAccidentesLaboralesLabel_descIni}" for="descIni" />
+                        <p:inputText id="descIni" value="#{accidentesLaboralesController.selected.descIni}" title="#{bundle.CreateAccidentesLaboralesTitle_descIni}" />
+                        <p:outputLabel value="#{bundle.CreateAccidentesLaboralesLabel_accTrab}" for="accTrab" />
+                        <p:inputText id="accTrab" value="#{accidentesLaboralesController.selected.accTrab}" title="#{bundle.CreateAccidentesLaboralesTitle_accTrab}" />
+                        <p:outputLabel value="#{bundle.CreateAccidentesLaboralesLabel_enferProfe}" for="enferProfe" />
+                        <p:inputText id="enferProfe" value="#{accidentesLaboralesController.selected.enferProfe}" title="#{bundle.CreateAccidentesLaboralesTitle_enferProfe}" />
+                        <p:outputLabel value="#{bundle.CreateAccidentesLaboralesLabel_empAcc}" for="empAcc" />
+                        <p:inputText id="empAcc" value="#{accidentesLaboralesController.selected.empAcc}" title="#{bundle.CreateAccidentesLaboralesTitle_empAcc}" />
+                        <p:outputLabel value="#{bundle.CreateAccidentesLaboralesLabel_secuelas}" for="secuelas" />
+                        <p:inputText id="secuelas" value="#{accidentesLaboralesController.selected.secuelas}" title="#{bundle.CreateAccidentesLaboralesTitle_secuelas}" />
+                        <p:outputLabel value="#{bundle.CreateAccidentesLaboralesLabel_arl}" for="arl" />
+                        <p:inputText id="arl" value="#{accidentesLaboralesController.selected.arl}" title="#{bundle.CreateAccidentesLaboralesTitle_arl}" />
+                        <p:outputLabel value="#{bundle.CreateAccidentesLaboralesLabel_idEmo}" for="idEmo" />
+                        <p:selectOneMenu id="idEmo" value="#{accidentesLaboralesController.selected.idEmo}" required="true" requiredMessage="#{bundle.EditAccidentesLaboralesRequiredMessage_idEmo}">
+                            <f:selectItems value="#{emoController.itemsAvailableSelectOne}"
+                                           var="idEmoItem"
+                                           itemValue="#{idEmoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton action="#{accidentesLaboralesController.create}" value="#{bundle.Save}" />
+                    <p:button value="#{bundle.Cancel}" outcome="/accidentesLaborales/List"/>
+                </h:panelGroup>
+            </h:form>
+              </ui:define>
+    </ui:composition>
+      
+</html>

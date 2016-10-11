@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListAudiometriasTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="AudiometriasListForm" rendered="#{loginController.user}">
+
+                <p:dataTable id="datalist" value="#{audiometriasController.items}" var="item"
+                             selectionMode="single" 
+                             paginator="true"
+                             rowKey="#{item.idAudiometria}"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             >
+                    <f:facet name="header">
+                        Reporte por página:
+                        <h:commandLink  style="margin-top: 15px; margin-bottom: 15px; ">
+                            <img src="#{request.contextPath}/resources/images/excel.png" width="24"/>
+                            <p:dataExporter type="xls" target="datalist" fileName="Lista de Audiometrías" pageOnly="true" />
+                        </h:commandLink>
+
+                        <h:commandLink rendered="#{loginController.admin}" style="margin-top: 15px; margin-bottom: 15px; margin-left: 15px;">
+                            <img src="#{request.contextPath}/resources/images/pdf.png" width="24"/>
+                            <p:dataExporter type="pdf" target="datalist" fileName="Lista de Audiometrías" pageOnly="true"/>
+                        </h:commandLink >
+
+                        <h:commandLink rendered="#{loginController.admin}"   style="margin-top: 15px; margin-bottom: 15px; margin-left: 15px; margin-right: 40px;">
+                            <img src="#{request.contextPath}/resources/images/csv.png" width="24"/>
+                            <p:dataExporter type="csv" target="datalist" fileName="Lista de Audiometrías" pageOnly="true" />
+                        </h:commandLink>
+                        Reporte completo:
+
+                        <h:commandLink  style="margin-top: 15px; margin-bottom: 15px; ">
+                            <img src="#{request.contextPath}/resources/images/excel.png" width="24"/>
+                            <p:dataExporter type="xls" target="datalist" fileName="Lista de Audiometrías" />
+                        </h:commandLink>
+
+                        <h:commandLink  rendered="#{loginController.admin}"  style="margin-top: 15px; margin-bottom: 15px; margin-left: 15px;">
+                            <img src="#{request.contextPath}/resources/images/pdf.png" width="24"/>
+                            <p:dataExporter type="pdf" target="datalist" fileName="Lista de Audiometrías"/>
+                        </h:commandLink >
+
+                        <h:commandLink rendered="#{loginController.admin}"   style="margin-top: 15px; margin-bottom: 15px; margin-left: 15px;">
+                            <img src="#{request.contextPath}/resources/images/csv.png" width="24"/>
+                            <p:dataExporter type="csv" target="datalist" fileName="Lista de Audiometrías" />
+                        </h:commandLink>
+
+                    </f:facet>
+
+
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_fechaAudiometria}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.fechaAudiometria}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column toggleable="false"  filterBy="#{item.idPaciente.idClem.nomClem}">
+                        <f:facet name="header">
+                            <h:outputText value="Empresa"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPaciente.idClem.nomClem}"/>
+                    </p:column>
+
+                    <p:column toggleable="false" filterBy="#{item.idPaciente}">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListLaboratorioTitle_idPaciente}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPaciente.toString()}"/>
+                    </p:column>
+
+
+
+
+                    <p:column filterBy="#{item.idPaciente.numDoc}">
+                        <f:facet name="header">
+                            <h:outputText value="Número de documento"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPaciente.numDoc}"/>
+                    </p:column>
+
+
+                    <p:column style="display: none;" >
+                        <f:facet name="header">
+                            <h:outputText value="Fecha de nacimiento"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPaciente.fecNac}"> 
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="Ciudad de nacimiento"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPaciente.ciudadNac}"/>
+
+                    </p:column>
+
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="Edad"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPaciente.edad}"/>
+                    </p:column>
+
+                    <p:column style="display: none;" >
+                        <f:facet name="header">
+                            <h:outputText value="Género"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPaciente.genero}"/>
+                    </p:column>
+
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="Cargo"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPaciente.cargo}"/>
+                    </p:column>
+
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="Profesión"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPaciente.profesion}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="Número de hijos"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPaciente.numHijos}"/>
+                    </p:column>
+
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="Eps"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPaciente.eps}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="Nivel academico"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPaciente.nivAca}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="Estado civil"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPaciente.estCiv   }"/>
+                    </p:column>
+                 
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_facturado}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.facturado}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_vaoi250}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vaoi250}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_vaoi500}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vaoi500}"/>
+                    </p:column >
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_vaoi1000}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vaoi1000}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_vaoi2000}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vaoi2000}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_vaoi3000}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vaoi3000}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_vaoi4000}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vaoi4000}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_vaoi6000}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vaoi6000}"/>
+                    </p:column >
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_vaoi8000}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vaoi8000}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_vaod250}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vaod250}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_vaod500}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vaod500}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_vaod1000}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vaod1000}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_vaod2000}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vaod2000}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_vaod3000}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vaod3000}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_vaod4000}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vaod4000}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_vaod6000}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vaod6000}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_vaod8000}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vaod8000}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_vooi250}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vooi250}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_vooi500}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vooi500}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_vooi1000}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vooi1000}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_vooi2000}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vooi2000}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_vooi3000}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vooi3000}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_vooi4000}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vooi4000}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_vood250}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vood250}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_vood500}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vood500}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_vood1000}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vood1000}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_vood2000}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vood2000}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_vood3000}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vood3000}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_vood4000}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vood4000}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_larsenod}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.larsenod}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_larsenoi}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.larsenoi}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_eliod}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.eliod}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_elioi}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.elioi}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_salod}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.salod}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_saloi}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.saloi}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_ptaod}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.ptaod}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_ptaoi}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.ptaoi}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_otoscopiaoi}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.otoscopiaoi}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_otoscopiaod}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.otoscopiaod}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_impresionDiagnosticaOidoDerecho}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.impresionDiagnosticaOidoDerecho}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_impresionDiagnosticaOidoIzquierdo}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.impresionDiagnosticaOidoIzquierdo}"/>
+                    </p:column >
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_conceptoOidoDerecho}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.conceptoOidoDerecho}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_conceptoOidoIzquierdo}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.conceptoOidoIzquierdo}"/>
+                    </p:column >
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAudiometriasTitle_recomendaciones}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.recomendaciones}"/>
+                    </p:column>
+
+
+
+
+
+                    <p:column exportable="false" > 
+                        <f:facet name="header">Opciones</f:facet>
+                        <p:commandButton id="viewButton" icon="ui-icon-search" update="datalist" action="#{audiometriasController.prepareView}">
+                            <f:setPropertyActionListener value="#{item}" target="#{audiometriasController.selected}"/>
+                        </p:commandButton>
+
+                        <p:commandButton  id="editButton" icon="ui-icon-pencil" update="datalist" action="#{audiometriasController.prepareEdit}">
+                            <f:setPropertyActionListener value="#{item}" target="#{audiometriasController.selected}"/>
+                        </p:commandButton>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash" action="#{audiometriasController.destroy()}"
+                                         process="@this" update="datalist">
+                            <p:confirm header="Confirmación" message="¿Esta seguro que desea eliminar el item?" icon="ui-icon-alert" />
+                            <f:setPropertyActionListener value="#{item}" target="#{audiometriasController.selected}"/>
+                        </p:commandButton>
+
+                    </p:column> 
+
+
+                </p:dataTable>
+
+            </h:form>
+
+
+        </ui:define>
+    </ui:composition>
+
+</html>

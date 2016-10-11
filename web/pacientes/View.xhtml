@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewPacientesTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+
+            <h:form id="PacientesViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" style="width: 1050px;" >
+                            <h:outputText value="Foto:"/>
+                            <p:graphicImage value="#{pacientesController.imagen}"  cache="false" style=" width: 90px; height: 90px;"/>
+                        
+                        <h:outputText value="#{bundle.ViewPacientesLabel_nombres}"/>
+                        <h:outputText value="#{pacientesController.selected.nombres}" title="#{bundle.ViewPacientesTitle_nombres}"/>
+                        <h:outputText value="#{bundle.ViewPacientesLabel_apellidos}"/>
+                        <h:outputText value="#{pacientesController.selected.apellidos}" title="#{bundle.ViewPacientesTitle_apellidos}"/>
+                        <h:outputText value="#{bundle.ViewPacientesLabel_tipoDoc}"/>
+                        <h:outputText value="#{pacientesController.selected.tipoDoc}" title="#{bundle.ViewPacientesTitle_tipoDoc}"/>
+                        <h:outputText value="#{bundle.ViewPacientesLabel_numDoc}"/>
+                        <h:outputText value="#{pacientesController.selected.numDoc}" title="#{bundle.ViewPacientesTitle_numDoc}"/>
+                        <h:outputText value="#{bundle.ViewPacientesLabel_fecNac}"/>
+                        <h:outputText value="#{pacientesController.selected.fecNac}" title="#{bundle.ViewPacientesTitle_fecNac}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewPacientesLabel_edad}"/>
+                        <h:outputText value="#{pacientesController.selected.edad}" title="#{bundle.ViewPacientesTitle_edad}"/>
+                        <h:outputText value="#{bundle.ViewPacientesLabel_telCel}"/>
+                        <h:outputText value="#{pacientesController.selected.telCel}" title="#{bundle.ViewPacientesTitle_telCel}"/>
+                        <h:outputText value="#{bundle.ViewPacientesLabel_direccion}"/>
+                        <h:outputText value="#{pacientesController.selected.direccion}" title="#{bundle.ViewPacientesTitle_direccion}"/>
+                        <h:outputText value="#{bundle.ViewPacientesLabel_ciudad}"/>
+                        <h:outputText value="#{pacientesController.selected.ciudad}" title="#{bundle.ViewPacientesTitle_ciudad}"/>
+                        <h:outputText value="#{bundle.ViewPacientesLabel_ciudadNac}"/>
+                        <h:outputText value="#{pacientesController.selected.ciudadNac}" title="#{bundle.ViewPacientesTitle_ciudadNac}"/>
+                        <h:outputText value="#{bundle.ViewPacientesLabel_estCiv}"/>
+                        <h:outputText value="#{pacientesController.selected.estCiv}" title="#{bundle.ViewPacientesTitle_estCiv}"/>
+                        <h:outputText value="#{bundle.ViewPacientesLabel_nivAca}"/>
+                        <h:outputText value="#{pacientesController.selected.nivAca}" title="#{bundle.ViewPacientesTitle_nivAca}"/>
+                        <h:outputText value="#{bundle.ViewPacientesLabel_afp}"/>
+                        <h:outputText value="#{pacientesController.selected.afp}" title="#{bundle.ViewPacientesTitle_afp}"/>
+                        <h:outputText value="#{bundle.ViewPacientesLabel_eps}"/>
+                        <h:outputText value="#{pacientesController.selected.eps}" title="#{bundle.ViewPacientesTitle_eps}"/>
+                        <h:outputText value="#{bundle.ViewPacientesLabel_arl}"/>
+                        <h:outputText value="#{pacientesController.selected.arl}" title="#{bundle.ViewPacientesTitle_arl}"/>
+                        <h:outputText value="#{bundle.ViewPacientesLabel_numHijos}"/>
+                        <h:outputText value="#{pacientesController.selected.numHijos}" title="#{bundle.ViewPacientesTitle_numHijos}"/>
+                        <h:outputText value="#{bundle.ViewPacientesLabel_genero}"/>
+                        <h:outputText value="#{pacientesController.selected.genero}" title="#{bundle.ViewPacientesTitle_genero}"/>
+                        <h:outputText value="#{bundle.ViewPacientesLabel_cargo}"/>
+                        <h:outputText value="#{pacientesController.selected.cargo}" title="#{bundle.ViewPacientesTitle_cargo}"/>
+                        <h:outputText value="#{bundle.ViewPacientesLabel_profesion}"/>
+                        <h:outputText value="#{pacientesController.selected.profesion}" title="#{bundle.ViewPacientesTitle_profesion}"/>
+                        <h:outputText value="#{bundle.ViewPacientesLabel_idClem}"/>
+                        <h:outputText value="#{pacientesController.selected.idClem.toString()}" title="#{bundle.ViewPacientesTitle_idClem}"/>
+                          <h:outputText value="Firma"/>
+                          <p:graphicImage value="#{pacientesController.imagenFirma}"  cache="false" style=" width: 120px; height: 60px;"/>
+                    </p:panelGrid>
+                    <p:button style="margin-top: 15px; margin-bottom: 15px" value="#{bundle.Close}" outcome="/pacientes/List"/>
+                </h:panelGroup>
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+</html>

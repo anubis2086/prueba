@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+   <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditAntecedentesOcupacionalesTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="AntecedentesOcupacionalesEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="3" layout="grid" rendered="#{antecedentesOcupacionalesController.selected != null}">
+                     
+                            <p:outputLabel value="Empresa:" for="nomEmp" />
+                            <p:inputText id="nomEmp" value="#{antecedentesOcupacionalesController.selected.nomEmp}" 
+                                         title="NomEmp" 
+                                        
+                                         maxlength="200">
+                               
+                            </p:inputText>
+                            <p:message id="nomEmpMessage" for="nomEmp"  styleClass="error"/>
+
+                            <p:outputLabel value="Actividad economica:" for="actEcoEmp" />
+                            <p:inputText id="actEcoEmp"
+                                         value="#{antecedentesOcupacionalesController.selected.actEcoEmp}" 
+                                         title="ActEcoEmp" 
+                                         maxlength="45"
+                                        >
+                               
+                            </p:inputText>
+                            <p:message id="actEcoEmpMessage" for="actEcoEmp"  styleClass="error"/>
+
+                            <p:outputLabel value="Oficio:" for="oficio" />
+                            <p:inputText id="oficio" value="#{antecedentesOcupacionalesController.selected.oficio}"
+                                         title="Oficio" maxlength="45"
+                                         >
+                          
+                            </p:inputText>
+                            <p:message id="oficioMessage" for="oficio"  styleClass="error"/>
+
+
+                            <p:outputLabel value="Antiguedad:" for="antiguedad" />
+                            <p:inputText id="antiguedad" maxlength="11" 
+                                         value="#{antecedentesOcupacionalesController.selected.antiguedad}"
+                                         title="Antigüedad"
+                                        >
+                                
+                            </p:inputText>
+                            <p:message id="antiguedadMessage" for="antiguedad"  styleClass="error"/>
+
+
+                            <p:outputLabel value="Riesgos:" for="riesgos" />
+                            <p:inputTextarea id="riesgos" value="#{antecedentesOcupacionalesController.selected.riesgos}"
+                                   style="width: 400px;"              title="Riesgos" maxlength="150"
+                                              >
+                               
+                            </p:inputTextarea>
+                            <p:message id="riesgosMessage" for="riesgos"  styleClass="error"/>
+
+
+
+                            <p:outputLabel value="Epp:" for="epp" />
+                            <p:inputTextarea id="epp" value="#{antecedentesOcupacionalesController.selected.epp}"
+                                             title="Epp"
+                                       style="width: 400px;"          maxlength="300"
+                                              >
+                                
+                            </p:inputTextarea>
+                            <p:message id="eppMessage" for="epp"  styleClass="error"/>
+
+
+                            
+                    </p:panelGrid>
+                    <p:commandButton style="margin-top: 20px; margin-right: 20px;" action="#{antecedentesOcupacionalesController.update}" value="#{bundle.Save}"/>
+                    <p:button style="margin-top: 20px" value="#{bundle.Cancel}" outcome="/antecedentesOcupacionales/List"/>
+                </h:panelGroup>
+            </h:form>
+        </ui:define>
+
+    </ui:composition>
+</html>

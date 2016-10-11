@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateCieDiezTitle}"></h:outputText>
+        </ui:define>
+
+
+        <ui:define name="body">
+
+            <h:form id="CieDiezCreateForm">
+               
+                    <p:panelGrid columns="2" rendered="#{cieDiezController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCieDiezLabel_idCie}" for="idCie" />
+                        <p:inputText id="idCie" value="#{cieDiezController.selected.idCie}" title="#{bundle.CreateCieDiezTitle_idCie}" required="true" requiredMessage="#{bundle.CreateCieDiezRequiredMessage_idCie}"/>
+                        <p:outputLabel value="#{bundle.CreateCieDiezLabel_codigoCie}" for="codigoCie" />
+                        <p:inputText id="codigoCie" value="#{cieDiezController.selected.codigoCie}" title="#{bundle.CreateCieDiezTitle_codigoCie}" />
+                        <p:outputLabel value="#{bundle.CreateCieDiezLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{cieDiezController.selected.descripcion}" title="#{bundle.CreateCieDiezTitle_descripcion}" />
+                    </p:panelGrid>
+                    <p:commandButton action="#{cieDiezController.create}" value="#{bundle.Save}" />
+                    <p:button value="#{bundle.Cancel}" outcome="/cieDiez/List" />
+                
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+
+
+</html>

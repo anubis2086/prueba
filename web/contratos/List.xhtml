@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListContratosTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="ContratosListForm" rendered="#{loginController.user}">
+
+                <p:dataTable id="datalist" value="#{contratosController.items}" var="item"
+                             selectionMode="single" 
+                             paginator="true"
+                             rowKey="#{item.idCont}"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             >
+
+                    <f:facet name="header">
+                        Reporte por página:
+                        <h:commandLink  style="margin-top: 15px; margin-bottom: 15px; ">
+                            <img src="#{request.contextPath}/resources/images/excel.png" width="24"/>
+                            <p:dataExporter type="xls" target="datalist" fileName="Lista de contratos" pageOnly="true" />
+                        </h:commandLink>
+
+                        <h:commandLink rendered="#{loginController.admin}"  style="margin-top: 15px; margin-bottom: 15px; margin-left: 15px;">
+                            <img src="#{request.contextPath}/resources/images/pdf.png" width="24"/>
+                            <p:dataExporter type="pdf" target="datalist" fileName="Lista de contratos" pageOnly="true"/>
+                        </h:commandLink >
+
+                        <h:commandLink rendered="#{loginController.admin}" style="margin-top: 15px; margin-bottom: 15px; margin-left: 15px; margin-right: 40px;">
+                            <img src="#{request.contextPath}/resources/images/csv.png" width="24"/>
+                            <p:dataExporter type="csv" target="datalist" fileName="Lista de contratos" pageOnly="true" />
+                        </h:commandLink>
+                        Reporte completo:
+
+                        <h:commandLink  style="margin-top: 15px; margin-bottom: 15px; ">
+                            <img src="#{request.contextPath}/resources/images/excel.png" width="24"/>
+                            <p:dataExporter type="xls" target="datalist" fileName="Lista de contratos" />
+                        </h:commandLink>
+
+                        <h:commandLink rendered="#{loginController.admin}" style="margin-top: 15px; margin-bottom: 15px; margin-left: 15px;">
+                            <img src="#{request.contextPath}/resources/images/pdf.png" width="24"/>
+                            <p:dataExporter type="pdf" target="datalist" fileName="Lista de contratos"/>
+                        </h:commandLink >
+
+                        <h:commandLink rendered="#{loginController.admin}"  style="margin-top: 15px; margin-bottom: 15px; margin-left: 15px;">
+                            <img src="#{request.contextPath}/resources/images/csv.png" width="24"/>
+                            <p:dataExporter type="csv" target="datalist" fileName="Lista de contratos" />
+                        </h:commandLink>
+
+                    </f:facet>
+
+                    <p:column filterBy="#{item.idClem}">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListContratosTitle_idClem}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idClem.toString()}"/>
+                    </p:column>
+
+                    <p:column filterBy="#{item.numCont}">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListContratosTitle_numCont}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.numCont}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListContratosTitle_conceptoCont}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.conceptoCont}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListContratosTitle_fechaIniCon}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.fechaIniCon}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListContratosTitle_fechaFinCont}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.fechaFinCont}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column filterBy="#{item.pagoCont}">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListContratosTitle_pagoCont}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.pagoCont}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListContratosTitle_telCelCont}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.telCelCont}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListContratosTitle_dirCont}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.dirCont}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListContratosTitle_nomCont}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nomCont}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListContratosTitle_emailCont}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.emailCont}"/>
+                    </p:column>
+              
+
+                    <p:column exportable="false" > 
+                        <f:facet name="header">Opciones</f:facet>
+                        <p:commandButton id="viewButton" icon="ui-icon-search" update="datalist" action="#{contratosController.prepareView}">
+                            <f:setPropertyActionListener value="#{item}" target="#{contratosController.selected}"/>
+                        </p:commandButton>
+
+                        <p:commandButton  id="editButton" icon="ui-icon-pencil" update="datalist" action="#{contratosController.prepareEdit}">
+                            <f:setPropertyActionListener value="#{item}" target="#{contratosController.selected}"/>
+                        </p:commandButton>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash" action="#{contratosController.destroy()}"
+                                         process="@this" update="datalist">
+                            <p:confirm header="Confirmación" message="¿Esta seguro que desea eliminar el item?" icon="ui-icon-alert" />
+                            <f:setPropertyActionListener value="#{item}" target="#{contratosController.selected}"/>
+                        </p:commandButton>
+
+                    </p:column> 
+
+
+
+
+
+                </p:dataTable>
+
+            </h:form>
+
+
+        </ui:define>
+    </ui:composition>
+
+</html>

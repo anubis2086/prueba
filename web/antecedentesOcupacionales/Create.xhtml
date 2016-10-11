@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AntecedentesOcupacionalesCreateDlg" widgetVar="AntecedentesOcupacionalesCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateAntecedentesOcupacionalesTitle}">
+            <h:form id="AntecedentesOcupacionalesCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{antecedentesOcupacionalesController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateAntecedentesOcupacionalesLabel_idAntecedenteLaboral}" for="idAntecedenteLaboral" />
+                        <p:inputText id="idAntecedenteLaboral" value="#{antecedentesOcupacionalesController.selected.idAntecedenteOcupacional}" title="#{bundle.CreateAntecedentesOcupacionalesTitle_idAntecedenteLaboral}" required="true" requiredMessage="#{bundle.CreateAntecedentesOcupacionalesRequiredMessage_idAntecedenteLaboral}"/>
+                        <p:outputLabel value="#{bundle.CreateAntecedentesOcupacionalesLabel_nomEmp}" for="nomEmp" />
+                        <p:inputText id="nomEmp" value="#{antecedentesOcupacionalesController.selected.nomEmp}" title="#{bundle.CreateAntecedentesOcupacionalesTitle_nomEmp}" />
+                        <p:outputLabel value="#{bundle.CreateAntecedentesOcupacionalesLabel_actEcoEmp}" for="actEcoEmp" />
+                        <p:inputText id="actEcoEmp" value="#{antecedentesOcupacionalesController.selected.actEcoEmp}" title="#{bundle.CreateAntecedentesOcupacionalesTitle_actEcoEmp}" />
+                        <p:outputLabel value="#{bundle.CreateAntecedentesOcupacionalesLabel_oficio}" for="oficio" />
+                        <p:inputText id="oficio" value="#{antecedentesOcupacionalesController.selected.oficio}" title="#{bundle.CreateAntecedentesOcupacionalesTitle_oficio}" />
+                        <p:outputLabel value="#{bundle.CreateAntecedentesOcupacionalesLabel_antiguedad}" for="antiguedad" />
+                        <p:inputText id="antiguedad" value="#{antecedentesOcupacionalesController.selected.antiguedad}" title="#{bundle.CreateAntecedentesOcupacionalesTitle_antiguedad}" />
+                        <p:outputLabel value="#{bundle.CreateAntecedentesOcupacionalesLabel_riesgos}" for="riesgos" />
+                        <p:inputText id="riesgos" value="#{antecedentesOcupacionalesController.selected.riesgos}" title="#{bundle.CreateAntecedentesOcupacionalesTitle_riesgos}" />
+                        <p:outputLabel value="#{bundle.CreateAntecedentesOcupacionalesLabel_epp}" for="epp" />
+                        <p:inputText id="epp" value="#{antecedentesOcupacionalesController.selected.epp}" title="#{bundle.CreateAntecedentesOcupacionalesTitle_epp}" />
+                        <p:outputLabel value="#{bundle.CreateAntecedentesOcupacionalesLabel_idEmo}" for="idEmo" />
+                        <p:selectOneMenu id="idEmo" value="#{antecedentesOcupacionalesController.selected.idEmo}" required="true" requiredMessage="#{bundle.EditAntecedentesOcupacionalesRequiredMessage_idEmo}">
+                            <f:selectItems value="#{emoController.itemsAvailableSelectOne}"
+                                           var="idEmoItem"
+                                           itemValue="#{idEmoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{antecedentesOcupacionalesController.create}" value="#{bundle.Save}" update="display,:AntecedentesOcupacionalesListForm:datalist,:growl" oncomplete="handleSubmit(args,'AntecedentesOcupacionalesCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AntecedentesOcupacionalesCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

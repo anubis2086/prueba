@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListEmpresasTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="EmpresasListForm" rendered="#{loginController.user}">
+
+
+                <p:dataTable id="datalist" value="#{empresasController.items}" var="item" 
+                             selectionMode="single"
+                             paginator="true"
+                             rowKey="#{item.idClem}"
+                             rows="10" 
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             >
+                <f:facet name="header">
+
+                        <p:commandButton value="Agregar Cliente|Empresa" action="#{empresasController.prepareCreate}"/>
+                        
+                       
+                         Reporte por página:
+                        <h:commandLink  style="margin-top: 15px; margin-bottom: 15px; ">
+                            <img src="#{request.contextPath}/resources/images/excel.png" width="24"/>
+                            <p:dataExporter type="xls" target="datalist" fileName="Lista de Empresas" pageOnly="true" />
+                        </h:commandLink>
+
+                        Reporte completo:
+
+                        <h:commandLink  style="margin-top: 15px; margin-bottom: 15px; ">
+                            <img src="#{request.contextPath}/resources/images/excel.png" width="24"/>
+                            <p:dataExporter type="xls" target="datalist" fileName="Lista de Empresas" />
+                        </h:commandLink>
+                        
+                    </f:facet>
+
+
+                    <p:column filterBy="#{item.nomClem}">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListEmpresasTitle_nomClem}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nomClem}"/>
+                    </p:column >
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListEmpresasTitle_fecCreClem}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.fecCreClem}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column filterBy="#{item.nitClem}">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListEmpresasTitle_nitClem}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nitClem}"/>
+                    </p:column>
+                    <p:column exportable="false" > 
+                        <f:facet name="header">Opciones</f:facet>
+
+
+                        <p:commandButton  id="editButton" icon="ui-icon-pencil" title="Editar" update="datalist" action="#{empresasController.prepareEdit}">
+                            <f:setPropertyActionListener value="#{item}" target="#{empresasController.selected}"/>
+                        </p:commandButton>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash" rendered="#{loginController.admin}" title="Eliminar" action="#{empresasController.destroy()}"
+                                         process="@this" update="datalist">
+                            <p:confirm header="Confirmación" message="¿Esta seguro que desea eliminar el item? Al eliminar la empresa eliminaras todos registros de pacientes asociados a ella" icon="ui-icon-alert" />
+                            <f:setPropertyActionListener value="#{item}" target="#{empresasController.selected}"/>
+                        </p:commandButton>
+                        <p:commandButton icon="ui-icon-plus" title="Crear paciente"
+                                         action="#{empresasController.prepareCreatePaciente}">
+                            <f:setPropertyActionListener value="#{item}"
+                                                         target="#{empresasController.selected}"/>
+                        </p:commandButton>
+                         <p:commandButton icon="ui-icon-document" title="Crear contrato"
+                                          action="#{empresasController.prepareCreateContratros}">
+                            <f:setPropertyActionListener value="#{item}"
+                                                         target="#{empresasController.selected}"/>
+                        </p:commandButton>
+
+                    </p:column> 
+
+                </p:dataTable>
+
+            </h:form>
+
+
+        </ui:define>
+    </ui:composition>
+
+</html>

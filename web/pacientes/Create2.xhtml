@@ -1,0 +1,265 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition template="/template.xhtml">
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListPacientesTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+
+            <h:form rendered="#{loginController.user}" enctype="multipart/form-data">
+                <p:panel header="Datos del paciente">
+                    <h:panelGrid columns="3" rendered="#{empresasController.selected != null}" style="width: 1000px;">
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px" value="#{bundle.CreatePacientesLabel_nombres}" for="nombres" />
+                        <p:inputText id="nombres" value="#{empresasController.pacienteActual.nombres}" 
+                                     title="#{bundle.CreatePacientesTitle_nombres}" required="true" style="margin-top: 15px; margin-bottom: 15px;"
+                                     requiredMessage="Nombres son requeridos." 
+                                     validatorMessage="Por favor solo letras"
+                                     maxlength="45">
+                            <f:validateRegex pattern="[a-zA-Z áéíóúÁÉÍÓÚÑñ]*"/>
+                            <p:ajax process="@this" update="nombresMessage"/>
+                        </p:inputText>
+                        <p:message id="nombresMessage" for="nombres" style="margin-top: 15px; margin-bottom: 15px" styleClass="error"/>
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px" value="#{bundle.CreatePacientesLabel_apellidos}" for="apellidos" />
+                        <p:inputText style="margin-top: 15px; margin-bottom: 15px" id="apellidos" value="#{empresasController.pacienteActual.apellidos}" 
+                                     title="#{bundle.CreatePacientesTitle_apellidos}" required="true" 
+                                     requiredMessage="Apellidos son obligatorios."
+                                     validatorMessage="Por favor sólo letras"
+                                     maxlength="45">
+                            <f:validateRegex pattern="[a-zA-Z áéíóúÁÉÍÓÚÑñ]*"/>
+                            <p:ajax process="@this" update="apellidosMessage"/>
+                        </p:inputText>
+                        <p:message style="margin-top: 15px; margin-bottom: 15px" id="apellidosMessage" for="apellidos"  styleClass="error"/>
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px" value="#{bundle.CreatePacientesLabel_fecNac}" for="fecNac" />
+                        <p:calendar style="margin-top: 15px; margin-bottom: 15px" showOn="button" id="fecNac" navigator="true" 
+                                    value="#{empresasController.pacienteActual.fecNac}"  
+                                    pattern="yyyy-MM-dd"  yearRange="c-80:c+10"
+                                    >
+                            <p:ajax process="@this" update="fechaNacMessage"/>
+                        </p:calendar>
+                        <p:message style="margin-top: 15px; margin-bottom: 15px" id="fechaNacMessage" for="fecNac"  styleClass="error"/>
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px" value="#{bundle.CreatePacientesLabel_ciudadNac}" for="ciudadNac" />
+                        <p:inputText style="margin-top: 15px; margin-bottom: 15px" id="ciudadNac" value="#{empresasController.pacienteActual.ciudadNac}" 
+                                     title="#{bundle.CreatePacientesTitle_ciudadNac}" required="true" 
+                                     requiredMessage="Ciudad de Nacimiento requerido."
+                                     validatorMessage="Por favor solo letras">
+                            <f:validateRegex pattern="[a-zA-Z áéíóúÁÉÍÓÚÑñ]*"/>
+                            <p:ajax process="@this" update="ciudadNacMessage"/>
+                        </p:inputText>
+                        <p:message style="margin-top: 15px; margin-bottom: 15px" id="ciudadNacMessage" for="ciudadNac"  styleClass="error"/>
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px" value="#{bundle.CreatePacientesLabel_tipoDoc}" for="tipoDoc" />
+                        <p:selectOneMenu id="tipoDoc" required="true" style="margin-top: 15px; margin-bottom: 15px"
+                                         value="#{empresasController.pacienteActual.tipoDoc}"
+                                         requiredMessage="Ingrese un item">
+                            <f:selectItem itemLabel="Selecciona un tipo de documento..."  />
+                            <f:selectItem itemLabel="Cédula de Ciudadanía" itemValue="CC"/>
+                            <f:selectItem itemLabel="Cédula de Extragería" itemValue="CE"/>
+                            <f:selectItem itemLabel="Pasaporte" itemValue="P"/>
+                        </p:selectOneMenu>
+                        <p:message style="margin-top: 15px; margin-bottom: 15px" id="tipodocMessage" for="tipoDoc"  styleClass="error"/>
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px" value="#{bundle.CreatePacientesLabel_numDoc}" for="numDoc" />
+                        <p:inputText id="numDoc" value="#{empresasController.pacienteActual.numDoc}" 
+                                     title="#{bundle.CreatePacientesTitle_numDoc}" required="true" 
+                                     validator="#{empresasController.validarDocumento}" style="margin-top: 15px; margin-bottom: 15px"
+                                     requiredMessage="El número de documento es requerido.">
+                            <f:validateRegex pattern="[0-9]*"/>
+                            <p:ajax process="@this" update="numDocMessage"/>
+                        </p:inputText>
+                        <p:message style="margin-top: 15px; margin-bottom: 15px" id="numDocMessage" for="numDoc"  styleClass="error"/>
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px" value="#{bundle.CreatePacientesLabel_edad}" for="edad" />
+                        <p:inputText style="margin-top: 15px; margin-bottom: 15px"  id="edad" value="#{empresasController.pacienteActual.edad}" 
+                                     title="#{bundle.CreatePacientesTitle_edad}" required="true" 
+                                     requiredMessage="El número de teléfono es obligatorio."
+                                     validatorMessage="Por favor solo numeros" maxlength="2">
+                            <f:validateRegex pattern="[0-9]*"/>
+                            <p:ajax process="@this" update="edadMessage"/>
+                        </p:inputText>
+                        <p:message style="margin-top: 15px; margin-bottom: 15px" id="edadMessage" for="edad"  styleClass="error"/>
+
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px" value="#{bundle.CreatePacientesLabel_telCel}" for="telCel" />
+                        <p:inputText style="margin-top: 15px; margin-bottom: 15px" id="telCel" value="#{empresasController.pacienteActual.telCel}" 
+                                     title="#{bundle.CreatePacientesTitle_telCel}" required="true" 
+                                     requiredMessage="El número de teléfono es obligatorio." 
+                                     validatorMessage="Por favor solo numeros">
+                            <f:validateRegex pattern="[0-9]*"/>
+                            <p:ajax process="@this" update="telCelMessage"/>
+                        </p:inputText>
+                        <p:message style="margin-top: 15px; margin-bottom: 15px" id="telCelMessage" for="telCel"  styleClass="error"/>
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px" value="#{bundle.CreatePacientesLabel_direccion}" for="direccion" />
+                        <p:inputText style="margin-top: 15px; margin-bottom: 15px" id="direccion" value="#{empresasController.pacienteActual.direccion}" 
+                                     title="#{bundle.CreatePacientesTitle_direccion}" required="true" 
+                                     requiredMessage="Direccion es un campo requerido.">
+                            <p:ajax process="@this" update="direccionMessage"/>
+                        </p:inputText>
+                        <p:message style="margin-top: 15px; margin-bottom: 15px" id="direccionMessage" for="direccion"  styleClass="error"/>
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px" value="#{bundle.CreatePacientesLabel_ciudad}" for="ciudad" />
+                        <p:inputText style="margin-top: 15px; margin-bottom: 15px" id="ciudad" value="#{empresasController.pacienteActual.ciudad}" 
+                                     title="#{bundle.CreatePacientesTitle_ciudad}" required="true" 
+                                     requiredMessage="Ciudad es un campo requerido."
+                                     validatorMessage="Por favor solo letras">
+                            <f:validateRegex pattern="[a-zA-Z áéíóúÁÉÍÓÚÑñ]*"/>
+                            <p:ajax process="@this" update="ciudadMessage"/>
+                        </p:inputText>
+                        <p:message style="margin-top: 15px; margin-bottom: 15px" id="ciudadMessage" for="ciudad"  styleClass="error"/>
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px" value="#{bundle.CreatePacientesLabel_estCiv}" for="estCiv" />
+                        <p:selectOneMenu id="estCiv" required="true" style="margin-top: 15px; margin-bottom: 15px"
+                                         value="#{empresasController.pacienteActual.estCiv}"
+                                         requiredMessage="Ingrese un Item">
+                            <f:selectItem itemLabel="Selecciona un estado civil..." />
+                            <f:selectItem itemLabel="Soltero/a" itemValue="soltero"/>
+                            <f:selectItem itemLabel="Casado/a" itemValue="casado"/>
+                            <f:selectItem itemLabel="Unión Libre" itemValue="union libre"/>
+                            <f:selectItem itemLabel="Viudo/a" itemValue="viudo"/>                        
+                            <p:ajax process="@this" update="estCivMessage"/>
+                        </p:selectOneMenu>
+                        <p:message style="margin-top: 15px; margin-bottom: 15px" id="estCivMessage" for="estCiv"  styleClass="error"/>
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px" value="#{bundle.CreatePacientesLabel_nivAca}" for="nivAca" />
+                        <p:selectOneMenu style="margin-top: 15px; margin-bottom: 15px"  id="nivAca" value="#{empresasController.pacienteActual.nivAca}" 
+                                     title="#{bundle.CreatePacientesTitle_nivAca}" required="true" 
+                                     requiredMessage="Nivel Académico requerido." 
+                                    >
+                            
+                             <f:selectItem itemLabel="SIN ESTUDIO" itemValue="SIN ESTUDIO" />
+                            <f:selectItem itemLabel="PRIMARIA" itemValue="PRIMARIA"/>
+                            <f:selectItem itemLabel="SECUNDARIA" itemValue="SECUNDARIA"/>
+                            <f:selectItem itemLabel="TÉCNICO" itemValue="TÉCNICO"/>
+                            <f:selectItem itemLabel="TECNÓLOGO" itemValue="TECNÓLOGO"/> 
+                            <f:selectItem itemLabel="UNIVERSITARIO" itemValue="UNIVERSITARIO"/>
+                            <f:selectItem itemLabel="POSGRADO" itemValue="POSGRADO"/>  
+                            <p:ajax process="@this" update="nivAcaMessage"/>
+                        </p:selectOneMenu>
+                        <p:message style="margin-top: 15px; margin-bottom: 15px" id="nivAcaMessage" for="nivAca"  styleClass="error"/>
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px" value="#{bundle.CreatePacientesLabel_afp}" for="afp" />
+                        <p:inputText style="margin-top: 15px; margin-bottom: 15px" id="afp" value="#{empresasController.pacienteActual.afp}" 
+                                     title="#{bundle.CreatePacientesTitle_afp}" required="true" 
+                                     requiredMessage="AFP requerido." maxlength="45"
+                                     validatorMessage="Por favor solo letras">
+                            <f:validateRegex pattern="[a-zA-Z áéíóúÁÉÍÓÚÑñ]*"/>
+                            <p:ajax process="@this" update="afpMessage"/>
+                        </p:inputText>
+                        <p:message style="margin-top: 15px; margin-bottom: 15px" id="afpMessage" for="afp"  styleClass="error"/>
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px" value="#{bundle.CreatePacientesLabel_eps}" for="eps" />
+                        <p:inputText id="eps" value="#{empresasController.pacienteActual.eps}" 
+                                     title="#{bundle.CreatePacientesTitle_eps}" required="true" 
+                                     requiredMessage="EPS requerido." maxlength="45" style="margin-top: 15px; margin-bottom: 15px"
+                                     validatorMessage="Por favor solo letras">
+                            <f:validateRegex pattern="[a-zA-Z áéíóúÁÉÍÓÚÑñ]*"/>
+                            <p:ajax process="@this" update="epsMessage"/>
+                        </p:inputText>
+                        <p:message style="margin-top: 15px; margin-bottom: 15px" id="epsMessage" for="eps"  styleClass="error"/>
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px" value="#{bundle.CreatePacientesLabel_arl}" for="arl" />
+                        <p:inputText id="arl" value="#{empresasController.pacienteActual.arl}" style="margin-top: 15px; margin-bottom: 15px"
+                                     title="#{bundle.CreatePacientesTitle_arl}" required="true" 
+                                     requiredMessage="ARL requerido." maxlength="45"
+                                     validatorMessage="Por favor solo letras">
+                            <f:validateRegex pattern="[a-zA-Z áéíóúÁÉÍÓÚÑñ]*"/>
+                            <p:ajax process="@this" update="arlMessage"/>
+                        </p:inputText>
+                        <p:message style="margin-top: 15px; margin-bottom: 15px" id="arlMessage" for="arl"  styleClass="error"/>
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px" value="#{bundle.CreatePacientesLabel_numHijos}" for="numHijos" />
+                        <p:inputText id="numHijos" value="#{empresasController.pacienteActual.numHijos}" 
+                                     title="#{bundle.CreatePacientesTitle_numHijos}" required="true" maxlength="2"
+                                     requiredMessage="Número de Hijos requerido." style="margin-top: 15px; margin-bottom: 15px"
+                                     validatorMessage="Por favor solo números">
+                            <f:validateRegex pattern="[0-9]*"/>
+                            <p:ajax process="@this" update="numHijosMessage"/>
+                        </p:inputText>
+                        <p:message style="margin-top: 15px; margin-bottom: 15px" id="numHijosMessage" for="numHijos"  styleClass="error"/>
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px" value="#{bundle.CreatePacientesLabel_cargo}" for="cargo" />
+                        <p:inputText style="margin-top: 15px; margin-bottom: 15px" id="cargo" value="#{empresasController.pacienteActual.cargo}" 
+                                     title="#{bundle.CreatePacientesTitle_cargo}" maxlength="45"
+                                     validatorMessage="Por favor solo letras">
+                            <f:validateRegex pattern="[a-zA-Z áéíóúÁÉÍÓÚÑñ]*"/>
+                            <p:ajax process="@this" update="cargoMessage"/>
+                        </p:inputText>
+                        <p:message style="margin-top: 15px; margin-bottom: 15px" id="cargoMessage" for="cargo"  styleClass="error"/>
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px" value="#{bundle.CreatePacientesLabel_profesion}" for="profesion" />
+                        <p:inputText style="margin-top: 15px; margin-bottom: 15px" id="profesion" value="#{empresasController.pacienteActual.profesion}" 
+                                     title="#{bundle.CreatePacientesTitle_profesion}" maxlength="45"
+                                     validatorMessage="Por favor solo letras">
+                            <f:validateRegex pattern="[a-zA-Z áéíóúÁÉÍÓÚÑñ]*"/>
+                            <p:ajax process="@this" update="profesionMessage"/>
+                        </p:inputText>
+                        <p:message style="margin-top: 15px; margin-bottom: 15px" id="profesionMessage" for="profesion"  styleClass="error"/>
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px" value="Acompañante" for="acompanante" />
+                        <p:inputText id="acompanante" value="#{empresasController.pacienteActual.acompanante}" 
+                                     title="Acompañante" required="true" style="margin-top: 15px; margin-bottom: 15px;"
+                                     requiredMessage="Acompañante es requerido." 
+                                     validatorMessage="Por favor solo letras"
+                                     maxlength="100">
+                            <f:validateRegex pattern="[a-zA-Z áéíóúÁÉÍÓÚÑñ]*"/>
+                            <p:ajax process="@this" update="acompananteMessage"/>
+                        </p:inputText>
+                        <p:message id="acompananteMessage" for="acompanante" style="margin-top: 15px; margin-bottom: 15px" styleClass="error"/>
+                        
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px" value="#{bundle.CreatePacientesLabel_genero}" for="genero" />                
+                        <p:selectOneMenu style="margin-top: 15px; margin-bottom: 15px" id="genero" required="true"
+                                         value="#{empresasController.pacienteActual.genero}">
+                            <f:selectItem itemLabel="Selecciona un género..." />
+                            <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                            <f:selectItem itemLabel="Femenino" itemValue="F"/>
+                            <p:ajax process="@this" update="generoMessage"/>
+                        </p:selectOneMenu>
+                        <p:message  style="margin-top: 15px; margin-bottom: 15px" id="generoMessage" for="genero"  styleClass="error"/>
+                       
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px" value="Subir Firma" for="firma" />
+                        <p:fileUpload id="firma" value="#{empresasController.file}" mode="simple" required="true" requiredMessage="Debe elegir una imágen"/>
+
+                        <p:message  style="margin-top: 15px; margin-bottom: 15px" id="firmaMessage" for="firma"  styleClass="error"/>
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px" value="Subir Foto" for="foto" />
+                        <p:commandLink id="foto" value="Tomar foto" oncomplete="PF('tomarPhotoDlg').show()" />
+                        <p:message  for="foto" />
+                    </h:panelGrid>
+                </p:panel>
+                
+                <p:dialog id="tomarPhotoDialogo" widgetVar="tomarPhotoDlg"  header="Foto" modal="true" resizable="false" closeOnEscape="true" draggable="false">
+
+                    <!--<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />-->
+                    <h:panelGrid columns="2">
+                        <p:photoCam widgetVar="pc" listener="#{empresasController.oncapture}"  />
+                        <p:commandButton style="margin-left: 20px" type="button" value="Captura" onclick="PF('pc').capture()"> 
+                            <p:ajax oncomplete="PF('tomarPhotoDlg').hide();" />
+                        </p:commandButton>  
+
+
+                    </h:panelGrid>
+
+
+                </p:dialog>
+
+                <p:commandButton style="margin-top: 15px; margin-bottom: 15px" action="#{empresasController.addPaciente()}" value="#{bundle.Save}" ajax="false">
+                    <p:ajax update="@this" listener="#{pacientesController.recargarListaPacientes}"/>
+                </p:commandButton>                   
+
+
+                <p:button style="margin-left: 4em; margin-top: 15px; margin-bottom: 15px" value="#{bundle.Cancel}" outcome="/empresas/List" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

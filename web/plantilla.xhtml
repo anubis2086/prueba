@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:p="http://primefaces.org/ui">
+    <head jsf:id="head">
+        <title><ui:insert name="title">Titulo por defecto</ui:insert></title>
+        <link rel="shortcut icon" href="#{request.contextPath}/resources/images/favico.ico"></link>
+        <link rel="stylesheet" href="#{request.contextPath}/resources/css/custom.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/resources/css/style.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/resources/css/bootstrap.css"/>
+        <link href="#{request.contextPath}resources/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="#{request.contextPath}resorces/css/ie10-viewport-bug-workaround.css" rel="stylesheet"/>
+
+        <link href="#{request.contextPath}resources/css/carousel.css" rel="stylesheet"/> 
+    </head>
+    <h:body id="body">
+        <p:growl id="growl" life="3000" showDetail="true"  p:style="z-index: 2;" />
+        <!-- Static navbar -->
+        <nav class="navbar navbar-default navbar-static-top my-navbar"  p:style="z-index: 1;" >
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">
+                        <span class="icon-nuevoLogo" aria-hidden="true"></span>
+                    </a>
+
+                </div>
+                <div id="navbar" class="">
+                    <!-- <form class="nav navbar-nav navbar-right"  name="reportePaciente" action="/Sistema_Ocupacional/ReporteDePaciente" method="POST">
+                         <input class="" type="texto" placeholder="Número de Documento" name="consultaCertificado"></input>
+ 
+                         <input class="descargarcertificado" type="submit" value="Descargar Certificado" name="reportePaciente" />
+                     </form>-->
+                    <h:form class="nav navbar-nav navbar-right"> 
+                        <h:column/>
+                        <p:button value="Descargar certificado" outcome="/certificados"/>
+                        <p:column/>
+                    </h:form>
+
+
+                    <!-- <ul class="nav navbar-nav navbar-right">
+                          <li><a href="#">Descargar certificado</a></li>
+    
+                      </ul>-->
+                </div>
+            </div>
+        </nav>
+
+        <ui:insert name="body">Deafault body</ui:insert> 
+    </h:body>
+</html>

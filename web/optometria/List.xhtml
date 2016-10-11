@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListOptometriaTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="OptometriaListForm" rendered="#{loginController.user}">
+
+                <p:dataTable id="datalist" value="#{optometriaController.items}" var="item"
+                             selectionMode="single" 
+                             paginator="true"
+                             rowKey="#{item.idOptometria}"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             >
+                    <f:facet name="header">
+                        Reporte por página
+                        <h:commandLink  style="margin-top: 15px; margin-bottom: 15px; ">
+                            <img src="#{request.contextPath}/resources/images/excel.png" width="24"/>
+                            <p:dataExporter type="xls" target="datalist" fileName="Lista de Optometrías" pageOnly="true" />
+                        </h:commandLink>
+
+                        <h:commandLink rendered="#{loginController.admin}" style="margin-top: 15px; margin-bottom: 15px; margin-left: 15px;">
+                            <img src="#{request.contextPath}/resources/images/pdf.png" width="24"/>
+                            <p:dataExporter type="pdf" target="datalist" fileName="Lista de Optometrías" pageOnly="true"/>
+                        </h:commandLink >
+
+                        <h:commandLink rendered="#{loginController.admin}"  style="margin-top: 15px; margin-bottom: 15px; margin-left: 15px; margin-right: 40px;">
+                            <img src="#{request.contextPath}/resources/images/csv.png" width="24"/>
+                            <p:dataExporter type="csv" target="datalist" fileName="Lista de Optometrías" pageOnly="true" />
+                        </h:commandLink>
+                        Reporte completo:
+
+                        <h:commandLink   style="margin-top: 15px; margin-bottom: 15px; ">
+                            <img src="#{request.contextPath}/resources/images/excel.png" width="24"/>
+                            <p:dataExporter type="xls" target="datalist" fileName="Lista de Optometrías" />
+                        </h:commandLink>
+
+                        <h:commandLink rendered="#{loginController.admin}"  style="margin-top: 15px; margin-bottom: 15px; margin-left: 15px;">
+                            <img src="#{request.contextPath}/resources/images/pdf.png" width="24"/>
+                            <p:dataExporter type="pdf" target="datalist" fileName="Lista de Optometrías"/>
+                        </h:commandLink >
+
+                        <h:commandLink rendered="#{loginController.admin}" style="margin-top: 15px; margin-bottom: 15px; margin-left: 15px;">
+                            <img src="#{request.contextPath}/resources/images/csv.png" width="24"/>
+                            <p:dataExporter type="csv" target="datalist" fileName="Lista de Optometrías" />
+                        </h:commandLink>
+
+                    </f:facet>
+
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListOptometriaTitle_fechaOptpmetria}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.fechaOptpmetria}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+
+
+
+                    <p:column toggleable="false"  filterBy="#{item.idPaciente.idClem.nomClem}">
+                        <f:facet name="header">
+                            <h:outputText value="Empresa"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPaciente.idClem.nomClem}"/>
+                    </p:column>
+
+                    <p:column filterBy="#{item.idPaciente}">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListOptometriaTitle_idPaciente}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPaciente.toString()}"/>
+                    </p:column>
+
+
+
+
+                    <p:column filterBy="#{item.idPaciente.numDoc}">
+                        <f:facet name="header">
+                            <h:outputText value="Número de documento"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPaciente.numDoc}"/>
+                    </p:column>
+
+
+                    <p:column style="display: none;" >
+                        <f:facet name="header">
+                            <h:outputText value="Fecha de nacimiento"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPaciente.fecNac}"> 
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="Ciudad de nacimiento"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPaciente.ciudadNac}"/>
+
+                    </p:column>
+
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="Edad"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPaciente.edad}"/>
+                    </p:column>
+
+                    <p:column style="display: none;" >
+                        <f:facet name="header">
+                            <h:outputText value="Genero"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPaciente.genero}"/>
+                    </p:column>
+
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="Cargo"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPaciente.cargo}"/>
+                    </p:column>
+
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="profesion"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPaciente.profesion}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="Número de hijos"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPaciente.numHijos}"/>
+                    </p:column>
+
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="Eps"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPaciente.eps}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="Nivel academico"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPaciente.nivAca}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="Estado civil"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPaciente.estCiv   }"/>
+                    </p:column>
+
+
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListOptometriaTitle_cargo}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.cargo}"/>
+                    </p:column>
+
+
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListOptometriaTitle_vcodsl}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vcodsl}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListOptometriaTitle_vcoisl}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vcoisl}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListOptometriaTitle_vlodsl}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vlodsl}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListOptometriaTitle_vloisl}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vloisl}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListOptometriaTitle_vcodcl}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vcodcl}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListOptometriaTitle_vcoicl}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vcoicl}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListOptometriaTitle_vlodcl}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vlodcl}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListOptometriaTitle_vloicl}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vloicl}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListOptometriaTitle_recomendaciones}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.recomendaciones}"/>
+                    </p:column>
+                    <p:column >
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListOptometriaTitle_usalentes}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.usalentes}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListOptometriaTitle_ultimoExamen}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.ultimoExamen}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListOptometriaTitle_sintomatologia}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.sintomatologia}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListOptometriaTitle_normalsn}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.normalsn}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListOptometriaTitle_azul}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.azul}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListOptometriaTitle_rojo}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.rojo}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListOptometriaTitle_amarillo}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.amarillo}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListOptometriaTitle_verde}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.verde}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListOptometriaTitle_normal}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.normal}"/>
+                    </p:column>
+                    <p:column style="display: none;">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListOptometriaTitle_profundidad}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.profundidad}"/>
+                    </p:column>
+                    <p:column exportable="false" > 
+                        <f:facet name="header">Opciones</f:facet>
+                        <p:commandButton id="viewButton" icon="ui-icon-search" update="datalist" action="#{optometriaController.prepareView}">
+                            <f:setPropertyActionListener value="#{item}" target="#{optometriaController.selected}"/>
+                        </p:commandButton>
+
+                        <p:commandButton  id="editButton" icon="ui-icon-pencil" update="datalist" action="#{optometriaController.prepareEdit}">
+                            <f:setPropertyActionListener value="#{item}" target="#{optometriaController.selected}"/>
+                        </p:commandButton>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash" action="#{optometriaController.destroy()}"
+                                         process="@this" update="datalist">
+                            <p:confirm header="Confirmación" message="¿Esta seguro que desea eliminar el item?" icon="ui-icon-alert" />
+                            <f:setPropertyActionListener value="#{item}" target="#{optometriaController.selected}"/>
+                        </p:commandButton>
+                    </p:column>
+
+
+
+                </p:dataTable>
+
+            </h:form>
+
+
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/template.xhtml">
+
+        <ui:define name="title">
+            <h:outputText value="Nuevo Laboratorio"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+
+            <h:form>
+                    <p:panel header="Paciente">
+                    <h:panelGrid columns="2" style="width: 1050px;">
+                        
+                        
+                        <p:graphicImage   value="#{pacientesController.imagen}"  cache="false" 
+                                         style=" width: 90px; height: 110px; margin-top: 15px; margin-bottom: 15px; margin-left: 20px;"/>
+                        
+                        <h:outputText  style="margin-top: 10px; margin-bottom: 10px;"   
+                                       value="#{pacientesController.selected.nombres}  
+                                       #{pacientesController.selected.apellidos} Doumento:
+                                      #{pacientesController.selected.numDoc} &lt;br /&gt;
+                                      #{pacientesController.selected.idClem.nomClem} 
+                                      Nit: #{pacientesController.selected.idClem.nitClem}&lt;br /&gt;
+                                       Cargo: #{pacientesController.selected.cargo} &lt;br /&gt;
+                                        Ciudad: #{pacientesController.selected.ciudad} &lt;br /&gt;" 
+                                      title="#{bundle.ViewOptometriaTitle_idPaciente}" escape="false"/> 
+
+                    </h:panelGrid>
+                </p:panel>
+                <p:panel header="Datos de laboratorio">
+                       <h:panelGrid columns="2" style="width: 1050px;" >
+
+
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px" value="#{bundle.EditLaboratorioLabel_tipoExamenLab}" for="tipoExamenLab" />
+                        <p:inputText style="margin-top: 15px; margin-bottom: 15px" id="tipoExamenLab" value="#{pacientesController.laboratorioActual.tipoExamenLab}" 
+                                     title="#{bundle.EditLaboratorioTitle_tipoExamenLab}" maxlength="80" />
+                        
+                         <p:outputLabel style="margin-top: 15px; margin-bottom: 15px" value="Facturado" for="facturado" />
+                         <p:selectOneMenu style="margin-top: 15px; margin-bottom: 15px" id="facturado" value="#{pacientesController.laboratorioActual.facturado}" 
+                                           > 
+                         
+                             <f:selectItem itemLabel="SI" itemValue="SI"/>
+                            <f:selectItem itemLabel="NO" itemValue="NO" />
+                         </p:selectOneMenu>
+                         
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px" value="#{bundle.EditLaboratorioLabel_resultado}" for="resultado" />
+                        <p:inputTextarea style="margin-top: 15px; margin-bottom: 15px; width: 400px;" id="resultado" 
+                                     value="#{pacientesController.laboratorioActual.resultado}"
+                                     title="#{bundle.EditLaboratorioTitle_resultado}" maxlength="200"/>
+                        
+                        <p:outputLabel value="#{bundle.EditLaboratorioLabel_concepto}" for="concepto" />
+                        <p:inputText style="margin-top: 15px; margin-bottom: 15px" id="concepto" 
+                                     value="#{pacientesController.laboratorioActual.concepto}" 
+                                     title="#{bundle.EditLaboratorioTitle_concepto}" maxlength="45"/> 
+                        
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px" value="#{bundle.EditLaboratorioLabel_usuarioTomaMuestra}" for="usuarioTomaMuestra" />
+                        <p:inputText style="margin-top: 15px; margin-bottom: 15px" id="usuarioTomaMuestra"
+                                     value="#{pacientesController.laboratorioActual.usuarioTomaMuestra}" maxlength="45"
+                                     title="#{bundle.EditLaboratorioTitle_usuarioTomaMuestra}" />
+                        
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px" value="Notas" for="notas" />
+                        <p:inputTextarea style="margin-top: 15px; margin-bottom: 15px; width: 400px; " id="notas" maxlength="200"
+                                     value="#{pacientesController.laboratorioActual.notas}" 
+                                     title="#{bundle.EditLaboratorioTitle_usuarioTomaMuestra}" />
+                        
+                        <p:outputLabel style="margin-top: 15px; margin-bottom: 15px" value="#{bundle.EditLaboratorioLabel_fehcaToma}" for="fehcaToma" />
+                        <p:calendar style="margin-top: 15px; margin-bottom: 15px" id="fehcaToma" pattern="MM/dd/yyyy" value="#{pacientesController.laboratorioActual.fehcaToma}"
+                                    yearRange="c-10:c+10" navigator="true"   title="#{bundle.EditLaboratorioTitle_fehcaToma}"  showOn="button"/>
+
+                    </h:panelGrid>
+                </p:panel>
+                <p:commandButton style="margin-top: 10px; margin-bottom: 10px;" action="#{pacientesController.addLaboratorio()}" value="#{bundle.Save}">
+                    <p:ajax update="@this" listener="#{laboratorioController.recargarListaLaboratorio()}"/>
+                </p:commandButton>                   
+
+
+                <p:button style="margin-top: 10px; margin-bottom: 10px; margin-left: 4em;" value="#{bundle.Cancel}" outcome="/pacientes/List" />
+            </h:form>
+
+
+
+        </ui:define>
+    </ui:composition>
+</html>
+

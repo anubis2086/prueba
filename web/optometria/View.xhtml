@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewOptometriaTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="OptometriaViewForm">
+                <p:panel header="datos de la optometría">
+                    <h:panelGroup id="display">
+                        <p:panelGrid columns="2" rendered="#{optometriaController.selected != null}" style="width: 1000px;">
+                            <h:outputText value="#{bundle.ViewOptometriaLabel_idPaciente}"/>
+                            <h:outputText value="#{optometriaController.selected.idPaciente.toString()}" title="#{bundle.ViewOptometriaTitle_idPaciente}"/>
+                            <h:outputText value="#{bundle.ViewOptometriaLabel_fechaOptpmetria}"/>
+                            <h:outputText value="#{optometriaController.selected.fechaOptpmetria}" title="#{bundle.ViewOptometriaTitle_fechaOptpmetria}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                           
+                            <h:outputText value="#{bundle.ViewOptometriaLabel_vcodsl}"/>
+                            <h:outputText value="#{optometriaController.selected.vcodsl}" title="#{bundle.ViewOptometriaTitle_vcodsl}"/>
+                            <h:outputText value="#{bundle.ViewOptometriaLabel_vcoisl}"/>
+                            <h:outputText value="#{optometriaController.selected.vcoisl}" title="#{bundle.ViewOptometriaTitle_vcoisl}"/>
+                            <h:outputText value="#{bundle.ViewOptometriaLabel_vlodsl}"/>
+                            <h:outputText value="#{optometriaController.selected.vlodsl}" title="#{bundle.ViewOptometriaTitle_vlodsl}"/>
+                            <h:outputText value="#{bundle.ViewOptometriaLabel_vloisl}"/>
+                            <h:outputText value="#{optometriaController.selected.vloisl}" title="#{bundle.ViewOptometriaTitle_vloisl}"/>
+                            <h:outputText value="#{bundle.ViewOptometriaLabel_vcodcl}"/>
+                            <h:outputText value="#{optometriaController.selected.vcodcl}" title="#{bundle.ViewOptometriaTitle_vcodcl}"/>
+                            <h:outputText value="#{bundle.ViewOptometriaLabel_vcoicl}"/>
+                            <h:outputText value="#{optometriaController.selected.vcoicl}" title="#{bundle.ViewOptometriaTitle_vcoicl}"/>
+                            <h:outputText value="#{bundle.ViewOptometriaLabel_vlodcl}"/>
+                            <h:outputText value="#{optometriaController.selected.vlodcl}" title="#{bundle.ViewOptometriaTitle_vlodcl}"/>
+                            <h:outputText value="#{bundle.ViewOptometriaLabel_vloicl}"/>
+                            <h:outputText value="#{optometriaController.selected.vloicl}" title="#{bundle.ViewOptometriaTitle_vloicl}"/>
+                            <h:outputText value="#{bundle.ViewOptometriaLabel_recomendaciones}"/>
+                            <h:outputText value="#{optometriaController.selected.recomendaciones}" title="#{bundle.ViewOptometriaTitle_recomendaciones}"/>
+                            <h:outputText value="#{bundle.ViewOptometriaLabel_usalentes}"/>
+                            <h:outputText value="#{optometriaController.selected.usalentes}" title="#{bundle.ViewOptometriaTitle_usalentes}"/>
+                            <h:outputText value="#{bundle.ViewOptometriaLabel_ultimoExamen}"/>
+                            <h:outputText value="#{optometriaController.selected.ultimoExamen}" title="#{bundle.ViewOptometriaTitle_ultimoExamen}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                            <h:outputText value="#{bundle.ViewOptometriaLabel_sintomatologia}"/>
+                            <h:outputText value="#{optometriaController.selected.sintomatologia}" title="#{bundle.ViewOptometriaTitle_sintomatologia}"/>
+                          
+                            <h:outputText value="#{bundle.ViewOptometriaLabel_azul}"/>
+                            <h:outputText value="#{optometriaController.selected.azul}" title="#{bundle.ViewOptometriaTitle_azul}"/>
+                            <h:outputText value="#{bundle.ViewOptometriaLabel_rojo}"/>
+                            <h:outputText value="#{optometriaController.selected.rojo}" title="#{bundle.ViewOptometriaTitle_rojo}"/>
+                            <h:outputText value="#{bundle.ViewOptometriaLabel_amarillo}"/>
+                            <h:outputText value="#{optometriaController.selected.amarillo}" title="#{bundle.ViewOptometriaTitle_amarillo}"/>
+                            <h:outputText value="#{bundle.ViewOptometriaLabel_verde}"/>
+                            <h:outputText value="#{optometriaController.selected.verde}" title="#{bundle.ViewOptometriaTitle_verde}"/>
+                            <h:outputText value="#{bundle.ViewOptometriaLabel_normal}"/>
+                            <h:outputText value="#{optometriaController.selected.normal}" title="#{bundle.ViewOptometriaTitle_normal}"/>
+                            <h:outputText value="#{bundle.ViewOptometriaLabel_profundidad}"/>
+                            <h:outputText value="#{optometriaController.selected.profundidad}" title="#{bundle.ViewOptometriaTitle_profundidad}"/>
+
+                        </p:panelGrid>
+                    </h:panelGroup>
+                </p:panel>  
+                <p:button style="margin-bottom: 15px; margin-top: 15px;" value="#{bundle.Close}" outcome="/optometria/List"/>
+
+            </h:form>
+
+
+        </ui:define>
+
+    </ui:composition>
+</html>

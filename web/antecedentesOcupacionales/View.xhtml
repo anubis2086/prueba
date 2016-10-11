@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+  <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewAntecedentesOcupacionalesTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="AntecedentesOcupacionalesViewForm">
+                <h:panelGroup id="display" >
+                    <p:panelGrid columns="2" style="width: 1050px" >
+                        <h:outputText value="Paciente"/>
+                        <h:outputText value="#{antecedentesOcupacionalesController.selected.idEmo.idPaciente.toString()}" title="#{bundle.ViewAntecedentesOcupacionalesTitle_idEmo}"/>
+                        
+                        <h:outputText value="#{bundle.ViewAntecedentesOcupacionalesLabel_nomEmp}"/>
+                        <h:outputText value="#{antecedentesOcupacionalesController.selected.nomEmp}" title="#{bundle.ViewAntecedentesOcupacionalesTitle_nomEmp}"/>
+                        <h:outputText value="#{bundle.ViewAntecedentesOcupacionalesLabel_actEcoEmp}"/>
+                        <h:outputText value="#{antecedentesOcupacionalesController.selected.actEcoEmp}" title="#{bundle.ViewAntecedentesOcupacionalesTitle_actEcoEmp}"/>
+                        <h:outputText value="#{bundle.ViewAntecedentesOcupacionalesLabel_oficio}"/>
+                        <h:outputText value="#{antecedentesOcupacionalesController.selected.oficio}" title="#{bundle.ViewAntecedentesOcupacionalesTitle_oficio}"/>
+                        <h:outputText value="#{bundle.ViewAntecedentesOcupacionalesLabel_antiguedad}"/>
+                        <h:outputText value="#{antecedentesOcupacionalesController.selected.antiguedad}" title="#{bundle.ViewAntecedentesOcupacionalesTitle_antiguedad}"/>
+                        <h:outputText value="#{bundle.ViewAntecedentesOcupacionalesLabel_riesgos}"/>
+                        <h:outputText value="#{antecedentesOcupacionalesController.selected.riesgos}" title="#{bundle.ViewAntecedentesOcupacionalesTitle_riesgos}"/>
+                        <h:outputText value="#{bundle.ViewAntecedentesOcupacionalesLabel_epp}"/>
+                        <h:outputText value="#{antecedentesOcupacionalesController.selected.epp}" title="#{bundle.ViewAntecedentesOcupacionalesTitle_epp}"/>
+                        
+                    </p:panelGrid>
+                    <p:button style="margin-top: 20px;" value="#{bundle.Close}" outcome="/antecedentesOcupacionales/List"/>
+                </h:panelGroup>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

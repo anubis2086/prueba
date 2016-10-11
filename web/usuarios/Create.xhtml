@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateUsuariosTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <div class="col-md-12">
+                <h:form id="UsuariosCreateForm" rendered="#{loginController.admin}"
+                        enctype="multipart/form-data">
+                    <h:panelGroup id="display">
+                        <p:fieldset legend="Datos de usuario" style="margin-bottom:20px">
+                            <h:panelGrid columns="3" rendered="#{usuariosController.selected != null}" p:layout="grid">
+
+                                <p:outputLabel style="margin-top: 15px; margin-bottom: 15px" value="#{bundle.CreateUsuariosLabel_nom}" for="nom" />
+                                <p:inputText id="nom" value="#{usuariosController.selected.nom}" 
+                                             title="#{bundle.CreateUsuariosTitle_nom}" 
+                                             required="true"  maxlength="45" style="margin-top: 15px; margin-bottom: 15px; margin-left: 8em;"
+                                             requiredMessage="#{bundle.CreateUsuariosRequiredMessage_nom}"
+                                             validatorMessage="Por favor sólo letras"> 
+                                    <f:validateRegex pattern="[a-zA-Z áéíóúÁÉÍÓÚÑñ]*"/>
+                                    <p:ajax process="@this" update="nomMessage"/>
+                                </p:inputText>
+                                <p:message id="nomMessage" style="margin-top: 15px; margin-bottom: 15px"
+                                           for="nom" styleClass="error"/>
+
+                                <p:outputLabel value="#{bundle.CreateUsuariosLabel_ape}" for="ape" style="margin-top: 15px; margin-bottom: 15px" />
+                                <p:inputText id="ape" value="#{usuariosController.selected.ape}" style="margin-top: 15px; margin-left: 8em; margin-bottom: 15px"
+                                             title="#{bundle.CreateUsuariosTitle_ape}" required="true" maxlength="45"
+                                             validatorMessage="Por favor sólo letras"
+                                             requiredMessage="#{bundle.CreateUsuariosRequiredMessage_ape}">
+                                    <f:validateRegex pattern="[a-zA-Z áéíóúÁÉÍÓÚÑñ]*"/>
+                                    <p:ajax process="@this" update="apeMessage"/>
+                                </p:inputText>
+                                <p:message id="apeMessage" style="margin-top: 15px; margin-bottom: 15px"
+                                           for="ape" styleClass="error"/>
+
+                                <p:outputLabel value="#{bundle.CreateUsuariosLabel_numeroDoc}" for="numeroDoc" style="margin-top: 15px; margin-bottom: 15px" />
+                                <p:inputText id="numeroDoc" value="#{usuariosController.selected.numeroDoc}" 
+                                             title="#{bundle.CreateUsuariosTitle_numeroDoc}" required="true" style="margin-left: 8em; margin-top: 15px; margin-bottom: 15px"
+                                             validatorMessage="Por favor sólo numeros" maxlength="15"
+                                             requiredMessage="#{bundle.CreateUsuariosRequiredMessage_numeroDoc}">
+                                    <f:validateRegex pattern="[0-9]*"/>
+                                    <p:ajax process="@this" update="numeroDocMessage"/>
+                                </p:inputText>
+                                <p:message id="numeroDocMessage" style="margin-top: 15px; margin-bottom: 15px"
+                                           for="numeroDoc" styleClass="error"/>
+
+
+
+
+                                <label class="Label" style="margin-top: 15px; margin-bottom: 15px">Contraseña *</label>
+                                <p:password id="pwd1" value="#{usuariosController.password}" match="pwd2" 
+                                            label="Password 1" required="true" maxlength="20" style="margin-top: 15px; margin-left: 8em; margin-bottom: 15px"
+                                            requiredMessage="#{bundle.CreateUsuariosRequiredMessage_password}" />
+                                <p:message id="pwd1Message" style="margin-top: 15px; margin-bottom: 15px"
+                                           for="pwd1" styleClass="error"/>
+
+                                <label class="Label" style="margin-top: 15px; margin-bottom: 15px">Escriba de nuevo la contraseña *</label>
+                                <p:password id="pwd2" value="#{usuariosController.password}" style=" margin-left: 8em; margin-top: 15px; margin-bottom: 15px"
+                                            label="Password 2" required="true" maxlength="20"
+                                            requiredMessage="#{bundle.CreateUsuariosRequiredMessage_password}"/>
+                                <p:message id="pwd2Message" style="margin-top: 15px; margin-bottom: 15px"
+                                           for="pwd2" styleClass="error"/>
+                                
+                                <p:outputLabel value="Dirección" for="direccion" 
+                                               style="margin-top: 15px; margin-bottom: 15px" />
+                                <p:inputText id="direccion" value="#{usuariosController.selected.direccion}" 
+                                             title="Dirección" style="margin-top: 15px; margin-left: 8em; margin-bottom: 15px"
+                                             >
+                       
+                                </p:inputText>
+                                <p:message id="direccionMessage" style="margin-top: 15px; margin-bottom: 15px"
+                                           for="direccion" styleClass="error"/>
+                                
+                                
+
+                                <p:outputLabel value="#{bundle.CreateUsuariosLabel_correo}" for="correo" 
+                                               style="margin-top: 15px; margin-bottom: 15px" />
+                                <p:inputText id="correo" value="#{usuariosController.selected.correo}" 
+                                             title="#{bundle.CreateUsuariosTitle_correo}" style="margin-top: 15px; margin-left: 8em; margin-bottom: 15px"
+                                             validatorMessage="Ingrese un formato de correo valido">
+                                    <f:validateRegex
+                                        pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                    <p:ajax process="@this" update="correoMessage"/>
+                                </p:inputText>
+                                <p:message id="correoMessage" style="margin-top: 15px; margin-bottom: 15px"
+                                           for="correo" styleClass="error"/>
+
+                                <p:outputLabel value="#{bundle.CreateUsuariosLabel_tel}" for="tel" style="margin-top: 15px; margin-bottom: 15px" />
+                                <p:inputText id="tel" value="#{usuariosController.selected.tel}" maxlength="12"
+                                             validatorMessage="Por favor sólo números" style="margin-top: 15px; margin-left: 8em; margin-bottom: 15px"
+                                             title="#{bundle.CreateUsuariosTitle_tel}" >
+                                    <f:validateRegex pattern="[0-9]*"/>
+                                    <p:ajax process="@this" update="telMessage"/>
+                                </p:inputText>
+                                <p:message id="telMessage" style="margin-top: 15px; margin-bottom: 15px"
+                                           for="tel" styleClass="error"/>
+
+                                <p:outputLabel value="#{bundle.CreateUsuariosLabel_cel}" for="cel" style="margin-top: 15px; margin-bottom: 15px" />
+                                <p:inputText id="cel" value="#{usuariosController.selected.cel}" 
+                                             title="#{bundle.CreateUsuariosTitle_cel}" style="margin-top: 15px; margin-left: 8em; margin-bottom: 15px"
+                                             maxlength="14" validatorMessage="Por favor sólo números">
+                                    <f:validateRegex pattern="[0-9]*"/>
+                                    <p:ajax process="@this" update="celMessage"/>
+                                </p:inputText>
+                                <p:message id="celMessage" style="margin-top: 15px; margin-bottom: 15px"
+                                           for="cel" styleClass="error"/>
+
+                                <p:outputLabel value="#{bundle.CreateUsuariosLabel_estado}" for="estado" style="margin-top: 15px; margin-bottom: 15px"/>
+                                <p:selectBooleanCheckbox id="estado" value="#{usuariosController.selected.estado}" 
+                                                         required="true" style="margin-top: 15px; margin-left: 8em; margin-bottom: 15px"
+                                                         requiredMessage="#{bundle.EditUsuariosRequiredMessage_estado}"/>
+                                <p:message id="estadoMessage" style="margin-top: 15px; margin-bottom: 15px"
+                                           for="estado" styleClass="error"/>
+
+                                <p:outputLabel value="Tipo de usuario" for="rol" style="margin-top: 15px; margin-bottom: 15px"/>
+                                <p:selectOneMenu id="rol" value="#{usuariosController.selected.idRol}" required="true" 
+                                                 requiredMessage="Rol es requerido" style="margin-top: 15px; margin-left: 8em; margin-bottom: 15px">
+                                    <f:selectItems value="#{rolController.itemsAvailableSelectOne}"
+                                                   var="idRolItem"
+                                                   itemValue="#{idRolItem}"/>
+                                </p:selectOneMenu>
+                                <p:message id="rolMessage" style="margin-top: 15px; margin-bottom: 15px"
+                                           for="rol" styleClass="error"/>
+
+                                <p:outputLabel style="margin-top: 15px; margin-bottom: 15px" value="Subir Firma" for="firma" />
+                                <p:fileUpload id="firma" value="#{usuariosController.fileFirma}" mode="simple" required="true" requiredMessage="Debe elegir una imágen"/>
+
+                                <p:message  style="margin-top: 15px; margin-bottom: 15px" id="firmaMessage" for="firma"  styleClass="error"/>
+                            </h:panelGrid>
+                            <p:commandButton action="#{usuariosController.create}" value="#{bundle.Save}" ajax="false" />
+                            <p:button value="#{bundle.Cancel}" outcome="/usuarios/List" />
+                        </p:fieldset>
+                    </h:panelGroup>
+                </h:form>
+            </div>
+        </ui:define>
+    </ui:composition>
+
+</html>

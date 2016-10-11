@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <head jsf:id="head">
+        <title><ui:insert name="title">Titulo por defecto</ui:insert></title>
+        <link rel="shortcut icon" href="#{request.contextPath}/resources/images/favico.ico"></link>
+        <link rel="stylesheet" href="#{request.contextPath}/resources/css/custom.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/resources/css/normalize.css"/>     
+        <link rel="stylesheet" href="#{request.contextPath}/resources/css/estilos.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/resources/css/bootstrap.css"/>
+        <link href="#{request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet"/>
+        <f:event type="preRenderView" listener="#{loginController.VerificarSesion(event)}" />
+    </head>
+    <body jsf:id="body" class="Body">
+        <p:growl id="growl" life="3000" showDetail="true"  p:style="z-index: 2;" />
+        <h:form>
+
+            <nav class="navbar navbar-default navbar-static-top my-navbar" style="z-index: 1;">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">
+                            <span class="icon-nuevoLogo" aria-hidden="true"></span>
+
+                        </a>
+
+                    </div>
+                    <div style=" margin-left: 5em;" >
+                        <p:clock />
+                    </div>
+                    <div id="navbar" class="">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li  class="btn-sing" style="margin-right: 20px"><h:link  title="Guia de usuario"
+                                                                                      outcome="/guia/guia.ocupacional"
+                                                                                      ><span 
+                                        class=" glyphicon glyphicon-eye-open " >                                                   
+                                    </span></h:link> </li> 
+
+
+
+
+                            <li  class="btn-sing" style="margin-right: 20px"><p:commandLink  title="Cambio de contraseña"
+                                                                                             oncomplete="PF('CambioContraseñaDlg').show()" 
+                                                                                             ><span 
+                                        class=" glyphicon glyphicon-cog " >                                                   
+                                    </span></p:commandLink> </li> 
+
+
+
+
+
+
+                            <li class="btn-sing"  ><a href="#" jsf:actionListener="#{loginController.cerrarSesion}"
+                                                      class="" jsf:action="/inicio.xhtml?faces-redirect=true" aria-label="Notificaciones"
+                                                      data-toggle="tooltip" data-placement="bottom" title="Cerrar sesión"><span class="glyphicon glyphicon-off" ></span></a></li>
+
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div><!-- /.container-fluid -->
+
+            </nav>
+
+        </h:form>
+        <div class="templ container">
+            <div class="row">
+                <div class="jumbotron">
+
+                    <h:form>
+                        <p:menubar model="#{menuController.model}" />
+
+                    </h:form>
+                    <ui:insert name="body">Deafault body</ui:insert>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid myFooter">
+            <div class="row">
+                <div class="col-md-2">
+                    .
+                </div>
+                <div class="col-md-8">
+                    <footer>
+                        <p class="pull-right"><a href="#"><span style="color: #203864; font-size: 50px;" class="glyphicon glyphicon-chevron-up"/>
+                            </a></p>
+                        <h4>&copy; N B D - E.S.O. #{loginController.annio} &middot;  </h4>
+                        <h5>&copy; Designed and developed by: <a href="https://www.facebook.com/miketascon" target="_blank">@miketascon</a>  &middot; 
+                            <a href="https://www.facebook.com/LenisJeison" target="_blank">@jeisonlenis</a> &middot; 
+
+                          
+                            &middot; <a href="#">version del software 0.1</a> &middot;</h5>
+                    </footer>
+                </div>
+                <div class="col-md-2">
+                    .
+                </div>
+            </div>
+            <div class="hidden-xs hidden-sm row">
+                <div class="myBar3 col-md-3">
+                </div>
+                <div class="bg-primary myBar1 col-md-3">
+                </div>
+                <div class="myBar4 col-md-3">
+                </div>
+                <div class="myBar2 col-md-3">
+                </div>
+            </div>
+        </div>
+        <p:dialog id="CambioContraseñaDialogo" widgetVar="CambioContraseñaDlg"  header="Nueva Contraseña" modal="true" resizable="false" closeOnEscape="true" draggable="false">
+            <h:form id="CambioContraseñaForm">
+                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                <h:panelGrid columns="2">
+
+
+                    <label class="Label" style="margin-left: 4px; margin-bottom: 7px; margin-top: 7px;">Contraseña actual* </label>
+                    <p:password id="contraseñaVieja" style="margin-left: 4px; margin-bottom: 7px; margin-top: 7px;" 
+                                value="#{usuariosController.passwordVieja}" title="vieja contraseña" maxlength="20"
+                                required="true" requiredMessage="Contraseña actual es requerida" />
+
+                    <label class="Label" style="margin-left: 4px; margin-bottom: 7px; margin-top: 7px;">Nueva Contraseña * </label>
+                    <p:password id="pwd1" style="margin-left: 4px; margin-bottom: 7px; margin-top: 7px;" 
+                                value="#{usuariosController.password}" match="pwd2" title="Contraseña 1" maxlength="20"
+                                label="Contraseña 1" required="true" requiredMessage="Contraseña uno requerida" />
+
+                    <label class="Label" style="margin-left: 4px; margin-bottom: 7px; margin-top: 7px;" >Escriba de nuevo la contraseña * </label>
+                    <p:password id="pwd2" style="margin-left: 4px; margin-bottom: 7px; margin-top: 7px;" 
+                                value="#{usuariosController.password}" title="Contraseña 2" maxlength="20"
+                                label="Contraseña 2" required="true" requiredMessage="Contraseña dos requeridad"/>
+                    <p:commandButton style="margin-left: 4px; margin-bottom: 7px; margin-top: 7px;"  value="#{bundle.Save}" actionListener="#{usuariosController.updatePassword}"  />
+                    <p:commandButton style="margin-left: 4px; margin-bottom: 7px; margin-top: 7px;"  value="#{bundle.Close}" onclick="CambioContraseñaDlg.hide()"/>
+
+
+                </h:panelGrid>
+            </h:form>
+
+        </p:dialog>
+        <form jsf:id="confirmForm">
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+            </p:confirmDialog>
+
+        </form> 
+    </body>
+</html>

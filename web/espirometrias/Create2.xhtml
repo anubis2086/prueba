@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateEspirometriasTitle}"></h:outputText>
+        </ui:define>
+
+
+        <ui:define name="body">
+
+
+
+            <h:form>
+                <p:panel header="Paciente">
+                    <h:panelGrid columns="2" style="width: 1050px;">
+
+
+                        <p:graphicImage   value="#{pacientesController.imagen}"  cache="false" 
+                                          style=" width: 90px; height: 110px; margin-top: 15px; margin-bottom: 15px; margin-left: 20px;"/>
+
+                        <h:outputText  style="margin-top: 10px; margin-bottom: 10px;"   
+                                       value="#{pacientesController.selected.nombres}  
+                                       #{pacientesController.selected.apellidos} Doumento:
+                                       #{pacientesController.selected.numDoc} &lt;br /&gt;
+                                       #{pacientesController.selected.idClem.nomClem} 
+                                       Nit: #{pacientesController.selected.idClem.nitClem}&lt;br /&gt;
+                                       Cargo: #{pacientesController.selected.cargo} &lt;br /&gt;
+                                       Ciudad: #{pacientesController.selected.ciudad} &lt;br /&gt;" 
+                                       title="#{bundle.ViewOptometriaTitle_idPaciente}" escape="false"/> 
+
+                    </h:panelGrid>
+                </p:panel>
+                <p:panel header="Datos de la espirometría">
+                    <p:messages id='messages' showDetail="true" autoUpdate="true" closable="true" />
+                    <h:panelGrid columns="2"   style="width: 1050px;">
+
+
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" 
+                                       value="#{bundle.CreateEspirometriasLabel_fechaEspirometria}" for="fechaEspirometria" />
+                        <p:calendar style="margin-top: 10px; margin-bottom: 10px;" 
+                                    id="fechaEspirometria" pattern="MM/dd/yyyy" 
+                                    value="#{pacientesController.espiroActual.fechaEspirometria}" 
+                                    title="#{bundle.EditEspirometriasTitle_fechaEspirometria}"  showOn="button" navigator="true"/>
+
+
+
+
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateEspirometriasLabel_edadPulmonar}" for="edadPulmonar" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="edadPulmonar"
+                                     value="#{pacientesController.espiroActual.edadPulmonar}" 
+                                     title="#{bundle.CreateEspirometriasTitle_edadPulmonar}" maxlength="45" />
+
+
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateEspirometriasLabel_fev1Fvcporctj}" for="fev1Fvcporctj" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="fev1Fvcporctj"
+                                     value="#{pacientesController.espiroActual.fev1Fvcporctj}" 
+                                     title="#{bundle.CreateEspirometriasTitle_fev1Fvcporctj}" maxlength="45" />
+
+
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateEspirometriasLabel_fvc}" for="fvc" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="fvc" 
+                                     value="#{pacientesController.espiroActual.fvc}"
+                                     title="#{bundle.CreateEspirometriasTitle_fvc}" maxlength="45" />
+
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateEspirometriasLabel_fef7585}" for="fef7585" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="fef7585" 
+                                     value="#{pacientesController.espiroActual.fef7585}"
+                                     title="#{bundle.CreateEspirometriasTitle_fef7585}" maxlength="45" />
+
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateEspirometriasLabel_fef2575}" for="fef2575" />
+                        <p:inputText style="margin-top: 10px; margin-bottom: 10px;" id="fef2575" 
+                                     value="#{pacientesController.espiroActual.fef2575}" 
+                                     title="#{bundle.CreateEspirometriasTitle_fef2575}" maxlength="45" />
+
+                        <p:outputLabel value="#{bundle.CreateEspirometriasLabel_diagnostico}" for="diagnostico" />
+                        <p:selectOneMenu id="diagnostico" value="#{pacientesController.espiroActual.diagnostico}" >
+                            <f:selectItem itemLabel="RESTRICTIVA" itemValue="RESTRICTIVA" />
+                            <f:selectItem itemLabel="OBSTRUCTIVA" itemValue="OBSTRUCTIVA" />
+                            <f:selectItem itemLabel="MIXTA" itemValue="MIXTA" />
+                            <f:selectItem itemLabel="NORMAL" itemValue="NORMAL" />
+                        </p:selectOneMenu>
+
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateEspirometriasLabel_recomendaciones}" for="recomendaciones" />
+                        <p:inputTextarea style="margin-top: 10px; margin-bottom: 10px; width: 400px;" id="recomendaciones"
+                                         value="#{pacientesController.espiroActual.recomendaciones}"
+                                         title="#{bundle.CreateEspirometriasTitle_recomendaciones}" maxlength="250" />
+
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="#{bundle.CreateEspirometriasLabel_antecedentes}" for="antecedentes" />
+                        <p:inputTextarea style="margin-top: 10px; margin-bottom: 10px; width: 400px;" id="antecedentes"
+                                         value="#{pacientesController.espiroActual.antecedentes}" 
+                                         title="#{bundle.CreateEspirometriasTitle_antecedentes}" maxlength="1500"/>
+
+                        <p:outputLabel style="margin-top: 10px; margin-bottom: 10px;" value="Observaciones: " for="observaciones" />
+                        <p:inputTextarea style="margin-top: 10px; margin-bottom: 10px; width: 400px;" id="observaciones"
+                                         value="#{pacientesController.espiroActual.observaciones}" 
+                                         title="observaciones" maxlength="3000"/>
+
+                    </h:panelGrid>
+                </p:panel>
+
+
+                <p:commandButton style="margin-top: 10px; margin-bottom: 10px;" action="#{pacientesController.addEspirometria}" value="#{bundle.Save}">
+                    <p:ajax update="@this" listener="#{espirometriasController.recargarListaEspirometrias}"/>
+                </p:commandButton>                   
+
+
+                <p:button style="margin-top: 10px; margin-bottom: 10px; margin-left: 4em;" value="#{bundle.Cancel}" outcome="/pacientes/List" />
+            </h:form>
+
+
+
+
+        </ui:define>
+    </ui:composition>
+</html>
+

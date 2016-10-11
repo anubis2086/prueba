@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <link rel="shortcut icon" href="#{request.contextPath}/resources/images/favico.ico"></link>
+
+        <link rel="stylesheet" href="#{request.contextPath}/resources/css/normalize.css"/>     
+        <link rel="stylesheet" href="#{request.contextPath}/resources/css/estilos.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/resources/css/bootstrap.css"/>
+    </h:head>
+    <h:body style="     background: url(#{request.contextPath}/resources/images/blue.jpg) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;">
+        <h:form id="formConsulta">
+            <div class=" container">
+                <div class="row">
+                    <div class="col-md-5">
+                        .
+                    </div>
+                    <div class="col-md-6">
+                        <h1 class="hidden-md hidden-lg featurette-heading" style="color: white" >Consulta de examenes.</h1>
+                        <h1 class="hidden-xs hidden-sm hText featurette-heading" style="color: white">Consulta de examenes.</h1>
+                    </div>
+                    <div class="col-md-1">
+                        .
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        .
+                    </div>
+                    <div class="col-md-6">
+
+                        <h:panelGrid columns="2" >
+                            <p:inputText id="numeroDocu" placeholder="Número de documento"
+                                         maxlength="15" value="#{loginController.consulta}"
+                                           validatorMessage="Por favor solo numeros"> 
+                                 <f:validateRegex pattern="[0-9]*"/>
+                            <p:ajax process="@this" update="numeDocuMessage"/>
+
+                            </p:inputText>
+                            
+                            <p:message  id="numeDocuMessage" for="numeroDocu"  styleClass="error"/>
+
+                            
+
+                        </h:panelGrid>
+                        <p:commandButton style="margin-top: 20px;" actionListener="#{loginController.consultar}" 
+                                         value="Consulta" update="datatable" />
+                        
+                        <p:button style="margin-top: 20px; margin-left: 20px;" outcome="/index.ocupacional" 
+                                         value="Volver atras"  />
+
+
+
+
+                    </div>
+                    <div class="col-md-1">
+                        .
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-1">
+                    .
+                </div>
+                <div class="col-md-10">
+
+                    <f:view>
+
+
+
+                        <h1><h:outputText value=" "/></h1>
+                        <p:dataTable id="datatable" value="#{loginController.listaEmo}" var="item"
+                                     selectionMode="single"
+                                     
+                                     rowKey="#{item.idEmo}"
+                                >
+                          
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Nombre"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idPaciente.toString()}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Nombre"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idPaciente.numDoc}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Fecha examen"/>
+                                </f:facet>
+                                <h:outputText value="#{item.fechaCreacion}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Tipo concepto"/>
+                                </f:facet>
+                                <h:outputText value="#{item.tipoConcepto}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Tipo perfil"/>
+                                </f:facet>
+                                <h:outputText value="#{item.tipoPerfil}"/>
+                            </p:column>
+                            <p:column exportable="false">
+                                <f:facet name="header">
+                                    <h:outputText value="Generar PDF"/>
+                                </f:facet> 
+
+                                <a target="_blank" href="#{request.contextPath}/ReporteDePaciente?numero=#{item.idEmo}">
+                                    <img src="#{request.contextPath}/resources/images/pdf.png" width="24"/>  
+                                </a>
+                            </p:column>
+
+                        </p:dataTable>
+
+                    </f:view>
+
+                </div>
+                <div class="col-md-1">
+                    .
+                </div>
+
+            </div>
+        </h:form>
+    </h:body>
+</html>
+

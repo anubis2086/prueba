@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewAccidentesLaboralesTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+
+
+            <h:form id="AccidentesLaboralesViewForm">
+                
+                <p:panelGrid columns="2" style="width: 1050px" rendered="#{accidentesLaboralesController.selected != null}">
+                        <h:outputText value="Paciente:  "/>
+                        <h:outputText value="#{accidentesLaboralesController.selected.idEmo.idPaciente.toString()}" title="#{bundle.ViewAccidentesLaboralesTitle_idEmo}"/>
+                        
+                        <h:outputText value="#{bundle.ViewAccidentesLaboralesLabel_anio}"/>
+                        <h:outputText value="#{accidentesLaboralesController.selected.anio}" title="#{bundle.ViewAccidentesLaboralesTitle_anio}"/>
+                        <h:outputText value="#{bundle.ViewAccidentesLaboralesLabel_descIni}"/>
+                        <h:outputText value="#{accidentesLaboralesController.selected.descIni}" title="#{bundle.ViewAccidentesLaboralesTitle_descIni}"/>
+                        <h:outputText value="#{bundle.ViewAccidentesLaboralesLabel_accTrab}"/>
+                        <h:outputText value="#{accidentesLaboralesController.selected.accTrab}" title="#{bundle.ViewAccidentesLaboralesTitle_accTrab}"/>
+                        <h:outputText value="#{bundle.ViewAccidentesLaboralesLabel_enferProfe}"/>
+                        <h:outputText value="#{accidentesLaboralesController.selected.enferProfe}" title="#{bundle.ViewAccidentesLaboralesTitle_enferProfe}"/>
+                        <h:outputText value="#{bundle.ViewAccidentesLaboralesLabel_empAcc}"/>
+                        <h:outputText value="#{accidentesLaboralesController.selected.empAcc}" title="#{bundle.ViewAccidentesLaboralesTitle_empAcc}"/>
+                        <h:outputText value="#{bundle.ViewAccidentesLaboralesLabel_secuelas}"/>
+                        <h:outputText value="#{accidentesLaboralesController.selected.secuelas}" title="#{bundle.ViewAccidentesLaboralesTitle_secuelas}"/>
+                        <h:outputText value="#{bundle.ViewAccidentesLaboralesLabel_arl}"/>
+                        <h:outputText value="#{accidentesLaboralesController.selected.arl}" title="#{bundle.ViewAccidentesLaboralesTitle_arl}"/>
+                        
+                    </p:panelGrid>
+                <p:button style="margin-top: 20px;" value="#{bundle.Close}" outcome="/accidentesLaborales/List" />
+                
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+
+
+</html>

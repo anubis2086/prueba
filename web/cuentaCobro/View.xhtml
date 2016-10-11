@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="Ver"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+
+
+            <h:form id="CuentaCobroViewForm">
+
+                <p:panelGrid columns="2" rendered="#{cuentaCobroController.selected != null}" style="width: 1050px;">
+                    <h:outputText value="#{bundle.ViewCuentaCobroLabel_idUsuario}"/>
+                    <h:outputText value="#{cuentaCobroController.selected.idUsuario.toString()}" title="#{bundle.ViewCuentaCobroTitle_idUsuario}"/>
+                    <h:outputText value="#{bundle.ViewCuentaCobroLabel_idClem}"/>
+                    <h:outputText value="#{cuentaCobroController.selected.idClem.toString()}" title="#{bundle.ViewCuentaCobroTitle_idClem}"/>
+                   
+                    <h:outputText value="#{bundle.ViewCuentaCobroLabel_fechaCuenta}"/>
+                    <h:outputText value="#{cuentaCobroController.selected.fechaCuenta}" title="#{bundle.ViewCuentaCobroTitle_fechaCuenta}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewCuentaCobroLabel_numeroCuenta}"/>
+                    <h:outputText value="#{cuentaCobroController.selected.numeroCuenta}" title="#{bundle.ViewCuentaCobroTitle_numeroCuenta}"/>
+                    <h:outputText value="#{bundle.ViewCuentaCobroLabel_concepto}"/>
+                    <h:outputText value="#{cuentaCobroController.selected.concepto}" title="#{bundle.ViewCuentaCobroTitle_concepto}"/>
+                    <h:outputText value="#{bundle.ViewCuentaCobroLabel_cantidad}"/>
+                    <h:outputText value="#{cuentaCobroController.selected.cantidad}" title="#{bundle.ViewCuentaCobroTitle_cantidad}"/>
+                    <h:outputText value="#{bundle.ViewCuentaCobroLabel_valorUnitario}"/>
+                    <h:outputText value="#{cuentaCobroController.selected.valorUnitario}" title="#{bundle.ViewCuentaCobroTitle_valorUnitario}"/>
+
+                    <h:outputText value="#{bundle.ViewCuentaCobroLabel_banco}"/>
+                    <h:outputText value="#{cuentaCobroController.selected.banco}" title="#{bundle.ViewCuentaCobroTitle_banco}"/>
+                    <h:outputText value="#{bundle.ViewCuentaCobroLabel_cuentaAhorros}"/>
+                    <h:outputText value="#{cuentaCobroController.selected.cuentaAhorros}" title="#{bundle.ViewCuentaCobroTitle_cuentaAhorros}"/>
+                   
+                    <h:outputText value="#{bundle.ViewCuentaCobroLabel_titularCuenta}"/>
+                    <h:outputText value="#{cuentaCobroController.selected.titularCuenta}" title="#{bundle.ViewCuentaCobroTitle_titularCuenta}"/>
+                    <h:outputText value="#{bundle.ViewCuentaCobroLabel_pagoEfectivo}"/>
+                    <h:outputText value="#{cuentaCobroController.selected.pagoEfectivo}" title="#{bundle.ViewCuentaCobroTitle_pagoEfectivo}"/>
+                  
+                    <h:outputText value="#{bundle.ViewCuentaCobroLabel_valorTotal}"/>
+                    <h:outputText style="color: red; font-size: 30px;" value="$ #{cuentaCobroController.selected.valorTotal}" title="#{bundle.ViewCuentaCobroTitle_valorTotal}"/>
+
+                </p:panelGrid>
+                <p:button value="#{bundle.Close}" outcome="/cuentaCobro/List"/>
+
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+</html>

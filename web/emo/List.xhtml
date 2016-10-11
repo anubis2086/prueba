@@ -1,0 +1,1140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListEmoTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+
+            <f:view>
+
+
+                <h:form>
+
+                    <p:dataTable id="datalist" value="#{emoController.items}" var="item"
+                                 selectionMode="single" 
+                                 paginator="true"
+                                 rowKey="#{item.idEmo}"
+                                 rows="30"
+                                 rowsPerPageTemplate="10,20,30,40,50">
+
+                        <f:facet name="header">
+                            Reporte por página:
+                            <h:commandLink  style="margin-top: 15px; margin-bottom: 15px; ">
+                                <img src="#{request.contextPath}/resources/images/excel.png" width="24"/>
+                                <p:dataExporter type="xls" target="datalist" fileName="Lista de emo" pageOnly="true" />
+                            </h:commandLink>
+
+                            <h:commandLink rendered="#{loginController.admin}"   style="margin-top: 15px; margin-bottom: 15px; margin-left: 15px;">
+                                <img src="#{request.contextPath}/resources/images/pdf.png" width="24"/>
+                                <p:dataExporter type="pdf" target="datalist" fileName="Lista de emo" pageOnly="true"/>
+                            </h:commandLink >
+
+                            <h:commandLink rendered="#{loginController.admin}"   style="margin-top: 15px; margin-bottom: 15px; margin-left: 15px; margin-right: 40px;">
+                                <img src="#{request.contextPath}/resources/images/csv.png" width="24"/>
+                                <p:dataExporter type="csv" target="datalist" fileName="Lista de eno" pageOnly="true" />
+                            </h:commandLink>
+                            Reporte completo:
+
+                            <h:commandLink  style="margin-top: 15px; margin-bottom: 15px; ">
+                                <img src="#{request.contextPath}/resources/images/excel.png" width="24"/>
+                                <p:dataExporter type="xls" target="datalist" fileName="Lista de emo" />
+                            </h:commandLink>
+
+                            <h:commandLink rendered="#{loginController.admin}"  style="margin-top: 15px; margin-bottom: 15px; margin-left: 15px;">
+                                <img src="#{request.contextPath}/resources/images/pdf.png" width="24"/>
+                                <p:dataExporter type="pdf" target="datalist" fileName="Lista de emo"/>
+                            </h:commandLink >
+
+                            <h:commandLink rendered="#{loginController.admin}"  style="margin-top: 15px; margin-bottom: 15px; margin-left: 15px;">
+                                <img src="#{request.contextPath}/resources/images/csv.png" width="24"/>
+                                <p:dataExporter type="csv" target="datalist" fileName="Lista de emo" />
+                            </h:commandLink>
+
+                        </f:facet>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Id Emo"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idEmo}"/>
+                        </p:column>
+
+
+                        <p:column filterBy="#{item.tipoConcepto}" >
+                            <f:facet name="header">
+                                <h:outputText value="Tipo Concepto"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tipoConcepto}"/>
+                        </p:column>
+
+                        <p:column style="display: none;" >
+                            <f:facet name="header">
+                                <h:outputText value="Empresa"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPaciente.idClem.nomClem}"/>
+                        </p:column>
+
+                        <p:column style="display: none;" >
+                            <f:facet name="header">
+                                <h:outputText value="Nit"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPaciente.idClem.nitClem}"/>
+                        </p:column>
+
+                        <p:column filterBy="#{item.idPaciente}">
+                            <f:facet name="header">
+                                <h:outputText value="Paciente"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPaciente.toString()}"/>
+                        </p:column>
+
+                        <p:column  style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Documento"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPaciente.numDoc}"/>
+                        </p:column>
+
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Talla"/>
+                            </f:facet>
+                            <h:outputText value="#{item.talla}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Peso"/>
+                            </f:facet>
+                            <h:outputText value="#{item.peso}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Imc"/>
+                            </f:facet>
+                            <h:outputText value="#{item.imc}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Clasificación"/>
+                            </f:facet>
+                            <h:outputText value="#{item.clasificacion}"/>
+                        </p:column>
+
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Fecha de nacimiento"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaCreacion}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+
+
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Fecha de Creación"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaCreacion}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column  style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Género"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPaciente.genero}"/>
+                        </p:column>
+
+                        <p:column  style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Edad"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPaciente.edad}"/>
+                        </p:column>
+
+                        <p:column  style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Estado civil"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPaciente.estCiv}"/>
+                        </p:column>
+                        <p:column  style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="EPS"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPaciente.eps}"/>
+                        </p:column>
+                        <p:column  style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Fondo de Pensiones"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPaciente.afp}"/>
+                        </p:column>
+                        <p:column  style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="ARL"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPaciente.arl}"/>
+                        </p:column>
+
+                        <p:column  style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Nivel Académico"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPaciente.nivAca}"/>
+                        </p:column>
+
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Restricciones Laborales"/>
+                            </f:facet>
+                            <h:outputText value="#{item.restriccionesLab}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Cuales"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cualesUno}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Antecedentes Familiares"/>
+                            </f:facet>
+                            <h:outputText value="#{item.antFam}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Alérgicos"/>
+                            </f:facet>
+                            <h:outputText value="#{item.alergicos}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Asma"/>
+                            </f:facet>
+                            <h:outputText value="#{item.asma}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Cáncer"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cancer}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Cardiovasculares"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cardiovasculares}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Dermatológicos"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dermatologicos}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Diabetes"/>
+                            </f:facet>
+                            <h:outputText value="#{item.diabetes}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Epilepsia"/>
+                            </f:facet>
+                            <h:outputText value="#{item.epilepsia}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Hipertensión"/>
+                            </f:facet>
+                            <h:outputText value="#{item.hipertension}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Hipotiroidismo"/>
+                            </f:facet>
+                            <h:outputText value="#{item.hipotiroidismo}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Neurológicos"/>
+                            </f:facet>
+                            <h:outputText value="#{item.neurologicos}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Psiquiátricos"/>
+                            </f:facet>
+                            <h:outputText value="#{item.psiquiatricos}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Quirúrgicos"/>
+                            </f:facet>
+                            <h:outputText value="#{item.quimicos}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Respiratorias"/>
+                            </f:facet>
+                            <h:outputText value="#{item.respiratorias}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Reumatológicos"/>
+                            </f:facet>
+                            <h:outputText value="#{item.reumatologicos}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Traumáticos"/>
+                            </f:facet>
+                            <h:outputText value="#{item.traumaticos}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Varices"/>
+                            </f:facet>
+                            <h:outputText value="#{item.varicesUno}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Visuales"/>
+                            </f:facet>
+                            <h:outputText value="#{item.visuales}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Fuma"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fumas}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Cigarrillos por dia"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cuantos}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Hace Cuanto"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tiempoHaceCuanto}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Exfumador"/>
+                            </f:facet>
+                            <h:outputText value="#{item.exfumador}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Licor"/>
+                            </f:facet>
+                            <h:outputText value="#{item.licor}"/>
+                        </p:column >
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Habitual"/>
+                            </f:facet>
+                            <h:outputText value="#{item.habitual}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Deporte"/>
+                            </f:facet>
+                            <h:outputText value="#{item.deporte}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Qué Deporte"/>
+                            </f:facet>
+                            <h:outputText value="#{item.queDeporte}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Cuantas Veces por Semana"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cuantasVecesSemana}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Manualidades"/>
+                            </f:facet>
+                            <h:outputText value="#{item.manualidades}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Cuales"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cualesDos}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Menarca"/>
+                            </f:facet>
+                            <h:outputText value="#{item.menarca}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Gravidez"/>
+                            </f:facet>
+                            <h:outputText value="#{item.gravida}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Partos"/>
+                            </f:facet>
+                            <h:outputText value="#{item.partos}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Cesareas"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cesareas}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Abortos"/>
+                            </f:facet>
+                            <h:outputText value="#{item.abortos}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Hijos Vivos"/>
+                            </f:facet>
+                            <h:outputText value="#{item.hijosVivos}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Fecha de Última Menstruación"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaUltimaMenst}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Citología"/>
+                            </f:facet>
+                            <h:outputText value="#{item.citologia}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Ciclos"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ciclos}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Sintomas Osteomusculares"/>
+                            </f:facet>
+                            <h:outputText value="#{item.sintOsteom}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Cadera"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cadera}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Cervical"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cervical}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Codos"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codos}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Cuello"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cuelloUno}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Dedos"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dedos}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Dorsal"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dorsal}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Dorsolumbar"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dorsolumbar}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Hombros"/>
+                            </f:facet>
+                            <h:outputText value="#{item.hombros}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Lumbosacra"/>
+                            </f:facet>
+                            <h:outputText value="#{item.lumbosacra}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Manos"/>
+                            </f:facet>
+                            <h:outputText value="#{item.manos}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Muñecas"/>
+                            </f:facet>
+                            <h:outputText value="#{item.muniecas}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Pies"/>
+                            </f:facet>
+                            <h:outputText value="#{item.pies}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Rodillas"/>
+                            </f:facet>
+                            <h:outputText value="#{item.rodillasUno}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Descripción Osteom"/>
+                            </f:facet>
+                            <h:outputText value="#{item.descOsteom}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Otros"/>
+                            </f:facet>
+                            <h:outputText value="#{item.otros}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Revision por Sistemas"/>
+                            </f:facet>
+                            <h:outputText value="#{item.revisionSistemas}"/>
+                        </p:column >
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Descripción por Sistemas"/>
+                            </f:facet>
+                            <h:outputText value="#{item.descSiste}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Apariencia Física"/>
+                            </f:facet>
+                            <h:outputText value="#{item.aparienciaFisica}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Dominancia"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dominancia}"/>
+                        </p:column>
+
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Tas"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tas}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Tad"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tad}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Fc"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fc}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Fr"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fr}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Temp"/>
+                            </f:facet>
+                            <h:outputText value="#{item.temp}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Abdomen"/>
+                            </f:facet>
+                            <h:outputText value="#{item.abdomen}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Arco de Movilidad Artticular"/>
+                            </f:facet>
+                            <h:outputText value="#{item.arcoMovilidadArt}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Boca"/>
+                            </f:facet>
+                            <h:outputText value="#{item.boca}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Cicatrices/Tatuajes"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cicaTatu}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Columna Cervical"/>
+                            </f:facet>
+                            <h:outputText value="#{item.columCerv}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Columna Lumbosacra"/>
+                            </f:facet>
+                            <h:outputText value="#{item.columLumbo}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Columna Torácica"/>
+                            </f:facet>
+                            <h:outputText value="#{item.columTora}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Columna Vertebral"/>
+                            </f:facet>
+                            <h:outputText value="#{item.columVertebral}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Corazón"/>
+                            </f:facet>
+                            <h:outputText value="#{item.corazon}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Cuello"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cuelloDos}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Finkelstein"/>
+                            </f:facet>
+                            <h:outputText value="#{item.filkenstein}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Genitales"/>
+                            </f:facet>
+                            <h:outputText value="#{item.genitales}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Hernias"/>
+                            </f:facet>
+                            <h:outputText value="#{item.hernias}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Lasegue"/>
+                            </f:facet>
+                            <h:outputText value="#{item.lasegue}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Limitacion Funcional"/>
+                            </f:facet>
+                            <h:outputText value="#{item.limitacionFuncional}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Marcha en Puntas"/>
+                            </f:facet>
+                            <h:outputText value="#{item.marchaPuntas}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Marcha en Talones"/>
+                            </f:facet>
+                            <h:outputText value="#{item.marchaTalones}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Miembros Inferiores"/>
+                            </f:facet>
+                            <h:outputText value="#{item.miembrosInf}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Miembros Superiores"/>
+                            </f:facet>
+                            <h:outputText value="#{item.miembrosSup}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Oidos"/>
+                            </f:facet>
+                            <h:outputText value="#{item.oidos}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Ojos"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ojos}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Panel"/>
+                            </f:facet>
+                            <h:outputText value="#{item.panel}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Piel"/>
+                            </f:facet>
+                            <h:outputText value="#{item.piel}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Pulmones"/>
+                            </f:facet>
+                            <h:outputText value="#{item.pulmones}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="RodillasDos"/>
+                            </f:facet>
+                            <h:outputText value="#{item.rodillasDos}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Silla"/>
+                            </f:facet>
+                            <h:outputText value="#{item.silla}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Tinel"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tinel}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="VaricesDos"/>
+                            </f:facet>
+                            <h:outputText value="#{item.varicesDos}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="FechaEncuesta"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaEncuesta}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Trabajador Menor de Edad"/>
+                            </f:facet>
+                            <h:outputText value="#{item.trabajadorMenorEdad}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Mujer Gestante"/>
+                            </f:facet>
+                            <h:outputText value="#{item.mujerGestante}"/>
+                        </p:column>
+                        
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Pánico a las alturas"/>
+                            </f:facet>
+                            <h:outputText value="#{item.panicoAlturas}"/>
+                        </p:column>
+                        
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Restricciones Laborales"/>
+                            </f:facet>
+                            <h:outputText value="#{item.restriccionesLabdos}"/>
+                        </p:column>
+                        
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Limitaciones Físicas"/>
+                            </f:facet>
+                            <h:outputText value="#{item.limitacionesFisicas}"/>
+                        </p:column>
+                        
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Traumáticos"/>
+                            </f:facet>
+                            <h:outputText value="#{item.traumaticosdos}"/>
+                        </p:column>
+                        
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Perdida de Capacidad Laboral"/>
+                            </f:facet>
+                            <h:outputText value="#{item.alteraciones}"/>
+                        </p:column>
+
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Adicciones"/>
+                            </f:facet>
+                            <h:outputText value="#{item.antecedentesMedicamentos}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Ceguera"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ceguera}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Visión Lejana Alterada"/>
+                            </f:facet>
+                            <h:outputText value="#{item.planoHorizontalVision}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Visión Cercana Alterada"/>
+                            </f:facet>
+                            <h:outputText value="#{item.visionCercanaAlterada}"/>
+                        </p:column>
+                        
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Alteracion de Color"/>
+                            </f:facet>
+                            <h:outputText value="#{item.alteracionesColor}"/>
+                        </p:column>                        
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Alteración Profundidad"/>
+                            </f:facet>
+                            <h:outputText value="#{item.alteracionProfundidad}"/>
+                        </p:column>                        
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Vision Binocular Alterada"/>
+                            </f:facet>
+                            <h:outputText value="#{item.visionBinocularAlterada}"/>
+                        </p:column>
+                        
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Alteración Auditiva"/>
+                            </f:facet>
+                            <h:outputText value="#{item.alteracionesAudicion}"/>
+                        </p:column>
+                        
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Mareo o Vértigo"/>
+                            </f:facet>
+                            <h:outputText value="#{item.alteracionesEquilibrio}"/>
+                        </p:column>
+                        
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Epilepsia"/>
+                            </f:facet>
+                            <h:outputText value="#{item.sindromeConvulsivo}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Dislipidemia"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dislipidemia}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Hiperglicemia"/>
+                            </f:facet>
+                            <h:outputText value="#{item.hiperglicemia}"/>
+                        </p:column>
+                        
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="AccidenteCerebrovascular"/>
+                            </f:facet>
+                            <h:outputText value="#{item.accidenteCerebrovascular}"/>
+                        </p:column>
+                        
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Infarto"/>
+                            </f:facet>
+                            <h:outputText value="#{item.sintomasCardiovasculares}"/>
+                        </p:column>
+                        
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Alteraciones Respiratorias"/>
+                            </f:facet>
+                            <h:outputText value="#{item.alteracionesComportamiento}"/>
+                        </p:column>
+                        
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Imc Mayor a 35"/>
+                            </f:facet>
+                            <h:outputText value="#{item.imcmayor}"/>
+                        </p:column>
+                        
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Trastorno del Comportamiento"/>
+                            </f:facet>
+                            <h:outputText value="#{item.sintomasMentales}"/>
+                        </p:column>
+                        
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Observaciones"/>
+                            </f:facet>
+                            <h:outputText value="#{item.obsUno}"/>
+                        </p:column>
+                        
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="PruebasVestibular"/>
+                            </f:facet>
+                            <h:outputText value="#{item.pruebasVestibular}"/>
+                        </p:column>
+                        
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Concepto"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tipoExamenEmo}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Antecedentes Enfermedades"/>
+                            </f:facet>
+                            <h:outputText value="#{item.antecedentesEnfermedades}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Antecedentes Adicción"/>
+                            </f:facet>
+                            <h:outputText value="#{item.antecedentesAdiccion}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Signos Sintomas Visuales"/>
+                            </f:facet>
+                            <h:outputText value="#{item.signosSintomasVisuales}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Alteraciones Visuales"/>
+                            </f:facet>
+                            <h:outputText value="#{item.alteracionesVisuales}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Signos Sintomas Auditivos"/>
+                            </f:facet>
+                            <h:outputText value="#{item.signosSintomasAuditivos}"/>
+                        </p:column>
+                        
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Alteraciones de Atención"/>
+                            </f:facet>
+                            <h:outputText value="#{item.alteracionesAtencion}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Fecha de Creacion"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaCreacion}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Conductas Ocupacionales"/>
+                            </f:facet>
+                            <h:outputText value="#{item.conductasOcupacionales}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Observaciones"/>
+                            </f:facet>
+                            <h:outputText value="#{item.observaciones}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Tipo de Perfil"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tipoPerfil}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Resultado Concepto Final"/>
+                            </f:facet>
+                            <h:outputText value="#{item.resultadoConceptoFinal}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Observaciones Cie10"/>
+                            </f:facet>
+                            <h:outputText value="#{item.observacionesCiediez}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Remisión"/>
+                            </f:facet>
+                            <h:outputText value="#{item.remision}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.visiometria}">
+                            <f:facet name="header">
+                                <h:outputText value="Visiometria"/>
+                            </f:facet>
+                            <h:outputText value="#{item.visiometria}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.audiometria}">
+                            <f:facet name="header">
+                                <h:outputText value="Audiometria"/>
+                            </f:facet>
+                            <h:outputText value="#{item.audiometria}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.espirometriaComputalizada}" >
+                            <f:facet name="header">
+                                <h:outputText value="Espirometria"/>
+                            </f:facet>
+                            <h:outputText value="#{item.espirometriaComputalizada}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Sistemas Vigilancia"/>
+                            </f:facet>
+                            <h:outputText value="#{item.sistemasVigilancia}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Observaciones Especificas"/>
+                            </f:facet>
+                            <h:outputText value="#{item.observacionesEspecificas}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Recomendaciones"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idRecomendacion.toString()}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Diagnostico CIE 10 - 1"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cieDiezIdCie}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Diagnostico CIE 10 - 2"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cieDiezIdCie1}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Diagnostico CIE 10 - 3"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cieDiezIdCie2}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Diagnostico CIE 10 - 4"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cieDiezIdCie3}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Diagnostico CIE 10 - 5"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cieDiezIdCie4}"/>
+                        </p:column>
+                        <p:column style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Diagnostico CIE 10 - 6"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cieDiezIdCie5}"/>
+                        </p:column>
+
+                        <p:column exportable="false" > 
+                            <f:facet name="header">Opciones</f:facet>
+
+                            <p:commandLink  ajax="false" pt:target="_blank"
+                                            action="#{emoController.llamarReporte}" title="Historia clinica">
+                                <img src="#{request.contextPath}/resources/images/pdf.png" width="24"/>
+                                <f:setPropertyActionListener value="#{item}"
+                                                             target="#{emoController.selected}"/>
+                            </p:commandLink>
+                            
+                            <p:commandLink  ajax="false" pt:target="_blank" title="Examen ocupacional"
+                                            action="#{emoController.llamarReporteExamen}" >
+                                <img src="#{request.contextPath}/resources/images/pdf.png" width="24"/>
+                                <f:setPropertyActionListener value="#{item}"
+                                                             target="#{emoController.selected}"/>
+                            </p:commandLink>
+                            <p:commandButton id="viewButton" icon="ui-icon-search" update="datalist" action="#{emoController.prepareView}">
+                                <f:setPropertyActionListener value="#{item}" target="#{emoController.selected}"/>
+                            </p:commandButton>
+
+                            <p:commandButton  id="editButton" icon="ui-icon-pencil" update="datalist" action="#{emoController.prepareEdit}">
+                                <f:setPropertyActionListener value="#{item}" target="#{emoController.selected}"/>
+                            </p:commandButton>
+                            <p:commandButton rendered="#{loginController.admin}" id="deleteButton" icon="ui-icon-trash" action="#{emoController.destroy()}"
+                                             process="@this" update="datalist">
+                                <p:confirm header="Confirmación" message="¿Esta seguro que desea eliminar el item?" icon="ui-icon-alert" />
+                                <f:setPropertyActionListener value="#{item}" target="#{emoController.selected}"/>
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </f:view>
+
+
+        </ui:define>
+    </ui:composition>
+
+</html>
