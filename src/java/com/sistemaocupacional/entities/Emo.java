@@ -174,7 +174,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Emo.findByAlteracionesAtencion", query = "SELECT e FROM Emo e WHERE e.alteracionesAtencion = :alteracionesAtencion"),
     @NamedQuery(name = "Emo.findByAlteracionesComportamiento", query = "SELECT e FROM Emo e WHERE e.alteracionesComportamiento = :alteracionesComportamiento"),
     @NamedQuery(name = "Emo.findByTipoConcepto", query = "SELECT e FROM Emo e WHERE e.tipoConcepto = :tipoConcepto"),
-    @NamedQuery(name = "Emo.findByExaPreingresoPeriodico", query = "SELECT e FROM Emo e WHERE e.exaPreingresoPeriodico = :exaPreingresoPeriodico"),
+    
     @NamedQuery(name = "Emo.findByExaPeriodicoMedicinalaboral", query = "SELECT e FROM Emo e WHERE e.exaPeriodicoMedicinalaboral = :exaPeriodicoMedicinalaboral"),
     @NamedQuery(name = "Emo.findByExaEgreso", query = "SELECT e FROM Emo e WHERE e.exaEgreso = :exaEgreso"),
     @NamedQuery(name = "Emo.findByEmocol", query = "SELECT e FROM Emo e WHERE e.emocol = :emocol"),
@@ -613,9 +613,9 @@ public class Emo implements Serializable {
     @Size(max = 100)
     @Column(name = "tipo_concepto")
     private String tipoConcepto;
-    @Size(max = 100)
-    @Column(name = "exa_preingreso_periodico")
-    private String exaPreingresoPeriodico;
+    @Size(max = 4000)
+    @Column(name = "consentimientoinformado")
+    private String consentimientoinformado;
     @Size(max = 100)
     @Column(name = "exa_periodico_medicinalaboral")
     private String exaPeriodicoMedicinalaboral;
@@ -1830,13 +1830,15 @@ public class Emo implements Serializable {
         this.tipoConcepto = tipoConcepto;
     }
 
-    public String getExaPreingresoPeriodico() {
-        return exaPreingresoPeriodico;
+    public String getConsentimientoinformado() {
+        return consentimientoinformado;
     }
 
-    public void setExaPreingresoPeriodico(String exaPreingresoPeriodico) {
-        this.exaPreingresoPeriodico = exaPreingresoPeriodico;
+    public void setConsentimientoinformado(String consentimientoinformado) {
+        this.consentimientoinformado = consentimientoinformado;
     }
+
+    
 
     public String getExaPeriodicoMedicinalaboral() {
         return exaPeriodicoMedicinalaboral;

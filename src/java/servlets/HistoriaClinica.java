@@ -189,6 +189,7 @@ public class HistoriaClinica extends HttpServlet {
                     emo.setGravida(rs.getString("em.gravida"));
                     emo.setPartos(rs.getString("em.partos"));
                     emo.setCesareas(rs.getString("em.cesareas"));
+                    emo.setCeguera(rs.getString("em.ceguera"));
                     emo.setAbortos(rs.getString("em.abortos"));
                     emo.setHijosVivos(rs.getString("em.hijos_vivos"));
                     emo.setFechaUltimaMenst(rs.getDate("em.fecha_ultima_menst"));
@@ -296,6 +297,15 @@ public class HistoriaClinica extends HttpServlet {
                     emo.setObservacionesEspecificas(rs.getString("em.observaciones_especificas"));
                     emo.setCiudadAtencion(rs.getString("em.ciudad_atencion"));
                     emo.setFechaCreacion(rs.getString("em.fecha_creacion"));
+                    emo.setAntFam(rs.getString("em.ant_fam"));
+                    emo.setCualesUno(rs.getString("em.cuales_uno"));
+                    emo.setTrabajadorMenorEdad(rs.getString("em.trabajador_menor_edad"));
+                    emo.setImcmayor(rs.getString("em.imcmayor"));
+                    emo.setDislipidemia(rs.getString("em.dislipidemia"));
+                    emo.setHiperglicemia(rs.getString("em.hiperglicemia"));
+                    emo.setSistemasVigilancia(rs.getString("em.sistemas_vigilancia"));
+                    emo.setRemision(rs.getString("em.remision"));
+
                     cieDiez.setDescripcion(rs.getString("cd.descripcion"));
                     cieDiezDos.setDescripcion(rs.getString("cd_dos.descripcion"));
                     cieDiezTres.setDescripcion(rs.getString("cd_tres.descripcion"));
@@ -308,6 +318,8 @@ public class HistoriaClinica extends HttpServlet {
                     emo.setEspirometriaComputalizada(rs.getString("em.espirometria_computalizada"));
                     emo.setLaboratorio(rs.getString("em.laboratorio"));
                     emo.setCualesUno(rs.getString("em.cuales_uno"));
+                    emo.setConsentimientoinformado(rs.getString("em.consentimientoinformado"));
+                    emo.setObservacionesEspecificas(rs.getString("em.observaciones_especificas"));
 
                     recomendaciones.setDescripcion(rs.getString("re.descripcion"));
 //
@@ -522,9 +534,17 @@ public class HistoriaClinica extends HttpServlet {
                     accidentes.add(new Phrase("ACCIDENTES LABORALES:  ", accidentesFont));
                     accidentes.setAlignment(Element.ALIGN_LEFT);
                     accidentes.add(new Phrase(Chunk.NEWLINE));
-                    accidentes.add(new Phrase(Chunk.NEWLINE));
-                    accidentes.add(new Phrase(Chunk.NEWLINE));
+
+                    Paragraph restriAccidentes;
+
+                    restriAccidentes = new Paragraph();
+                    restriAccidentes.add(new Phrase("Restricciones laborales por accidente:  " + emo.getCualesUno(), accidentesFont));
+                    restriAccidentes.setAlignment(Element.ALIGN_JUSTIFIED);
+                    restriAccidentes.add(new Phrase(Chunk.NEWLINE));
+                    restriAccidentes.add(new Phrase(Chunk.NEWLINE));
+                    restriAccidentes.add(new Phrase(Chunk.NEWLINE));
                     documento.add(accidentes);
+                    documento.add(restriAccidentes);
                     documento.add(tabla2);
 
                     documento.add(new Chunk(ls));
@@ -539,7 +559,7 @@ public class HistoriaClinica extends HttpServlet {
                             + "\nEpilepsia:         " + emo.getEpilepsia() + "         Hipertensión:    " + emo.getHipertension() + "    Hipotiroidismo:  " + emo.getHipotiroidismo()
                             + "\nNeurológicos:      " + emo.getNeurologicos() + "      Psiquiátricos:   " + emo.getPsiquiatricos() + "   Quirúrjicos:     " + emo.getQuimicos()
                             + "\nRespiratorios:     " + emo.getRespiratorias() + "     Reumatológicos:  " + emo.getReumatologicos() + "  Traumáticos:     " + emo.getTraumaticos()
-                            + "\nVisuales:          " + emo.getVisuales() + "\nAntecedentes Familiares:  " + emo.getObservacionesCiediez();
+                            + "\nVisuales:          " + emo.getVisuales() + "\nAntecedentes Familiares:  " + emo.getAntFam();
                     parAntecedentesPersonales.add(new Phrase(datosAntPer, fontdatosAntPer));
                     parAntecedentesPersonales.setAlignment(Element.ALIGN_LEFT);
                     parAntecedentesPersonales.add(new Phrase(Chunk.NEWLINE));
@@ -577,12 +597,10 @@ public class HistoriaClinica extends HttpServlet {
                     parGineco.setAlignment(Element.ALIGN_LEFT);
                     parGineco.add(new Phrase(Chunk.NEWLINE));
                     parGineco.add(new Phrase(Chunk.NEWLINE));
-                    
-                    if(paciente.getGenero().equals('F')){
-                        documento.add(parGineco); 
+
+                    if (paciente.getGenero().equals('F')) {
+                        documento.add(parGineco);
                     }
-                   
-                    
 
                     documento.add(new Chunk(ls));
 
@@ -610,7 +628,7 @@ public class HistoriaClinica extends HttpServlet {
                     String datosRevision
                             = "\nDescripción:   " + emo.getDescSiste();
                     parRevision.add(new Phrase(datosRevision, fontdatosRevision));
-                    parRevision.setAlignment(Element.ALIGN_LEFT);
+                    parRevision.setAlignment(Element.ALIGN_JUSTIFIED);
                     parRevision.add(new Phrase(Chunk.NEWLINE));
                     parRevision.add(new Phrase(Chunk.NEWLINE));
                     documento.add(parRevision);
@@ -662,11 +680,10 @@ public class HistoriaClinica extends HttpServlet {
                     parTrabajoAlturas.setAlignment(Element.ALIGN_LEFT);
                     parTrabajoAlturas.add(new Phrase(Chunk.NEWLINE));
                     parTrabajoAlturas.add(new Phrase(Chunk.NEWLINE));
-                    
-                    if(emo.getTipoPerfil().equals("TRABAJO EN ALTURAS")){
+
+                    if (emo.getTipoPerfil().equals("TRABAJO EN ALTURAS")) {
                         documento.add(parTrabajoAlturas);
                     }
-                    
 
                     documento.add(new Chunk(ls));
 
@@ -677,7 +694,7 @@ public class HistoriaClinica extends HttpServlet {
                     String datosConductas
                             = "\n" + emo.getConductasOcupacionales();
                     parConductas.add(new Phrase(datosConductas, fontdatosConductas));
-                    parConductas.setAlignment(Element.ALIGN_LEFT);
+                    parConductas.setAlignment(Element.ALIGN_JUSTIFIED);
                     parConductas.add(new Phrase(Chunk.NEWLINE));
                     parConductas.add(new Phrase(Chunk.NEWLINE));
                     documento.add(parConductas);
@@ -689,7 +706,7 @@ public class HistoriaClinica extends HttpServlet {
                     parRestricciones = new Paragraph();
                     parRestricciones.add(new Phrase("RESTRICCIONES LABORALES:  ", fontdatosRestricciones));
                     String datosRestricciones
-                            = "\nRestricciones:  " + emo.getCualesUno()
+                            = "\nRestricciones:  " + emo.getObservaciones()
                             + "\n" + emo.getOtros();
                     parRestricciones.add(new Phrase(datosRestricciones, fontdatosRestricciones));
                     parRestricciones.setAlignment(Element.ALIGN_LEFT);
@@ -726,6 +743,38 @@ public class HistoriaClinica extends HttpServlet {
                     parResul.add(new Phrase(Chunk.NEWLINE));
                     parResul.add(new Phrase(Chunk.NEWLINE));
                     documento.add(parResul);
+
+                    Paragraph sistemaVi = new Paragraph();
+                    Font sistemaViFont = new Font(Font.FontFamily.HELVETICA, 9, Font.NORMAL, BaseColor.BLACK);
+                    sistemaVi.add(new Phrase("SISTEMA DE VIGILANCIA EPIDENIOLÓGICA:  " + emo.getSistemasVigilancia(), sistemaViFont));
+                    sistemaVi.setAlignment(Element.ALIGN_JUSTIFIED);
+                    sistemaVi.add(new Phrase(Chunk.NEWLINE));
+                    sistemaVi.add(new Phrase(Chunk.NEWLINE));
+                    documento.add(sistemaVi);
+
+                    Paragraph consentimiento = new Paragraph();
+
+                    consentimiento.add(new Phrase("CONSENTIMIENTO INFORMADO:  " + emo.getConsentimientoinformado(), sistemaViFont));
+                    consentimiento.setAlignment(Element.ALIGN_JUSTIFIED);
+                    consentimiento.add(new Phrase(Chunk.NEWLINE));
+                    consentimiento.add(new Phrase(Chunk.NEWLINE));
+                    documento.add(consentimiento);
+
+                    Paragraph remision = new Paragraph();
+
+                    remision.add(new Phrase("REMISIÓN:  " + emo.getRemision(), sistemaViFont));
+                    remision.setAlignment(Element.ALIGN_JUSTIFIED);
+                    remision.add(new Phrase(Chunk.NEWLINE));
+                    remision.add(new Phrase(Chunk.NEWLINE));
+                    documento.add(remision);
+                    
+                    Paragraph obser = new Paragraph();
+
+                    obser.add(new Phrase("OBSERVACIONES ESPECIFICAS:  " + emo.getObservacionesEspecificas(), sistemaViFont));
+                    obser.setAlignment(Element.ALIGN_JUSTIFIED);
+                    obser.add(new Phrase(Chunk.NEWLINE));
+                    obser.add(new Phrase(Chunk.NEWLINE));
+                    documento.add(obser);
 
                     documento.add(new Chunk(ls));
 
@@ -771,7 +820,7 @@ public class HistoriaClinica extends HttpServlet {
                     Paragraph parRege = new Paragraph();
                     Font fontRege = new Font(Font.FontFamily.HELVETICA, 9, Font.NORMAL, BaseColor.BLACK);
                     parRege.add(new Phrase("RECOMENDACIONES GENERALES: \n" + recomendaciones.getDescripcion(), fontRege));
-                    parRege.setAlignment(Element.ALIGN_LEFT);
+                    parRege.setAlignment(Element.ALIGN_JUSTIFIED);
                     parRege.add(new Phrase(Chunk.NEWLINE));
                     parRege.add(new Phrase(Chunk.NEWLINE));
                     documento.add(parRege);

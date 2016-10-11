@@ -1081,9 +1081,7 @@
                                             var="cieDiezIdCie5" itemLabel="#{cieDiezIdCie5}" itemValue="#{cieDiezIdCie5}" 
                                             converter="cieDiezConverter" 
                                             forceSelection="true" /> 
-                            <p:outputLabel value="#{bundle.CreateEmoLabel_otros}" for="otros" />
-                            <p:inputTextarea maxlength="450" id="otros" value="#{pacientesController.emoActual.otros}" title="#{bundle.CreateEmoTitle_otros}" style="width: 400px;" >
-                            </p:inputTextarea>                            
+                                                  
 
                             <p:outputLabel value="#{bundle.CreateEmoLabel_resultadoConceptoFinal}" for="resultadoConceptoFinal" />
                             <p:selectOneMenu id="resultadoConceptoFinal" value="#{pacientesController.emoActual.resultadoConceptoFinal}" 
@@ -1104,9 +1102,17 @@
                                 <f:selectItem itemLabel="NO ES APTO PARA TRABAJAR EN ALTURAS" itemValue="NO ES APTO PARA TRABAJAR EN ALTURAS" />
 
                             </p:selectOneMenu>
+                              <p:outputLabel value="Consentimiento informado" for="consen" />
+                             <p:inputTextarea maxlength="4000" id="consen" value="#{emoController.selected.consentimientoinformado}" style="width: 400px;"    ></p:inputTextarea>
+
+                            
                             <p:outputLabel value="#{bundle.CreateEmoLabel_observaciones}" for="observaciones" />
                             <p:inputTextarea maxlength="1500" id="observaciones" value="#{pacientesController.emoActual.observaciones}" title="#{bundle.CreateEmoTitle_observaciones}" style="width: 400px;" >
-                            </p:inputTextarea>
+                            </p:inputTextarea> 
+                            
+                             <p:outputLabel value="#{bundle.CreateEmoLabel_otros}" for="otros" />
+                            <p:inputTextarea maxlength="450" id="otros" value="#{pacientesController.emoActual.otros}" title="#{bundle.CreateEmoTitle_otros}" style="width: 400px;" >
+                            </p:inputTextarea>     
 
                             <p:outputLabel value="#{bundle.CreateEmoLabel_obsevacionesEspecificas}" for="obsevacionesEspecificas" />
                             <p:inputTextarea maxlength="4500" id="obsevacionesEspecificas" value="#{pacientesController.emoActual.observacionesEspecificas}" title="#{bundle.CreateEmoTitle_obsevacionesEspecificas}" style="width: 400px;" ></p:inputTextarea>
