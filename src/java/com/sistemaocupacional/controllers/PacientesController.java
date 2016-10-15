@@ -659,6 +659,7 @@ public class PacientesController implements Serializable {
             SimpleDateFormat formateador = new SimpleDateFormat("dd '/' MM '/' yyyy HH:mm:ss", new Locale("es_ES"));
         
             emoActual.setFechaCreacion(formateador.format(ahora));
+            emoActual.setFechaDeModificacion(formateador.format(ahora));
            /* emoActual.setFechaCreacion(new Date(System.currentTimeMillis()).toString());*/
             
             StringBuffer cadena = new StringBuffer();
@@ -703,7 +704,7 @@ public class PacientesController implements Serializable {
 
     public String addOptometria() {
         try {
-            optometriaActual.setFechaOptpmetria(new Date());
+            
             optometriaActual.setIdPaciente(selected);
             getOptometriaFacade().create(optometriaActual);
             optometriaActual = new Optometria();

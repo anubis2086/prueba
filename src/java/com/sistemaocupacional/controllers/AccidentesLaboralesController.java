@@ -4,6 +4,8 @@ import com.sistemaocupacional.entities.AccidentesLaborales;
 import com.sistemaocupacional.controllers.util.JsfUtil;
 import com.sistemaocupacional.controllers.util.JsfUtil.PersistAction;
 import com.sistemaocupacional.sessions.AccidentesLaboralesFacade;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 
 import java.io.Serializable;
 import java.util.List;
@@ -18,6 +20,8 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 @Named("accidentesLaboralesController")
 @SessionScoped
@@ -27,8 +31,17 @@ public class AccidentesLaboralesController implements Serializable {
     private com.sistemaocupacional.sessions.AccidentesLaboralesFacade ejbFacade;
     private List<AccidentesLaborales> items = null;
     private AccidentesLaborales selected;
+    private StreamedContent imagen;
 
     public AccidentesLaboralesController() {
+    }
+
+    public StreamedContent getImagen() {
+        InputStream input = new ByteArrayInputStream(selected.getIdEmo().getIdPaciente().getFoto());
+
+        imagen = new DefaultStreamedContent(input, "image/jpg", "fileName.jpg");
+
+        return imagen;
     }
 
     public AccidentesLaborales getSelected() {

@@ -59,6 +59,20 @@
                         </h:commandLink>
 
                     </f:facet>
+                    <p:column filterBy="#{item.idEmo.idPaciente}">
+                        <f:facet name="header">
+                            <h:outputText value="Paciente"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idEmo.idPaciente.toString()}"/>
+                    </p:column>
+
+
+                    <p:column >
+                        <f:facet name="header">
+                            <h:outputText value="Fecha de atención"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idEmo.fechaCreacion}"/>
+                    </p:column>
 
 
 
@@ -110,12 +124,7 @@
                         </f:facet>
                         <h:outputText value="#{item.arl}"/>
                     </p:column>
-                    <p:column filterBy="#{item.idEmo.idPaciente}">
-                        <f:facet name="header">
-                            <h:outputText value="Paciente"/>
-                        </f:facet>
-                        <h:outputText value="#{item.idEmo.idPaciente.toString()}"/>
-                    </p:column>
+
                     <p:column exportable="false" > 
                         <f:facet name="header">Opciones</f:facet>
                         <p:commandButton id="viewButton" icon="ui-icon-search" update="datalist" action="#{accidentesLaboralesController.prepareView()}">

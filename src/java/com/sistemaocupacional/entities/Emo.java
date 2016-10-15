@@ -173,10 +173,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Emo.findByAlteracionesEquilibrio", query = "SELECT e FROM Emo e WHERE e.alteracionesEquilibrio = :alteracionesEquilibrio"),
     @NamedQuery(name = "Emo.findByAlteracionesAtencion", query = "SELECT e FROM Emo e WHERE e.alteracionesAtencion = :alteracionesAtencion"),
     @NamedQuery(name = "Emo.findByAlteracionesComportamiento", query = "SELECT e FROM Emo e WHERE e.alteracionesComportamiento = :alteracionesComportamiento"),
-    @NamedQuery(name = "Emo.findByTipoConcepto", query = "SELECT e FROM Emo e WHERE e.tipoConcepto = :tipoConcepto"),
-    
-    @NamedQuery(name = "Emo.findByExaPeriodicoMedicinalaboral", query = "SELECT e FROM Emo e WHERE e.exaPeriodicoMedicinalaboral = :exaPeriodicoMedicinalaboral"),
-    @NamedQuery(name = "Emo.findByExaEgreso", query = "SELECT e FROM Emo e WHERE e.exaEgreso = :exaEgreso"),
+    @NamedQuery(name = "Emo.findByTipoConcepto", query = "SELECT e FROM Emo e WHERE e.tipoConcepto = :tipoConcepto"),    
+     @NamedQuery(name = "Emo.findByExaEgreso", query = "SELECT e FROM Emo e WHERE e.exaEgreso = :exaEgreso"),
     @NamedQuery(name = "Emo.findByEmocol", query = "SELECT e FROM Emo e WHERE e.emocol = :emocol"),
     @NamedQuery(name = "Emo.findByFechaCreacion", query = "SELECT e FROM Emo e WHERE e.fechaCreacion = :fechaCreacion"),
     @NamedQuery(name = "Emo.findByCargo", query = "SELECT e FROM Emo e WHERE e.cargo = :cargo"),
@@ -617,8 +615,8 @@ public class Emo implements Serializable {
     @Column(name = "consentimientoinformado")
     private String consentimientoinformado;
     @Size(max = 100)
-    @Column(name = "exa_periodico_medicinalaboral")
-    private String exaPeriodicoMedicinalaboral;
+    @Column(name = "fecha_de_modificacion")
+    private String fechaDeMoficicacion;
     @Size(max = 100)
     @Column(name = "exa_egreso")
     private String exaEgreso;
@@ -1840,12 +1838,12 @@ public class Emo implements Serializable {
 
     
 
-    public String getExaPeriodicoMedicinalaboral() {
-        return exaPeriodicoMedicinalaboral;
+    public String getFechaDeMoficicacion() {
+        return fechaDeMoficicacion;
     }
 
-    public void setExaPeriodicoMedicinalaboral(String exaPeriodicoMedicinalaboral) {
-        this.exaPeriodicoMedicinalaboral = exaPeriodicoMedicinalaboral;
+    public void setFechaDeModificacion(String fechaDeMoficicacion) {
+        this.fechaDeMoficicacion = fechaDeMoficicacion;
     }
 
     public String getExaEgreso() {

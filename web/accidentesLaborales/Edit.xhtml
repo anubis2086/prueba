@@ -16,11 +16,31 @@
         <ui:define name="body">
 
             <h:form id="AccidentesLaboralesEditForm">
-                <h:panelGroup id="display">
-                    <p:panelGrid columns="3" layout="grid" rendered="#{accidentesLaboralesController.selected != null}">
-                        
-                                <p:outputLabel value="#{bundle.CreateAccidentesLaboralesLabel_anio}" for="anio" />
-                                <p:inputText id="anio" value="#{accidentesLaboralesController.selected.anio}" 
+                <p:panel header="Paciente">
+                    <h:panelGrid columns="2" style="width: 1050px;">
+
+
+                        <p:graphicImage   value="#{accidentesLaboralesController.imagen}"  cache="false" 
+                                          style=" width: 90px; height: 110px; margin-top: 15px; margin-bottom: 15px; margin-left: 20px;"/>
+
+                        <h:outputText  style="margin-top: 10px; margin-bottom: 10px;"   
+                                       value="#{accidentesLaboralesController.selected.idEmo.idPaciente.toString()}  Doumento:
+                                       #{accidentesLaboralesController.selected.idEmo.idPaciente.numDoc} &lt;br /&gt;
+                                       #{accidentesLaboralesController.selected.idEmo.idPaciente.idClem.nomClem} 
+                                       Nit: #{accidentesLaboralesController.selected.idEmo.idPaciente.idClem.nitClem}&lt;br /&gt;
+                                       Cargo: #{accidentesLaboralesController.selected.idEmo.idPaciente.cargo} &lt;br /&gt;
+                                       Ciudad: #{accidentesLaboralesController.selected.idEmo.idPaciente.ciudad} &lt;br /&gt;" 
+                                       escape="false"/> 
+
+                    </h:panelGrid>
+                </p:panel>
+                <p:panel header="Accidentes laborales">
+
+                    <h:panelGroup id="display">
+                        <p:panelGrid columns="3" layout="grid" rendered="#{accidentesLaboralesController.selected != null}">
+
+                            <p:outputLabel value="#{bundle.CreateAccidentesLaboralesLabel_anio}" for="anio" />
+                            <p:inputText id="anio" value="#{accidentesLaboralesController.selected.anio}" 
                                          title="#{bundle.CreateAccidentesLaboralesTitle_anio}"
                                          validatorMessage="Por favor solo numeros">
 
@@ -31,7 +51,7 @@
 
                             <p:outputLabel value="#{bundle.CreateAccidentesLaboralesLabel_descIni}" for="descIni" />
                             <p:inputTextarea id="descIni" value="#{accidentesLaboralesController.selected.descIni}" 
-                                     style="width: 400px;"            title="#{bundle.CreateAccidentesLaboralesTitle_descIni}" maxlength="200"
+                                             style="width: 400px;"            title="#{bundle.CreateAccidentesLaboralesTitle_descIni}" maxlength="200"
                                              validatorMessage="Por favor solo letras">
                                 <f:validateRegex pattern="[a-zA-Z áéíóúÁÉÍÓÚÑñ . , 0-9]*"/>
                                 <p:ajax process="@this" update="descIniMessage"/>
@@ -41,7 +61,7 @@
                             <p:outputLabel value="#{bundle.CreateAccidentesLaboralesLabel_accTrab}" for="accTrab" />
                             <p:inputTextarea id="accTrab" value="#{accidentesLaboralesController.selected.accTrab}" 
                                              title="#{bundle.CreateAccidentesLaboralesTitle_accTrab}"
-                                        style="width: 400px;"         validatorMessage="Por favor solo letras" maxlength="200"
+                                             style="width: 400px;"         validatorMessage="Por favor solo letras" maxlength="200"
                                              >
                                 <f:validateRegex pattern="[a-zA-Z áéíóúÁÉÍÓÚÑñ . , 0-9]*"/>
                                 <p:ajax process="@this" update="accTrabMessage"/>
@@ -51,7 +71,7 @@
 
                             <p:outputLabel value="#{bundle.CreateAccidentesLaboralesLabel_enferProfe}" for="enferProfe" />
                             <p:inputTextarea id="enferProfe" value="#{accidentesLaboralesController.selected.enferProfe}"
-                                       style="width: 400px;"          title="#{bundle.CreateAccidentesLaboralesTitle_enferProfe}"
+                                             style="width: 400px;"          title="#{bundle.CreateAccidentesLaboralesTitle_enferProfe}"
                                              validatorMessage="Por favor solo letras" maxlength="200"  >
                                 <f:validateRegex pattern="[a-zA-Z áéíóúÁÉÍÓÚÑñ . , 0-9]*"/>
                                 <p:ajax process="@this" update="enferProfeMessage"/>
@@ -60,7 +80,7 @@
 
                             <p:outputLabel value="#{bundle.CreateAccidentesLaboralesLabel_empAcc}" for="empAcc" />
                             <p:inputTextarea id="empAcc" value="#{accidentesLaboralesController.selected.empAcc}" 
-                                         style="width: 400px;"        title="#{bundle.CreateAccidentesLaboralesTitle_empAcc}" 
+                                             style="width: 400px;"        title="#{bundle.CreateAccidentesLaboralesTitle_empAcc}" 
                                              validatorMessage="Por favor solo letras" maxlength="100" >
                                 <f:validateRegex pattern="[a-zA-Z áéíóúÁÉÍÓÚÑñ . , 0-9]*"/>
                                 <p:ajax process="@this" update="empAccMessage"/>
@@ -69,7 +89,7 @@
 
                             <p:outputLabel value="#{bundle.CreateAccidentesLaboralesLabel_secuelas}" for="secuelas" />
                             <p:inputTextarea id="secuelas" value="#{accidentesLaboralesController.selected.secuelas}" 
-                                        style="width: 400px;"         title="#{bundle.CreateAccidentesLaboralesTitle_secuelas}"
+                                             style="width: 400px;"         title="#{bundle.CreateAccidentesLaboralesTitle_secuelas}"
                                              validatorMessage="Por favor solo letras" maxlength="250"> 
                                 <f:validateRegex pattern="[a-zA-Z áéíóúÁÉÍÓÚÑñ . , 0-9]*"/>
                                 <p:ajax process="@this" update="secuelasMessage"/>
@@ -84,10 +104,11 @@
                                 <p:ajax process="@this" update="arlMessage"/>
                             </p:inputText>
                             <p:message id="arlMessage" for="arl"  styleClass="error"/>
-                    </p:panelGrid>
-                    <p:commandButton style="margin-top: 20px; margin-right: 20px" value="Guardar" action="#{accidentesLaboralesController.update}"/>
-                    <p:button value="#{bundle.Cancel}" style="margin-top: 20px;" outcome="/accidentesLaborales/List" />
-                </h:panelGroup>
+                        </p:panelGrid>
+                        <p:commandButton style="margin-top: 20px; margin-right: 20px" value="Guardar" action="#{accidentesLaboralesController.update}"/>
+                        <p:button value="#{bundle.Cancel}" style="margin-top: 20px;" outcome="/accidentesLaborales/List" />
+                    </h:panelGroup>
+                </p:panel>
             </h:form>
 
         </ui:define>

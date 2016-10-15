@@ -320,7 +320,7 @@ public class HistoriaClinica extends HttpServlet {
                     emo.setCualesUno(rs.getString("em.cuales_uno"));
                     emo.setConsentimientoinformado(rs.getString("em.consentimientoinformado"));
                     emo.setObservacionesEspecificas(rs.getString("em.observaciones_especificas"));
-
+                    emo.setFechaDeModificacion(rs.getString("em.fecha_de_modificacion"));
                     recomendaciones.setDescripcion(rs.getString("re.descripcion"));
 //
 //                    if(true){
@@ -504,7 +504,8 @@ public class HistoriaClinica extends HttpServlet {
                             + "Profesión: " + paciente.getProfesion() + " Cargo: " + paciente.getCargo() + "\n"
                             + "Fondo de pensiones: " + paciente.getAfp() + " EPS: " + paciente.getEps() + " ARL: " + paciente.getArl() + "\n"
                             + "Empresa: " + empresa.getNomClem() + "  Nit: " + empresa.getNitClem() + "\n"
-                            + "Fecha y hora de creación del paciente: " + paciente.getFechaCreacion();
+                            + "Fecha y hora de creación del paciente: " + paciente.getFechaCreacion() + "\n"
+                            + "Última Fecha de Modificación: " + emo.getFechaDeMoficicacion();
                     parDatos = new Paragraph();
                     Font fontdatos = new Font(Font.FontFamily.HELVETICA, 9, Font.NORMAL, BaseColor.BLACK);
                     parDatos.add(new Phrase(datos, fontdatos));
@@ -824,6 +825,46 @@ public class HistoriaClinica extends HttpServlet {
                     parRege.add(new Phrase(Chunk.NEWLINE));
                     parRege.add(new Phrase(Chunk.NEWLINE));
                     documento.add(parRege);
+                    
+                    documento.add(new Chunk(ls));
+
+                    SimpleDateFormat formateador = new SimpleDateFormat("dd '/' MM '/' yyyy", new Locale("es_ES"));
+                    Date fechaDate = new Date();
+                    String fecha2 = formateador.format(fechaDate);
+                    Paragraph parfinal = new Paragraph();
+                    Font fontparfinal = new Font(Font.FontFamily.HELVETICA, 9, Font.NORMAL, BaseColor.BLACK);
+                    parfinal.add(new Phrase("CONSIDERACIONES LEGALES RELATIVAS A LOS EXAMENES MEDICOS OCUPACIONALES: "
+                            + "Las Resoluciones 2346 del 11 de julio de 2007 y 1918 de Junio 5 de 2009 del Ministerio"
+                            + " de la Protección Social (actualmente Ministerios de Trabajo y de Salud y Protección "
+                            + "Social) reglamentan la práctica de las evaluaciones médicas con el objeto de determinar "
+                            + "si existen restricciones para el trabajo a desempeñar según el profesiograma de la empresa, "
+                            + "monitorear la exposición a los factores de riesgo ocupacional e identificar posibles alteraciones"
+                            + " temporales, permanentes o agravamiento del estado de salud del trabajador, ocasionadas por la labor"
+                            + " o por el medio ambiente de trabajo, y para detectar precozmente enfermedades de origen común, con el "
+                            + "fin de establecer un manejo preventivo. También establece que la Empresa solo puede conocer el"
+                            + " CONCEPTO DE APTITUD del aspirante. Los documentos completos de la Historia Clínica Ocupacional "
+                            + "están sometidos a reserva profesional y quedan bajo nuestra guarda y custodia, acorde "
+                            + "con lo establecido en la Resolución 1918 de Junio 5 de 2009 y el trabajador puede obtener"
+                            + " una copia de ellos cuando lo requiera, entendiendo que hacen parte integral de su"
+                            + " historial médico. \n \n \n" + "AUTORIZACIÓN DE USUARIO PARA CONOCIMIENTO DE LA HISTORIA CLÍNICA"
+                            + " OCUPACIONAL POR PARTE DEL MÉDICO ESPECIALISTA EN SALUD OCUPACIONAL DE LA EMPRESA: Yo, " + paciente.getNombres() + " " + paciente.getApellidos() + ", con documento de identificación No. " + paciente.getNumDoc() + ", actuando libremente"
+                            + " y en nombre propio, autorizo expresamente a los médicos especialistas en Medicina del Trabajo "
+                            + "o Salud Ocupacional que formen parte de los servicios médicos de la empresa, a tener acceso a"
+                            + " todos los documentos de mi Historia Clínica Ocupacional y a todos los datos consignados en"
+                            + " ellos o que lleguen a ser registrados, con el objeto del cumplimiento de las obligaciones "
+                            + "relativas a la vigilancia de mi salud. Para ello, tendrán la guarda y custodia de la historia "
+                            + "clínica ocupacional de los documentos a los cuales tengan acceso y son responsables de garantizar"
+                            + " su confidencialidad y secreto profesional, conforme lo establece el artículo 16 de la Resoluciones"
+                            + " 2346 de 2007 y 1918 de 2009, la Ley 23 de 1981 y las demás normas que lo modifiquen, adicionen o sustituyan. "
+                            + " Autorizo, en caso de ser necesario, a hacer entrega de estos documentos a las Entidades de la Seguridad Social,"
+                            + " para que puedan definir el origen de los eventos adversos a mi salud o solucionar cualquier controversia relacionada "
+                            + "con el origen, las secuelas o la definición de la perdida de mi capacidad laboral, acorde con lo definido en el Artículo"
+                            + " 16 de la Resolución 2346 de 2007 (modificado por la Resolución 1918 de 2009). Certifico que las respuestas dadas por mí"
+                            + " en este examen están completas y son verídicas. . Para constancia firmo este consentimiento el " + fecha2 + ". "
+                            + " El presente documento se diligenció para dar cumplimiento a la exigencia legal, planteada por la Ley 23 de 1981 "
+                            + "en su Artículo 34 y la Resoluciones 2346 de 2007 y 1918 de 2009 del Ministerio de Salud y de la Protección Social).", fontparfinal));
+                    parfinal.setAlignment(Element.ALIGN_JUSTIFIED);
+                    documento.add(parfinal);
 
                     Image imageFirma = Image.getInstance(paciente.getImgFirma());
                     imageFirma.setBorderWidth((float) 15.0);

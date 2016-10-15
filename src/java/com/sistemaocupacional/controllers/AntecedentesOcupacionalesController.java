@@ -4,6 +4,8 @@ import com.sistemaocupacional.entities.AntecedentesOcupacionales;
 import com.sistemaocupacional.controllers.util.JsfUtil;
 import com.sistemaocupacional.controllers.util.JsfUtil.PersistAction;
 import com.sistemaocupacional.sessions.AntecedentesOcupacionalesFacade;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 
 import java.io.Serializable;
 import java.util.List;
@@ -18,6 +20,8 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 @Named("antecedentesOcupacionalesController")
 @SessionScoped
@@ -27,8 +31,17 @@ public class AntecedentesOcupacionalesController implements Serializable {
     private com.sistemaocupacional.sessions.AntecedentesOcupacionalesFacade ejbFacade;
     private List<AntecedentesOcupacionales> items = null;
     private AntecedentesOcupacionales selected;
+    private StreamedContent imagen;
 
     public AntecedentesOcupacionalesController() {
+    }
+
+    public StreamedContent getImagen() {
+        InputStream input = new ByteArrayInputStream(selected.getIdEmo().getIdPaciente().getFoto());
+
+        imagen = new DefaultStreamedContent(input, "image/jpg", "fileName.jpg");
+
+        return imagen;
     }
 
     public AntecedentesOcupacionales getSelected() {
@@ -54,12 +67,12 @@ public class AntecedentesOcupacionalesController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
-    
-    public String prepareView(){
+
+    public String prepareView() {
         return "/antecedentesOcupacionales/View";
     }
-    
-       public String prepareEdit(){
+
+    public String prepareEdit() {
         return "/antecedentesOcupacionales/Edit";
     }
 
@@ -89,7 +102,7 @@ public class AntecedentesOcupacionalesController implements Serializable {
         }
         return items;
     }
-    
+
     public void recargarListaAntecedentes() {
         items = null;
     }

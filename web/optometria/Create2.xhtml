@@ -41,20 +41,7 @@
 
                     <h:panelGrid columns="2" style="width: 1050px;">
                         
-                          <p:outputLabel  style="margin-top: 10px; margin-bottom: 10px;"  value="#{bundle.CreateOptometriaLabel_usalentes}" for="usalentes" />
-                        <p:selectOneMenu  style="margin-top: 10px; margin-bottom: 10px;"  id="usalentes" value="#{pacientesController.optometriaActual.usalentes}" 
-                                          >
-                            <f:selectItem itemLabel="SI" itemValue="SI" />
-                            <f:selectItem itemLabel="NO" itemValue="NO" />
-                        </p:selectOneMenu>
-
-
-
-                        <p:outputLabel  style="margin-top: 10px; margin-bottom: 10px;"  value="#{bundle.CreateOptometriaLabel_sintomatologia}" for="sintomatologia" />
-                        <p:inputTextarea  style="margin-top: 10px; margin-bottom: 10px; width: 300px;"  id="sintomatologia" value="#{pacientesController.optometriaActual.sintomatologia}"
-                                          maxlength="300"   title="#{bundle.CreateOptometriaTitle_sintomatologia}" />
-
-                        <p:outputLabel  style="margin-top: 10px; margin-bottom: 10px;"  value="#{bundle.CreateOptometriaLabel_ultimoExamen}" for="ultimoExamen" />
+                          <p:outputLabel  style="margin-top: 10px; margin-bottom: 10px;"  value="#{bundle.CreateOptometriaLabel_ultimoExamen}" for="ultimoExamen" />
                         <p:calendar  style="margin-top: 10px; margin-bottom: 10px;"  id="ultimoExamen" pattern="MM/dd/yyyy" value="#{pacientesController.optometriaActual.ultimoExamen}" 
                                      title="#{bundle.EditOptometriaTitle_ultimoExamen}"  showOn="button" yearRange="c-10:c+10" navigator="true"
                                      maxdate="#{pacientesController.optometriaActual.fechaOptpmetria}">
@@ -70,7 +57,27 @@
                             <p:ajax event="dateSelect" process="@this fechaOptpmetria" update="ultimoExamen"/>
                         </p:calendar>
 
-                  
+
+                      
+
+
+                        <p:outputLabel  style="margin-top: 10px; margin-bottom: 10px;"  value="#{bundle.CreateOptometriaLabel_usalentes}" for="usalentes" />
+                        <p:selectOneMenu  style="margin-top: 10px; margin-bottom: 10px;"  id="usalentes" value="#{pacientesController.optometriaActual.usalentes}" 
+                                          >
+                            <f:selectItem itemLabel="NO" itemValue="NO" />
+                            <f:selectItem itemLabel="SI" itemValue="SI" />
+
+                        </p:selectOneMenu>
+
+
+
+                        <p:outputLabel  style="margin-top: 10px; margin-bottom: 10px;"  value="#{bundle.CreateOptometriaLabel_sintomatologia}" for="sintomatologia" />
+                        <p:inputTextarea  style="margin-top: 10px; margin-bottom: 10px; width: 300px;"  id="sintomatologia" value="#{pacientesController.optometriaActual.sintomatologia}"
+                                          maxlength="300"   title="#{bundle.CreateOptometriaTitle_sintomatologia}" />
+
+                      
+
+
 
                         <p:outputLabel  style="margin-top: 10px; margin-bottom: 10px;"  value="#{bundle.CreateOptometriaLabel_vcodsl}" for="vcodsl" />
                         <p:inputText  style="margin-top: 10px; margin-bottom: 10px;"  id="vcodsl" value="#{pacientesController.optometriaActual.vcodsl}"
@@ -105,7 +112,7 @@
                                       maxlength="45" title="#{bundle.CreateOptometriaTitle_vloicl}" />
 
 
-                      
+
 
 
 

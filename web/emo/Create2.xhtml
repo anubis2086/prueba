@@ -57,7 +57,12 @@
 
                     <p:outputLabel value="#{bundle.CreateEmoLabel_tipoPerfil}" for="tipoPerfil" />
                     <p:selectOneMenu id="tipoPerfil" value="#{pacientesController.emoActual.tipoPerfil}" 
-                                     title="#{bundle.CreateEmoTitle_tipoPerfil}" >
+                                     title="#{bundle.CreateEmoTitle_tipoPerfil}"
+                                     >
+                          <p:ajax event="change" process="tipoPerfil" 
+                                        update="encuestaAltura"/>
+                          
+   
                         <f:selectItem itemLabel="MANIPULADORES DE ALIMENTOS" itemValue="MANIPULADORES DE ALIMENTOS" />
                         <f:selectItem itemLabel="TRABAJO EN ALTURAS" itemValue="TRABAJO EN ALTURAS" />
                         <f:selectItem itemLabel="EXAMEN MÉDICO OCUPACIONAL" itemValue="EXAMEN MEDICO OCUPACIONAL" />
@@ -73,7 +78,7 @@
 
 
 
-                <p:tabView scrollable="false">
+                <p:tabView scrollable="false" id="encuestaAltura">
 
                     <p:tab title="Antecedentes Ocupacionales" >
                         <p:panelGrid columns="3" layout="grid" id="panelAntecedentes">
@@ -443,9 +448,9 @@
                             <p:outputLabel value="#{bundle.CreateEmoLabel_hijosVivos}" for="hijosVivos" />
                             <p:inputText maxlength="45" id="hijosVivos" value="#{pacientesController.emoActual.hijosVivos}" title="#{bundle.CreateEmoTitle_hijosVivos}" />
                             <p:outputLabel value="#{bundle.CreateEmoLabel_fechaUltimaMenst}" for="fechaUltimaMenst" />
-                            <p:calendar id="fechaUltimaMenst" pattern="MM/dd/yyyy" value="#{pacientesController.emoActual.fechaUltimaMenst}" title="#{bundle.EditEmoTitle_fechaUltimaMenst}"  showOn="button"/>
+                            <p:calendar id="fechaUltimaMenst" pattern="MM/dd/yyyy" value="#{pacientesController.emoActual.fechaUltimaMenst}" title="#{bundle.EditEmoTitle_fechaUltimaMenst}" yearRange="c-10:c+10" navigator="true" showOn="button"/>
                             <p:outputLabel value="#{bundle.CreateEmoLabel_citologia}" for="citologia" />
-                            <p:calendar id="citologia" pattern="MM/dd/yyyy" value="#{pacientesController.emoActual.citologia}" title="#{bundle.EditEmoTitle_citologia}"  showOn="button"/>
+                            <p:calendar id="citologia" pattern="MM/dd/yyyy" yearRange="c-10:c+10" navigator="true" value="#{pacientesController.emoActual.citologia}" title="#{bundle.EditEmoTitle_citologia}"  showOn="button"/>
                             <p:outputLabel value="#{bundle.CreateEmoLabel_ciclos}" for="ciclos" />
                             <p:inputText id="ciclos" value="#{pacientesController.emoActual.ciclos}" title="#{bundle.CreateEmoTitle_ciclos}" />
                         </p:panelGrid>
@@ -815,17 +820,16 @@
 
 
 
-
-
-                    <p:tab title="Encuesta de Alturas">
-                        <p:panelGrid columns="2" layout="grid" >
+                    <p:tab title="Encuesta de Alturas" id="altura" 
+                         rendered="#{pacientesController.emoActual.tipoPerfil == 'TRABAJO EN ALTURAS'}"  >
+                        <p:panelGrid columns="2" layout="grid" id="encAltura">
                             <p:outputLabel value="#{bundle.CreateEmoLabel_pruebasVestibular}" for="pruebasVestibular" />
                             <p:selectOneMenu id="pruebasVestibular" value="#{pacientesController.emoActual.pruebasVestibular}" >
                                 <f:selectItem itemLabel="NEGATIVA" itemValue="NEGATIVA" />
                                 <f:selectItem itemLabel="POSITIVA" itemValue="POSITIVA" />
                             </p:selectOneMenu>
                             <p:outputLabel value="#{bundle.CreateEmoLabel_fechaEncuesta}" for="fechaEncuesta" />
-                            <p:calendar id="fechaEncuesta" pattern="MM/dd/yyyy" value="#{pacientesController.emoActual.fechaEncuesta}" title="#{bundle.EditEmoTitle_fechaEncuesta}"  showOn="button"/>
+                            <p:calendar id="fechaEncuesta" pattern="MM/dd/yyyy" yearRange="c-10:c+10" navigator="true" value="#{pacientesController.emoActual.fechaEncuesta}" title="#{bundle.EditEmoTitle_fechaEncuesta}"  showOn="button"/>
                             <p:outputLabel value="#{bundle.CreateEmoLabel_trabajadorMenorEdad}" for="trabajadorMenorEdad" />
                             <p:selectOneMenu id="trabajadorMenorEdad" value="#{pacientesController.emoActual.trabajadorMenorEdad}" >
                                 <f:selectItem itemLabel="NO" itemValue="NO" />
@@ -1102,9 +1106,7 @@
                                 <f:selectItem itemLabel="NO ES APTO PARA TRABAJAR EN ALTURAS" itemValue="NO ES APTO PARA TRABAJAR EN ALTURAS" />
 
                             </p:selectOneMenu>
-                              <p:outputLabel value="Consentimiento informado" for="consen" />
-                             <p:inputTextarea maxlength="4000" id="consen" value="#{emoController.selected.consentimientoinformado}" style="width: 400px;"    ></p:inputTextarea>
-
+                              
                             
                             <p:outputLabel value="#{bundle.CreateEmoLabel_observaciones}" for="observaciones" />
                             <p:inputTextarea maxlength="1500" id="observaciones" value="#{pacientesController.emoActual.observaciones}" title="#{bundle.CreateEmoTitle_observaciones}" style="width: 400px;" >

@@ -187,9 +187,9 @@
                             <p:outputLabel value="#{bundle.CreateEmoLabel_hijosVivos}" for="hijosVivos" />
                             <p:inputText maxlength="45" id="hijosVivos" value="#{emoController.selected.hijosVivos}" title="#{bundle.CreateEmoTitle_hijosVivos}" />
                             <p:outputLabel value="#{bundle.CreateEmoLabel_fechaUltimaMenst}" for="fechaUltimaMenst" />
-                            <p:calendar id="fechaUltimaMenst" pattern="MM/dd/yyyy" value="#{emoController.selected.fechaUltimaMenst}" title="#{bundle.EditEmoTitle_fechaUltimaMenst}"  showOn="button"/>
+                            <p:calendar id="fechaUltimaMenst" pattern="MM/dd/yyyy" yearRange="c-10:c+10" navigator="true" value="#{emoController.selected.fechaUltimaMenst}" title="#{bundle.EditEmoTitle_fechaUltimaMenst}"  showOn="button"/>
                             <p:outputLabel value="#{bundle.CreateEmoLabel_citologia}" for="citologia" />
-                            <p:calendar id="citologia" pattern="MM/dd/yyyy" value="#{emoController.selected.citologia}" title="#{bundle.EditEmoTitle_citologia}"  showOn="button"/>
+                            <p:calendar id="citologia" pattern="MM/dd/yyyy" yearRange="c-10:c+10" navigator="true" value="#{emoController.selected.citologia}" title="#{bundle.EditEmoTitle_citologia}"  showOn="button"/>
                             <p:outputLabel value="#{bundle.CreateEmoLabel_ciclos}" for="ciclos" />
                             <p:inputText id="ciclos" value="#{emoController.selected.ciclos}" title="#{bundle.CreateEmoTitle_ciclos}" />
                         </p:panelGrid>
@@ -469,8 +469,8 @@
                             </p:selectOneMenu>
                             <p:outputLabel value="#{bundle.CreateEmoLabel_varicesDos}" for="varicesDos" />
                             <p:selectOneMenu id="varicesDos" value="#{emoController.selected.varicesDos}" title="#{bundle.CreateEmoTitle_varicesDos}" >
-                                <f:selectItem itemLabel="NORMAL" itemValue="NORMAL" />
-                                <f:selectItem itemLabel="ANORMAL" itemValue="ANORMAL" />
+                                <f:selectItem itemLabel="NEGATIVO" itemValue="NEGATIVO" />
+                                <f:selectItem itemLabel="POSITIVO" itemValue="POSITIVO" />
                             </p:selectOneMenu>
                             <p:outputLabel value="#{bundle.CreateEmoLabel_columVertebral}" for="columVertebral" />
                             <p:selectOneMenu id="columVertebral" value="#{emoController.selected.columVertebral}" title="#{bundle.CreateEmoTitle_columVertebral}" >
@@ -570,7 +570,7 @@
                                 <f:selectItem itemLabel="POSITIVA" itemValue="POSITIVA" />
                             </p:selectOneMenu>
                             <p:outputLabel value="#{bundle.CreateEmoLabel_fechaEncuesta}" for="fechaEncuesta" />
-                            <p:calendar id="fechaEncuesta" pattern="MM/dd/yyyy" value="#{emoController.selected.fechaEncuesta}" title="#{bundle.EditEmoTitle_fechaEncuesta}"  showOn="button"/>
+                            <p:calendar id="fechaEncuesta" pattern="MM/dd/yyyy" yearRange="c-10:c+10" navigator="true" value="#{emoController.selected.fechaEncuesta}" title="#{bundle.EditEmoTitle_fechaEncuesta}"  showOn="button"/>
                             <p:outputLabel value="#{bundle.CreateEmoLabel_trabajadorMenorEdad}" for="trabajadorMenorEdad" />
                             <p:selectOneMenu id="trabajadorMenorEdad" value="#{emoController.selected.trabajadorMenorEdad}" >
                                 <f:selectItem itemLabel="NO" itemValue="NO" />

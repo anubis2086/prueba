@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-   <ui:composition template="/template.xhtml">
+    <ui:composition template="/template.xhtml">
 
 
         <ui:define name="title">
@@ -15,15 +15,38 @@
 
         <ui:define name="body">
             <h:form id="AntecedentesOcupacionalesEditForm">
-                <h:panelGroup id="display">
-                    <p:panelGrid columns="3" layout="grid" rendered="#{antecedentesOcupacionalesController.selected != null}">
-                     
+                <p:panel header="Paciente">
+                    <h:panelGrid columns="2" style="width: 1050px;">
+
+
+                        <p:graphicImage   value="#{antecedentesOcupacionalesController.imagen}"  cache="false" 
+                                          style=" width: 90px; height: 110px; margin-top: 15px; margin-bottom: 15px; margin-left: 20px;"/>
+
+                        <h:outputText  style="margin-top: 10px; margin-bottom: 10px;"   
+                                       value="#{antecedentesOcupacionalesController.selected.idEmo.idPaciente.toString()}  Doumento:
+                                       #{antecedentesOcupacionalesController.selected.idEmo.idPaciente.numDoc} &lt;br /&gt;
+                                       #{antecedentesOcupacionalesController.selected.idEmo.idPaciente.idClem.nomClem} 
+                                       Nit: #{antecedentesOcupacionalesController.selected.idEmo.idPaciente.idClem.nitClem}&lt;br /&gt;
+                                       Cargo: #{antecedentesOcupacionalesController.selected.idEmo.idPaciente.cargo} &lt;br /&gt;
+                                       Ciudad: #{antecedentesOcupacionalesController.selected.idEmo.idPaciente.ciudad} &lt;br /&gt;" 
+                                       escape="false"/> 
+
+                    </h:panelGrid>
+                </p:panel>
+                <p:panel header="Accidentes laborales">
+
+
+
+
+                    <h:panelGroup id="display">
+                        <p:panelGrid columns="3" layout="grid" rendered="#{antecedentesOcupacionalesController.selected != null}">
+
                             <p:outputLabel value="Empresa:" for="nomEmp" />
                             <p:inputText id="nomEmp" value="#{antecedentesOcupacionalesController.selected.nomEmp}" 
                                          title="NomEmp" 
-                                        
+
                                          maxlength="200">
-                               
+
                             </p:inputText>
                             <p:message id="nomEmpMessage" for="nomEmp"  styleClass="error"/>
 
@@ -32,8 +55,8 @@
                                          value="#{antecedentesOcupacionalesController.selected.actEcoEmp}" 
                                          title="ActEcoEmp" 
                                          maxlength="45"
-                                        >
-                               
+                                         >
+
                             </p:inputText>
                             <p:message id="actEcoEmpMessage" for="actEcoEmp"  styleClass="error"/>
 
@@ -41,7 +64,7 @@
                             <p:inputText id="oficio" value="#{antecedentesOcupacionalesController.selected.oficio}"
                                          title="Oficio" maxlength="45"
                                          >
-                          
+
                             </p:inputText>
                             <p:message id="oficioMessage" for="oficio"  styleClass="error"/>
 
@@ -50,17 +73,17 @@
                             <p:inputText id="antiguedad" maxlength="11" 
                                          value="#{antecedentesOcupacionalesController.selected.antiguedad}"
                                          title="Antigüedad"
-                                        >
-                                
+                                         >
+
                             </p:inputText>
                             <p:message id="antiguedadMessage" for="antiguedad"  styleClass="error"/>
 
 
                             <p:outputLabel value="Riesgos:" for="riesgos" />
                             <p:inputTextarea id="riesgos" value="#{antecedentesOcupacionalesController.selected.riesgos}"
-                                   style="width: 400px;"              title="Riesgos" maxlength="150"
-                                              >
-                               
+                                             style="width: 400px;"              title="Riesgos" maxlength="150"
+                                             >
+
                             </p:inputTextarea>
                             <p:message id="riesgosMessage" for="riesgos"  styleClass="error"/>
 
@@ -69,18 +92,19 @@
                             <p:outputLabel value="Epp:" for="epp" />
                             <p:inputTextarea id="epp" value="#{antecedentesOcupacionalesController.selected.epp}"
                                              title="Epp"
-                                       style="width: 400px;"          maxlength="300"
-                                              >
-                                
+                                             style="width: 400px;"          maxlength="300"
+                                             >
+
                             </p:inputTextarea>
                             <p:message id="eppMessage" for="epp"  styleClass="error"/>
 
 
-                            
-                    </p:panelGrid>
-                    <p:commandButton style="margin-top: 20px; margin-right: 20px;" action="#{antecedentesOcupacionalesController.update}" value="#{bundle.Save}"/>
-                    <p:button style="margin-top: 20px" value="#{bundle.Cancel}" outcome="/antecedentesOcupacionales/List"/>
-                </h:panelGroup>
+
+                        </p:panelGrid>
+                        <p:commandButton style="margin-top: 20px; margin-right: 20px;" action="#{antecedentesOcupacionalesController.update}" value="#{bundle.Save}"/>
+                        <p:button style="margin-top: 20px" value="#{bundle.Cancel}" outcome="/antecedentesOcupacionales/List"/>
+                    </h:panelGroup>
+                </p:panel>
             </h:form>
         </ui:define>
 

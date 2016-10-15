@@ -4,7 +4,7 @@ import com.sistemaocupacional.entities.Emo;
 import com.sistemaocupacional.controllers.util.JsfUtil;
 import com.sistemaocupacional.controllers.util.JsfUtil.PersistAction;
 import com.sistemaocupacional.entities.CieDiez;
-import com.sistemaocupacional.entities.Recomendaciones;
+
 import com.sistemaocupacional.sessions.CieDiezFacade;
 import com.sistemaocupacional.sessions.EmoFacade;
 import java.io.ByteArrayInputStream;
@@ -12,7 +12,10 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -158,6 +161,10 @@ public class EmoController implements Serializable {
 
     public String update() {
 
+        Date ahora = new Date();
+        SimpleDateFormat formateador = new SimpleDateFormat("dd '/' MM '/' yyyy HH:mm:ss", new Locale("es_ES"));
+        
+        selected.setFechaDeModificacion(formateador.format(ahora));
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("resources/Bundle").getString("EmoUpdated"));
         return "/emo/List";
     }
